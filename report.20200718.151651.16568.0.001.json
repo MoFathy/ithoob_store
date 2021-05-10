@@ -1,0 +1,399 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200718.151651.16568.0.001.json",
+    "dumpEventTime": "2020-07-18T15:16:51Z",
+    "dumpEventTimeStamp": "1595078211336",
+    "processId": 16568,
+    "cwd": "/home/bitnami/www/store",
+    "commandLine": [
+      "/opt/bitnami/nodejs/bin/.node.bin",
+      "/opt/bitnami/nodejs/lib/node_modules/pm2/lib/ProcessContainerFork.js"
+    ],
+    "nodejsVersion": "v12.13.0",
+    "glibcVersionRuntime": "2.23",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "12.13.0",
+      "v8": "7.7.299.13-node.12",
+      "uv": "1.32.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "4.4.0-1109-aws",
+    "osVersion": "#120-Ubuntu SMP Fri Jun 5 01:26:57 UTC 2020",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+        "speed": 2300,
+        "user": 76547200,
+        "nice": 406200,
+        "sys": 8800600,
+        "idle": 13995704700,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+        "speed": 2300,
+        "user": 77499800,
+        "nice": 551600,
+        "sys": 8901000,
+        "idle": 13994867600,
+        "irq": 0
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "eth0",
+        "internal": false,
+        "mac": "02:e5:33:ba:49:1e",
+        "address": "172.26.2.75",
+        "netmask": "255.255.240.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "eth0",
+        "internal": false,
+        "mac": "02:e5:33:ba:49:1e",
+        "address": "fe80::e5:33ff:feba:491e",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 2
+      }
+    ],
+    "host": "jzlServer"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000b027f5",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x00000000009d9fc3",
+      "symbol": "node::OnFatalError(char const*, char const*) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000b37dbe",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000b38139",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000ce34f5",
+      "symbol": " [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000ce3b86",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000cefa1a",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000cf0925",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000cf3338",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000cb9c67",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x0000000000fefb9b",
+      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [node /home/bitnami/www/store/server.js]"
+    },
+    {
+      "pc": "0x00000000013725d9",
+      "symbol": " [node /home/bitnami/www/store/server.js]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2076819456,
+    "totalCommittedMemory": 2075014840,
+    "usedMemory": 2027265192,
+    "availableMemory": 51966344,
+    "memoryLimit": 2121269248,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 32568,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 2097152,
+        "committedMemory": 1181488,
+        "capacity": 1047488,
+        "used": 134568,
+        "available": 912920
+      },
+      "old_space": {
+        "memorySize": 790474752,
+        "committedMemory": 790195392,
+        "capacity": 755286752,
+        "used": 749960184,
+        "available": 5326568
+      },
+      "code_space": {
+        "memorySize": 3571712,
+        "committedMemory": 3454912,
+        "capacity": 2905056,
+        "used": 2905056,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 13373440,
+        "committedMemory": 13110224,
+        "capacity": 11219840,
+        "used": 11219840,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 1266417664,
+        "committedMemory": 1266417664,
+        "capacity": 1262462592,
+        "used": 1262462592,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 622592,
+        "committedMemory": 622592,
+        "capacity": 550656,
+        "used": 550656,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047488,
+        "used": 0,
+        "available": 1047488
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 4912.97,
+    "kernelCpuSeconds": 374.08,
+    "cpuConsumptionPercent": 0.761359,
+    "maxRss": 2300084224,
+    "pageFaults": {
+      "IORequired": 244,
+      "IONotRequired": 106474936
+    },
+    "fsActivity": {
+      "reads": 138576,
+      "writes": 49853968
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 4445.9,
+    "kernelCpuSeconds": 319.688,
+    "cpuConsumptionPercent": 0.686266,
+    "fsActivity": {
+      "reads": 98184,
+      "writes": 49853968
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "LESSOPEN": "| /usr/bin/lesspipe %s",
+    "SUDO_GID": "1000",
+    "pm_out_log_path": "/root/.pm2/logs/Store-out.log",
+    "CURL_CA_BUNDLE": "/opt/bitnami/common/openssl/certs/curl-ca-bundle.crt",
+    "MAIL": "/var/mail/root",
+    "USER": "root",
+    "BITNAMI_ROOT": "/opt/bitnami",
+    "LANGUAGE": "en_US.UTF-8",
+    "GIT_TEMPLATE_DIR": "/opt/bitnami/git/share/git-core/templates",
+    "SASL_CONF_PATH": "/opt/bitnami/common/etc",
+    "restart_time": "1",
+    "FONTCONFIG_PATH": "/opt/bitnami/common/etc/fonts",
+    "GIT_EXEC_PATH": "/opt/bitnami/git/libexec/git-core/",
+    "SASL_PATH": "/opt/bitnami/common/lib/sasl2",
+    "CXXFLAGS": "-I/opt/bitnami/common/include -I/opt/bitnami/common/include ",
+    "SHLVL": "1",
+    "LD_LIBRARY_PATH": "/opt/bitnami/redis/lib:/opt/bitnami/python/lib:/opt/bitnami/git/lib:/opt/bitnami/apache2/lib:/opt/bitnami/common/lib:/opt/bitnami/common/lib64",
+    "GIT_SSL_CAINFO": "/opt/bitnami/common/openssl/certs/curl-ca-bundle.crt",
+    "LDAPCONF": "/opt/bitnami/common/etc/openldap/ldap.conf",
+    "PM2_USAGE": "CLI",
+    "HOME": "/root",
+    "OLDPWD": "/home/bitnami/www",
+    "TERMINFO": "/opt/bitnami/common/share/terminfo",
+    "username": "root",
+    "created_at": "1593666914825",
+    "PM2_HOME": "/root/.pm2",
+    "pm_cwd": "/home/bitnami/www/store",
+    "node_version": "12.13.0",
+    "LDFLAGS": "-L/opt/bitnami/common/lib -L/opt/bitnami/common/lib ",
+    "version": "1.0.0",
+    "LC_CTYPE": "UTF-8",
+    "SSL_CERT_FILE": "/opt/bitnami/common/openssl/certs/curl-ca-bundle.crt",
+    "OPENSSL_ENGINES": "/opt/bitnami/common/lib/engines",
+    "namespace": "default",
+    "pm_exec_path": "/home/bitnami/www/store/server.js",
+    "unstable_restarts": "0",
+    "pm_id": "1",
+    "LC_TERMINAL_VERSION": "3.3.9",
+    "kill_retry_time": "100",
+    "SUDO_UID": "1000",
+    "LOGNAME": "root",
+    "node_args": "",
+    "versioning": "[object Object]",
+    "_": "/opt/bitnami/nodejs/bin/pm2",
+    "MAGICK_CONFIGURE_PATH": "/opt/bitnami/common/lib/ImageMagick-6.9.8/config-Q16:/opt/bitnami/common/",
+    "OPENSSL_CONF": "/opt/bitnami/common/openssl/openssl.cnf",
+    "PKG_CONFIG_PATH": "/opt/bitnami/common/lib64/pkgconfig:/opt/bitnami/common/lib/pkgconfig",
+    "TERM": "xterm-256color",
+    "USERNAME": "root",
+    "exec_mode": "fork_mode",
+    "axm_monitor": "[object Object]",
+    "NODE_APP_INSTANCE": "0",
+    "windowsHide": "true",
+    "status": "launching",
+    "PATH": "/opt/bitnami/redis/bin:/opt/bitnami/python/bin:/opt/bitnami/nodejs/bin:/opt/bitnami/git/bin:/opt/bitnami/letsencrypt/:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/opt/bitnami/python/bin:/opt/bitnami/nodejs/bin:/opt/bitnami/git/bin:/opt/bitnami/letsencrypt/:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/opt/bitnami/python/bin:/opt/bitnami/nodejs/bin:/opt/bitnami/git/bin:/opt/bitnami/letsencrypt/:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin",
+    "exec_interpreter": "node",
+    "watch": "false",
+    "CFLAGS": "-I/opt/bitnami/common/include/ImageMagick -I/opt/bitnami/common/include -I/opt/bitnami/common/include/ImageMagick -I/opt/bitnami/common/include ",
+    "axm_dynamic": "[object Object]",
+    "axm_options": "[object Object]",
+    "MAGICK_CODER_MODULE_PATH": "/opt/bitnami/common/lib/ImageMagick-6.9.8/modules-Q16/coders",
+    "LANG": "en_US.UTF-8",
+    "MAGICK_HOME": "/opt/bitnami/common",
+    "pm_pid_path": "/root/.pm2/pids/Store-1.pid",
+    "pm_err_log_path": "/root/.pm2/logs/Store-error.log",
+    "vizion": "true",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "treekill": "true",
+    "SUDO_COMMAND": "/bin/bash",
+    "unique_id": "a23a4efd-55e5-4cb7-acc5-e963e64dcfd1",
+    "SHELL": "/bin/bash",
+    "NODE_PATH": "/opt/bitnami/nodejs/lib/node_modules",
+    "pmx": "true",
+    "automation": "true",
+    "exit_code": "0",
+    "SUDO_USER": "bitnami",
+    "LESSCLOSE": "/usr/bin/lesspipe %s %s",
+    "LC_TERMINAL": "iTerm2",
+    "vizion_running": "false",
+    "name": "Store",
+    "instance_var": "NODE_APP_INSTANCE",
+    "LC_ALL": "en_US.UTF-8",
+    "PWD": "/home/bitnami/www/store",
+    "XDG_DATA_DIRS": "/usr/local/share:/usr/share:/var/lib/snapd/desktop",
+    "env": "[object Object]",
+    "axm_actions": "",
+    "km_link": "false",
+    "instances": "1",
+    "merge_logs": "true",
+    "autorestart": "true",
+    "pm_uptime": "1594383787623"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 65536,
+      "hard": 65536
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 1048576,
+      "hard": 1048576
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 32768,
+      "hard": 32768
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2",
+    "/home/bitnami/www/store/node_modules/node-sass/vendor/linux-x64-72/binding.node"
+  ]
+}

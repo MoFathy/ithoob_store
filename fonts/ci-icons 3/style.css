@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'ci-icons';
+  src:  url('fonts/ci-icons.eot?vlhank');
+  src:  url('fonts/ci-icons.eot?vlhank#iefix') format('embedded-opentype'),
+    url('fonts/ci-icons.ttf?vlhank') format('truetype'),
+    url('fonts/ci-icons.woff?vlhank') format('woff'),
+    url('fonts/ci-icons.svg?vlhank#ci-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ci-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-twitter:before {
+  content: "\e908";
+  color: #fbfaf8;
+}
+.icon-facebook:before {
+  content: "\e909";
+  color: #fbfaf8;
+}
+.icon-instagram:before {
+  content: "\e90a";
+  color: #fbfaf8;
+}
+.icon-shopping-card-new:before {
+  content: "\e906";
+  color: #fff;
+}
+.icon-user-down:before {
+  content: "\e907";
+  color: #fbfaf8;
+}
+.icon-arrow:before {
+  content: "\e904";
+  color: #fdd4a8;
+}
+.icon-carouselArrow:before {
+  content: "\e905";
+  color: #fdd4a8;
+}
+.icon-undo:before {
+  content: "\e901";
+}
+.icon-redo:before {
+  content: "\e902";
+}
+.icon-close:before {
+  content: "\e903";
+}
+.icon-shopping-cart:before {
+  content: "\e91e";
+}
+.icon-carouselarrowcopy:before {
+  content: "\e90c";
+  color: #fdd4a8;
+}
+.icon-tick .path1:before {
+  content: "\e900";
+  color: rgb(253, 212, 168);
+}
+.icon-tick .path2:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}

@@ -1,0 +1,32 @@
+.hashwapopUp{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color:rgba(242,242,242,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 99999;
+  &__content{
+    width: auto;
+    margin: 0 auto;
+    background-color: $white;
+    padding: font-rem(45);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__okIcon{
+      margin-top: font-rem(20);
+      cursor: pointer;
+      display: inline-block;
+      border-radius: 5;
+      border: 1px solid $greyBorder;
+      padding: font-rem(5) font-rem(15);
+    }
+  }
+
+}

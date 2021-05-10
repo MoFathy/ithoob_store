@@ -1,0 +1,78 @@
+.productListPage {
+  .w-100s {
+    width: 100%;
+  }
+  .sideFilterContainer__sideFilter__mainMenu {
+    background-color: transparent;
+    color: $white !important;
+  }
+  .breadcrumb-item {
+    color: $white;
+  }
+  .breadcrumb {
+    background-color: transparent !important;
+    font-size: font-rem(15);
+    a {
+      color: $white;
+    }
+  }
+  .productList {
+    position: relative;
+    .productImg {
+      .button {
+        padding: font-rem(10);
+      }
+    }
+  }
+  .bannerWrapper {
+    color: $white;
+    position: relative;
+    img {
+      min-height: font-rem(360);
+      object-fit: cover;
+      @include media-breakpoint-down(md) {
+        min-height: 13.5rem;
+        margin-top: 57px;
+      }
+    }
+    &__content {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  .content {
+    margin-top: font-rem(0);
+    padding-top: font-rem(90);
+    @include media-breakpoint-down(sm) {
+      padding-top: font-rem(10);
+    }
+    position: relative;
+    &::after {
+      content: "";
+      background-image: url("images/Patern 01.jpg");
+      height: font-rem(260);
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background-position: top center;
+    }
+  }
+  .scrollingLoader {
+    margin-top: font-rem(90);
+    margin-bottom: font-rem(250);
+    color: $black;
+    font-size: font-rem(20);
+    padding: 0;
+    border: none;
+    border-radius: unset;
+    background: none;
+    text-align: center;
+    img {
+      padding-left: font-rem(20);
+    }
+  }
+}

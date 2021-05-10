@@ -1,0 +1,142 @@
+.addMeasurementPage {
+  * {
+    font-family: $Bahij;
+  }
+  .pageHeaderContainer {
+    border-bottom: 1px solid $hrGray;
+    .pageHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @media (max-width: 767.98px) {
+        flex-direction: column-reverse;
+      }
+      .fileName {
+        // display: flex;
+        // align-items: stretch;
+        // background: red;
+        /* align-items: stretch; */
+        /* height: 100%; */
+        display: flex;
+        background: $sidebarBG;
+        align-self: center;
+        padding: font-rem(37) 0 font-rem(37) font-rem(70);
+        border-left: 1px solid $hrGray;
+        box-shadow: 340px -150px 0 150px #f8f8f8;
+        align-items: center;
+        position: relative;
+        .tooltip {
+          display: none;
+          background-color: white;
+          padding: font-rem(15);
+          border-radius: 5px;
+          border: 1px solid white;
+          position: absolute;
+          z-index: 999999;
+          margin-top: font-rem(20);
+          font-size: font-rem(12);
+          color: $gray28;
+          bottom: 0;
+          transform: translateY(50%);
+        }
+        &:hover {
+          .tooltip {
+            display: block;
+          }
+        }
+        label {
+          margin-bottom: 0;
+          padding-left: font-rem(10);
+        }
+        @media (max-width: 767.98px) {
+          box-shadow: none;
+          padding: 2rem 1rem;
+          border-left: none;
+          width: 100%;
+        }
+        input {
+          padding: 0;
+          border: none;
+          background: $sidebarBG;
+          border-bottom: 1px solid $hrGray;
+          font-size: font-rem(18);
+          max-width: font-rem(120);
+
+          &::placeholder {
+            color: $black;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .buttonsContainer {
+        display: flex;
+        align-items: center;
+        @media (max-width: 767.98px) {
+          justify-content: space-between;
+          width: 100%;
+        }
+        .button {
+          margin: 1.5rem 2.75rem 1.5rem 6rem;
+          padding: font-rem(15) 1.5rem;
+          display: block;
+          cursor: pointer;
+
+          @media (max-width: 768px) {
+            margin: 1.5rem 1rem;
+          }
+
+          span {
+            display: block;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+        .closeBtn {
+          color: $black;
+          cursor: pointer;
+          text-decoration: none;
+          font-size: font-rem(22);
+          font-weight: normal;
+          display: block;
+          z-index: 1;
+          span {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 576px) {
+    .modal-dialog {
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .modal-footer {
+      flex-wrap: wrap !important;
+      margin: 0 1.5rem;
+    }
+  }
+}
+
+.page__en {
+  &.addMeasurementPage {
+    .pageHeaderContainer {
+      .pageHeader {
+        .fileName {
+          text-indent: 1rem;
+          
+          label {
+            padding-left: 0;
+            padding-right: font-rem(10);
+          }
+        }
+      } 
+    }
+  }
+}

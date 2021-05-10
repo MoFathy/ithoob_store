@@ -1,0 +1,292 @@
+.sideBar {
+  position: fixed;
+  // background: url("images/customizations-bg.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: cover;
+padding-bottom: font-rem(48);
+.customizationsContent__actionBar{
+  background-color:$sidebarBG;
+  padding-left: font-rem(15);
+}
+  @media (min-width: 576px)
+{
+  width :calc(191.998px - 50px);
+  }
+  @media (min-width: 768px)
+{
+      width :calc(255.997px- 50px);
+  }
+  @media (min-width: 992px)
+   {
+        width :calc(330.66336px - 50px);
+  }
+
+  @media (min-width: 1200px)
+{
+  width :calc( 399.996px - 50px);
+  }
+
+
+  @media (max-width: 767.98px) {
+    position: relative;
+    width: 100%;
+  }
+  &__header {
+    text-align: right;
+    font-family: $Bahij;
+    margin-left: font-rem(20);
+    font-size: font-rem(25);
+    padding: font-rem(48) 0 font-rem(48);
+  }
+
+  &__productImages {
+    .warningNote{
+      display: none;
+      color: $red;
+    }
+    &__productDesc {
+      flex-direction: row-reverse;
+      &.onScroll{
+          width: 100%;
+          position: fixed;
+          bottom: 0;
+          z-index: 9999999999999;
+          background-color: $white;
+          padding: 20px;
+          right: 0;
+          background-color:$sidebarBG;
+      }
+      &__btn {
+        display: inline-flex;
+        width: 65%;
+        margin-left:5%;
+        p {
+          font-size: font-rem(12);
+          padding: font-rem(10) 0;
+          text-align: center;
+        }
+        button {
+          width: 100%;
+          margin-top: font-rem(10);
+          margin-bottom: font-rem(10);
+          // background-color: $black;
+          padding: font-rem(10) font-rem(25);
+          border: 0;
+          border-radius: 30px;
+          @include media-breakpoint-down(md) {
+            padding: font-rem(10) font-rem(15);
+         }
+          background-color: $darkGrey;
+          cursor: auto;
+          &.active{
+            background-color: $darkRed;
+            cursor: pointer;
+          }
+          p {
+            color: $white;
+            // font-size: font-rem(15);
+            font-size: font-rem(20);
+            padding: 0;
+            @include media-breakpoint-down(md) {
+              font-size: font-rem(16);
+           }
+          }
+          .icon-shopping-cart {
+            &:before {
+              color: $white;
+            }
+          }
+          span {
+            // font-size: 22px;
+            font-size: 30px;
+            padding-left: font-rem(10);
+            border-left: 1px solid $darkRed;
+            margin-left: font-rem(10);
+          }
+        }
+      }
+
+      &__cost {
+        margin-top: font-rem(10);
+        margin-bottom: font-rem(10);
+        display: inline-flex;
+        width: 30%;
+        p {
+          // font-size: font-rem(18);
+          color: $black;
+          margin: auto;
+          font-size: font-rem(25);
+          font-weight: bold;
+          @include media-breakpoint-down(md) {
+            font-size: font-rem(20);
+         }
+        }
+        span {
+          padding-right: font-rem(5);
+          color: $black;
+          margin: auto;
+          font-size: font-rem(25);
+          font-weight: bold;
+          @include media-breakpoint-down(md) {
+            font-size: font-rem(20);
+         }
+        }
+      }
+    }
+    &__thumbnials {
+      margin-top: font-rem(20);
+      img {
+        display: block;
+      }
+    }
+
+    &__mainImage {
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .productImages{
+    &__main{
+      max-height: 430px;
+      overflow: hidden;
+    }
+    &__thumbs > a.active::after {
+      line-height: 56px;
+    }
+  }
+}
+.customizations{
+  &.page_en{
+        background-position: left top !important;
+  }
+}
+.page__en{
+  .measurementsCustom{
+    .title{
+      padding-right: font-rem(25);
+      padding-left: 0;
+    }
+    .radioBtn {
+      input{
+        margin-right: font-rem(10);
+      }
+    }
+
+    .showMeasurementTable{
+      margin-left: font-rem(7);
+      margin-right:0;
+    }
+    .dropdownForm{
+      .dropdownHeaderCopy{
+        padding-right: font-rem(35) !important;
+        padding-left: font-rem(15) !important;
+        &::after{
+          right: font-rem(15);
+          left: unset !important;
+          transform: rotate(90deg) !important;
+        }
+      }
+    }
+    .dropdownList{
+      right: auto;
+      left: 0;
+    }
+  }
+    .customsPage{
+      .customsContainer{
+         #accordion{
+           box-shadow:none;
+         }
+      }
+      .sidebarContainer{
+      padding-left: 0;
+      padding-right: font-rem(30);
+      }
+    }
+
+  .sideBar{
+    &__header{
+      text-align: left;
+      margin-right: font-rem(20);
+      margin-left: 0;
+    }
+    &__productImages__productDesc__btn{
+      margin-right: 5%;
+      margin-left: 0;
+      button{
+        span{
+          border-right: 1px solid $darkRed;
+          border-left:0;
+          padding-left: 0;
+          padding-right:font-rem(10);
+          margin-left:0;
+        }
+        p{
+          padding-left: font-rem(10);
+        }
+      }
+    }
+  }
+  .customizationsContent{
+    &__actionBar{
+      .close{
+        padding-left: font-rem(30);
+        padding-right: font-rem(20);
+        // margin-left: font-rem(30);
+        border-left: 1px solid #ecebe6;
+        margin-right: 0 !important;
+        border-right: 0;
+      }
+    }
+    .collapserTitle{
+      span{
+        &.icon-arrow{
+          margin-left: 0;
+          margin-right: font-rem(15);
+          transform: rotate(-90deg) !important;
+        }
+      }
+    }
+    .card{
+      .card-header-items{
+      margin-right:auto !important;
+      margin-left: font-rem(38);
+      }
+    .types, .images{
+        direction: ltr !important;
+      }
+      &-header{
+          border-left: 3px solid $greyBorder !important;
+      }
+      &-body{
+        .custom{
+          text-align: left !important;
+          .title{
+            &::after{
+              left: 0;
+              margin-left: -10px;
+              right: unset;
+            }
+          }
+        }
+        .notes__input{
+          p{
+            right: 5px;
+            left:auto !important;
+          }
+        }
+      }
+      &.active{
+        .collapserTitle{
+          span{
+            &.icon-arrow{
+              transform: rotate(0deg) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

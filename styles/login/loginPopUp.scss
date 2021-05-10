@@ -1,0 +1,741 @@
+.loginPopup,
+.fpwPopup,
+.changePwPopup,
+.signupPopup,
+.messagePopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(242, 242, 242, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 99999;
+  overflow: hidden;
+  * {
+    font-family: $Bahij;
+  }
+  &__content {
+    @media screen and (min-width: 768px) {
+      width: font-rem(470);
+    }
+    width: 25%;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    @include media-breakpoint-down(md) {
+      // width: 80%;
+      width: 95%;
+    }
+    &__header {
+      padding: font-rem(25);
+      width: 100%;
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-left: 0;
+      border-bottom: 1.5px solid $greyBorder;
+      background: $darkRed;
+      color: $white;
+
+      p {
+        margin: auto;
+        flex-grow: 1;
+        text-align: center;
+        font-size: font-rem(20);
+        margin-bottom: 0 !important;
+        margin-top: 0 !important ;
+        &:nth-child(2) {
+          margin-left: 0;
+          margin-right: auto;
+          flex-grow: 0;
+          font-size: font-rem(12);
+        }
+      }
+    }
+    &__mediaBtns {
+      text-align: center;
+      padding: font-rem(30) font-rem(40);
+      width: 100%;
+      img {
+        max-width: 95%;
+      }
+      &__google,
+      &__facebook,
+      &__twitter {
+        a {
+          /**
+           * TEMPORARY DISABLE
+           */
+          cursor: pointer;
+          //pointer-events: none !important;
+          //opacity: 0.3;
+
+          padding: 0;
+          border: none;
+          font-size: font-rem(12);
+          font-family: $Bahij;
+          display: flex;
+          align-items: center;
+          // margin-left: font-rem(20);
+          padding-left: font-rem(20);
+          border-left: 1px solid $gray24;
+          border-radius: 0;
+          span {
+            font-size: font-rem(18);
+            padding-left: font-rem(10);
+          }
+        }
+      }
+      &__google {
+        color: $googleColor;
+        a {
+          color: inherit;
+          span {
+            color: inherit;
+            &::before {
+              color: inherit;
+            }
+          }
+        }
+      }
+      &__facebook {
+        color: $facebookColor;
+        a {
+          color: inherit;
+          span {
+            color: inherit;
+            &::before {
+              color: inherit;
+            }
+          }
+        }
+      }
+      &__twitter {
+        color: $twitterColor;
+        a {
+          color: inherit;
+          margin-left: 0;
+          padding-left: 0;
+          border-left: none;
+          span {
+            color: inherit;
+            &::before {
+              color: inherit;
+            }
+          }
+        }
+      }
+    }
+    &__or {
+      // padding:0 font-rem(25);
+      width: 100%;
+      align-items: center;
+      .line {
+        border-bottom: 1px solid $gray24;
+      }
+      div {
+        padding: 0;
+        p {
+          text-align: center;
+          color: $gray24;
+        }
+      }
+    }
+    &__fail,
+    &__success {
+      width: 100%;
+      padding: 0 font-rem(20);
+      margin-top: font-rem(10);
+      &__content {
+        padding: font-rem(10) 0;
+        background-color: $bglightGrey;
+        p {
+          span {
+            cursor: pointer;
+            text-decoration: underline;
+            color: blue;
+          }
+        }
+        img {
+          margin: 0 font-rem(10);
+          max-width: 10%;
+          max-height: 35px;
+        }
+      }
+    }
+    &__form__place {
+      padding-top: font-rem(30);
+    }
+    &__form,
+    &__body {
+      p {
+        &.checkoutLink {
+          margin-top: font-rem(20);
+        }
+        a {
+          &.darkRedBtn {
+            text-decoration: none;
+            cursor: pointer;
+            background-color: $darkRed;
+            color: $white;
+            padding: font-rem(10) font-rem(100);
+            @include media-breakpoint-down(md) {
+              padding: font-rem(10) font-rem(40);
+            }
+          }
+        }
+      }
+      .boldP {
+        font-weight: 600;
+      }
+      padding: font-rem(25) font-rem(40) font-rem(25);
+      width: 100%;
+      // border-bottom: 1.5px solid $greyBorder;
+      .invalidInput {
+        &__password,
+        &__email,
+        &__code,
+        &__mobile,
+        &__name,
+        &__address {
+          font-size: font-rem(12);
+          display: none;
+          text-align: right;
+          margin-top: 0;
+          margin-bottom: 0;
+          color: $red !important;
+        }
+      }
+      .btnStyle {
+        width: 100%;
+        button {
+          padding: font-rem(15);
+          width: 100%;
+          margin-top: font-rem(15);
+        }
+      }
+      // &__field {
+      //   padding-bottom: font-rem(20);
+      //   display: flex;
+      //   flex-direction: column;
+      //   flex-wrap: wrap;
+      //   input {
+      //     max-width: 100%;
+      //     width: 100%;
+      //   }
+      //   label {
+      //     &.pwTitleForget__forget,
+      //     &.sendCode__forget {
+      //       text-decoration: underline;
+      //       color: $darkGray;
+      //       text-align: left;
+      //       cursor: pointer;
+      //     }
+      //   }
+      // }
+      &__field {
+        padding-bottom: 0;
+        // padding-top: font-rem(20);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        &.address {
+          padding-bottom: font-rem(30);
+        }
+        input,
+        label,
+        textarea, select {
+          max-width: 100%;
+          width: 100%;
+        }
+        label {
+          font-size: font-rem(11);
+          color: $gray7;
+          margin-bottom: font-rem(10);
+          transform: none;
+          transition: all 350ms ease-in-out;
+          &.sendCode__forget {
+            color: $black;
+            // font-weight: bold;
+            max-height: 32px;
+            @include media-breakpoint-down(md) {
+              min-width: fit-content;
+            }
+          }
+        }
+        input,
+        textarea, select {
+          padding: 0 0 font-rem(10);
+          border: none;
+          border-bottom: 1px solid $gray21;
+          background: $gray19;
+          margin-bottom: 0;
+          background: none;
+        }
+
+        &.notFocused {
+          label {
+            transform: translateY(40px);
+          }
+          &.msg {
+            margin-bottom: font-rem(0);
+            label {
+              transform: none;
+            }
+          }
+        }
+        label {
+          &.pwTitleForget__forget,
+          &.sendCode__forget {
+            cursor: pointer;
+          }
+          &.pwTitleForget__forget {
+            text-align: left;
+            text-decoration: underline;
+          }
+        }
+
+        &.code {
+          &.notFocused {
+            label {
+              transform: translateY(0);
+            }
+          }
+          label {
+            font-size: font-rem(14);
+            color: $darkGray;
+            margin-bottom: 0;
+          }
+          .codeInput {
+            padding: 0.3rem;
+            border-bottom: 0;
+            border: 1px solid $gray21;
+          }
+        }
+
+        &.password {
+          position: relative;
+
+          .show-hide-password {
+            position: absolute;
+            left: 5px;
+            bottom: 6px;
+            cursor: pointer;
+
+            &:after {
+              content: "";
+              width: 1px;
+              height: 20px;
+              transform: rotate(135deg) scale(0.9);
+              position: absolute;
+              left: 8px;
+              bottom: 2px;
+              opacity: 0;
+              background: $darkRed;
+              transition: all 300ms ease;
+            }
+
+            &.active:after {
+              transform: rotate(45deg) scale(1);
+              opacity: 1;
+            }
+          }
+        }
+      }
+      .pwTitleForget__forget {
+        margin-top: .5rem;
+        font-size: 0.7rem;
+        text-align: left;
+        cursor: pointer;
+      }
+      img.resendcode {
+        width: 20px;
+        height: 20px;
+        padding: 1%;
+        display: none;
+        margin-right: 20px;
+        @include media-breakpoint-down(md) {
+          margin-right: 10px;
+        }
+      }
+    }
+    &__signUpBtn {
+      margin: font-rem(30) font-rem(40) font-rem(40);
+      color: $darkRed;
+      cursor: pointer;
+      p {
+        text-decoration: underline;
+      }
+    }
+    &.cancelOrder {
+      // width: 32%;
+      // background: red;
+      border: 1px solid $greyBorder;
+      .messagePopup {
+        &__content {
+          &__header {
+            background: none;
+            color: $black;
+          }
+          &__footer {
+            button {
+              &:first-of-type {
+                margin-left: font-rem(10);
+              }
+            }
+            border: none;
+          }
+        }
+      }
+
+      h5 {
+        margin-bottom: font-rem(20);
+        // color: $white;
+      }
+      h6 {
+        font-weight: 600;
+        margin-bottom: font-rem(5);
+      }
+      p {
+        margin-bottom: 0.25rem;
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+      // }
+      .btn.button {
+        border: 1px solid $darkRed !important;
+      }
+      .btn.button.whiteBg {
+        // padding: font-rem(10) font-rem(40) !important;
+        background: $white !important;
+        border: 1px solid $darkRed !important;
+        color: $darkRed !important;
+      }
+    }
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      border-top: 1px solid #dee2e6;
+      padding: 1.5625rem 0;
+      margin: 0 2.5rem;
+      width: calc(100% - 80px);
+      .button {
+        padding: font-rem(15);
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+  .dropdown {
+    width: 100%;
+    // margin-bottom: font-rem(16);
+    padding-top: font-rem(7);
+    label {
+      display: block;
+      font-size: font-rem(11);
+      font-family: $Bahij;
+      color: $gray7;
+      margin-bottom: font-rem(10);
+    }
+    button {
+      display: block;
+      width: 100%;
+      // padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: $white;
+      background-clip: padding-box;
+      // border: 1px solid #ced4da;
+      // border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid $gray21;
+      padding: font-rem(5) 0;
+      &::after {
+        display: none;
+      }
+      span {
+        &::before {
+          color: $black;
+          font-size: font-rem(8);
+        }
+      }
+    }
+    .dropdown-menu {
+      width: 100%;
+      max-height: font-rem(200);
+      overflow: auto;
+      background: $white;
+    }
+  }
+
+  .dropdown:first-of-type {
+    padding-left: 20px;
+    .dropdown-menu {
+      width: calc(100% - 20px);
+      max-height: font-rem(200);
+      overflow: auto;
+      background: $white;
+    }
+  }
+}
+.signupPopup, .messagePopup {
+  @include media-breakpoint-down(md) {
+    overflow-y: auto;
+  }
+}
+.withInnerHeader .messagePopup__content {
+  @media screen and (min-width: 768px) {
+    width: font-rem(670);
+  }
+  &.orderModify {
+    @media screen and (min-width: 768px) {
+      width: font-rem(720);
+    }
+  }
+}
+.loginPopup__content__mediaBtns {
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 575.98px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__facebook,
+   &__google
+  //  &__twitter
+ {
+    a {
+      @media (max-width: 575.98px) {
+        padding: 0;
+        border: 0;
+        margin-bottom: font-rem(30);
+      }
+    }
+  }
+}
+.signupPopup__content {
+  .dropdown {
+    width: 50%;
+    button {
+      position: relative;
+      &:after {
+        position: absolute;
+        right: 0;
+        top: 45%;
+      }
+    }
+    label {
+      display: block;
+    }
+  }
+  &__or {
+    padding-bottom: font-rem(5);
+    padding-top: font-rem(5);
+  }
+  .btnStyle {
+    font-size: font-rem(18);
+    &.signup {
+      padding: font-rem(20);
+      button {
+        // padding-top:font-rem(30);
+        // padding-bottom: font-rem(30);
+      }
+    }
+  }
+  &__mediaBtns {
+    // display: block;
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 575.98px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &__google,
+    &__facebook,
+    &__twitter {
+      padding-top: font-rem(15);
+      padding-bottom: font-rem(25);
+    }
+    &__facebook,
+    &__google
+   //  &__twitter
+ {
+      a {
+        @media (max-width: 575.98px) {
+          padding: 0;
+          border: 0;
+          //  margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+// .fpwPopup__content__header,
+// .fpwPopup__content__form,
+// .messagePopup__content__form {
+//   border: 0;
+// }
+.page__en {
+  .loginPopup,
+  .fpwPopup,
+  .changePwPopup,
+  .signupPopup,
+  .messagePopup {
+    &__content {
+      &__footer {
+        button {
+          &:first-of-type {
+            margin-left: 0;
+            margin-right: font-rem(10);
+          }
+        }
+      }
+      &__form,
+      &__body {
+        // @include media-breakpoint-down(md) {
+        h2, p {
+          text-align: center;
+        }
+
+        .invalidInput {
+          &__password,
+          &__email,
+          &__code,
+          &__mobile,
+          &__name,
+          &__address {
+            text-align: left;
+          }
+        }
+
+        .cancelOrder__cancelTips {
+          p {
+            text-align: left;
+          }
+        }
+      }
+      &__form {
+        &__place {
+          padding-top: font-rem(30);
+          .placeComponent {
+            .dropdown {
+              padding-left: 0 !important;
+              padding-right: font-rem(20);
+            }
+          }
+        }
+        &__field {
+          label {
+            &.sendCode__forget {
+              text-align: right;
+            }
+          }
+          &.password {
+            .show-hide-password {
+              right: 5px;
+              left: auto;
+
+              &:after {
+                right: 7px;
+                bottom: 1px;
+                left: auto;
+              }
+            }
+          }
+        }
+        .pwTitleForget__forget {
+          text-align: right;
+        }
+        img.resendcode {
+          margin-right: 0;
+          margin-left: 20px;
+          @include media-breakpoint-down(md) {
+            margin-left: 10px;
+          }
+        }
+      }
+      &__mediaBtns__google,
+      &__mediaBtns__facebook {
+        a {
+          padding-right: font-rem(20);
+          border-right: 1px solid $gray24;
+          padding-left: 0;
+          border-left: 0;
+        }
+      }
+    }
+  }
+}
+.customizationsContent {
+  .messagePopup__content__closeIcon {
+    cursor: pointer;
+    padding: font-rem(20) 0;
+    width: 100%;
+    display: block;
+    background-color: $darkRed;
+    color: $white;
+    margin-bottom: font-rem(15);
+  }
+  .messagePopup__content__btns {
+    margin-bottom: font-rem(30);
+    .btnStyle {
+      &:first-of-type {
+        padding-left: font-rem(10);
+      }
+    }
+  }
+}
+.page__en {
+  .customizationsContent {
+    .imagespopUp {
+      .closeIcon {
+        justify-content: flex-end;
+      }
+    }
+    .messagePopup__content__btns {
+      .btnStyle {
+        &:first-of-type {
+          padding-right: font-rem(10);
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}
+
+.requestTailorPopup{
+  .signupPopup{
+    &__content {
+      .time-label{
+        transform: none;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+}
+      @media screen and (min-width: 768px) {
+        width: 50%;
+      }
+    }
+  }
+}

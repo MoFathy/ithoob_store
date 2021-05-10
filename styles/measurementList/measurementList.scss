@@ -1,0 +1,213 @@
+.measurementsGuidePage {
+  h3.title {
+    font-size: font-rem(45);
+    font-weight: 300;
+    color: $black;
+    margin-bottom: font-rem(60);
+  }
+  p.subTitle {
+    font-size: font-rem(15);
+    margin-bottom: font-rem(15);
+  }
+  .toAddMeasurement {
+    padding: 1rem 1.5rem;
+    text-align: center;
+    font-size: font-rem(20);
+    margin-bottom: font-rem(20);
+    // width: calc(100% - 46px);
+  }
+  .measurementList {
+    ul {
+      padding: 0;
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: font-rem(15);
+        background: $sidebarBG;
+        padding: 2.5rem 1.5rem;
+        position: relative;
+        flex-wrap: wrap;
+        border-radius: 40px;
+
+        @media (max-width: 575.98px) {
+          flex-direction: column;
+          align-items: flex-end;
+        }
+        * {
+          display: block;
+        }
+        img {
+          margin-left: font-rem(40);
+          @media (max-width: 767.98px) {
+            margin-bottom: font-rem(10);
+           }
+           @include media-breakpoint-down(sm){
+           margin-left: font-rem(16);
+           }
+        }
+        .sizeTitle {
+          min-width: font-rem(136);
+          @media (max-width: 767.98px) {
+            margin-bottom: font-rem(10);
+           }
+          p {
+            font-size: font-rem(22);
+            word-break: break-word;
+          }
+          span,
+          a {
+            display: inline-block;
+            font-size: font-rem(12);
+            color: $gray18;
+            cursor: pointer;
+            &::before {
+              content: "|";
+              padding: 0 5px;
+            }
+            // &:first-of-type {
+            //   &::before {
+            //     display: none;
+            //   }
+            // }
+          }
+          a {
+            &::before {
+              display: none;
+            }
+          }
+        }
+        .progressSize {
+          display: flex;
+          align-items: center;
+          .progressBar {
+            width: 5rem;
+            background: $gray17;
+            height: font-rem(15);
+            position: relative;
+            border-radius: 10px;
+            span {
+              position: absolute;
+              right: 0;
+              top: 0;
+              height: 100%;
+              background: $darkRed;
+              border-radius: 10px;
+            }
+
+            @media (min-width: 450px) {
+              width: 10rem;
+            }
+          }
+          .amount {
+            position: static;
+            margin-right: font-rem(20);
+            font-size: font-rem(12);
+          }
+        }
+        .lastUpdate {
+          color: $gray18;
+          font-size: font-rem(12);
+          display: flex;
+          span {
+            padding-right: font-rem(5);
+          }
+        }
+        .defaultSize {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          background: $darkYellow;
+          color: $white;
+          font-size: font-rem(11);
+          padding: 0.3rem 0.5rem;
+          border-radius: 20px;
+        }
+      }
+    }
+    @include media-breakpoint-up(md){
+      ul{
+         li{
+           width: 100%;
+           img{
+             width: 10%;
+             margin-left:5% !important;
+           }
+           .progressSize{
+             width: 30%;
+           }
+           .sizeTitle{
+              width: 25%;
+           }
+           .lastUpdate{
+             width:27%;
+             justify-content: flex-end;
+             margin-right: 2%;
+            }
+         }
+      }
+    }
+  }
+}
+.page__en{
+  &.measurementsGuidePage{
+    .measurementList{
+       ul{
+          li{
+            img{
+              margin-right: font-rem(40);
+              margin-left: 0 ;
+              transform: scaleX(-1);
+              @include media-breakpoint-down(sm){
+              margin-right: font-rem(16);
+              }
+            }
+            .amount {
+              margin-right: 0;
+              margin-left: font-rem(20);
+            }
+            .lastUpdate{
+              span{
+                margin-left: 4px;
+                padding-right: 0;
+              }
+              margin-right:unset !important;
+              margin-left: 2%;
+            }
+             .defaultSize{
+               right: 20px;
+               left: auto !important;
+               &::after{
+                     left: -10px;
+                     right: unset!important;
+                     transform: rotate(180deg);
+                     @include media-breakpoint-down(md) {
+                       left: -9px;
+                    }
+               }
+             }
+          }
+       }
+         @include media-breakpoint-up(md){
+       ul{
+          li{
+            img{
+              margin-right:5% !important;
+              margin-left: unset !important
+            }
+          }
+       }
+     }
+    }
+    .toAddMeasurement{
+      &::after{
+        right: -46px;
+        left: unset !important;
+        transform:rotate(180deg);
+        @include media-breakpoint-down(md) {
+          right: -45px;
+       }
+      }
+    }
+  }
+}

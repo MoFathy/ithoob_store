@@ -1,0 +1,265 @@
+.addMeasurementPage {
+  .PageFooter {
+    background: $sidebarBG;
+    .innerFooter {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      &.active {
+        display: flex;
+        @media (max-width: 991.98px) {
+          flex-wrap: wrap;
+        }
+      }
+      @media (max-width: 1199.98px) {
+        flex-direction: column-reverse;
+      }
+      .prev,
+      .next {
+        font-size: font-rem(25);
+        font-weight: bold;
+        color: $black;
+        display: flex;
+        align-items: center;
+        width: font-rem(170);
+        white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+        @media (max-width: 767.98px) {
+          justify-content: center;
+        }
+
+        cursor: pointer;
+        span {
+          &::before {
+            color: $black;
+          }
+        }
+        @media (max-width: 1199.98px) {
+          padding: font-rem(20) 0;
+        }
+        &.disabled {
+          span {
+            &::before {
+              color: $gray8;
+            }
+            cursor: no-drop;
+          }
+        }
+      }
+      .measurementPartContainer {
+        display: flex;
+        @media (max-width: 991.98px) {
+          // order: 1;
+          margin: auto;
+        }
+        .label {
+          background: $darkRed;
+          width: 13rem;
+          height: font-rem(100);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          background-position: right;
+          border-top-right-radius: 50px;
+          border-bottom-right-radius: 50px;
+
+          @media (max-width: 575.98px) {
+            width: font-rem(180);
+          }
+          label {
+            color: $white;
+            font-size: 1.75rem;
+            margin: 0;
+          }
+        }
+        .inputContainer {
+          background: $darkRed;
+          width: font-rem(269);
+          height: font-rem(100);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          border-top-left-radius: 50px;
+          border-bottom-left-radius: 50px;
+
+          @media (max-width: 575.98px) {
+            width: font-rem(160);
+          }
+          input[type="number"] {
+            -webkit-appearance: textfield;
+               -moz-appearance: textfield;
+                    appearance: textfield;
+          }
+          input[type=number]::-webkit-inner-spin-button, 
+          input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+          }
+          
+          input {
+            padding: 0;
+            border: none;
+            background: $darkRed;
+            border-bottom: 1px solid $darkYellow;
+            font-size: font-rem(18);
+            max-width: font-rem(120);
+            color: $darkYellow;
+            font-size: font-rem(40);
+            font-weight: bold;
+            text-indent: 20px;
+            text-align: center;
+            min-width: font-rem(80);
+            height: font-rem(60);
+            @media (max-width: 575.98px) {
+              // min-width: unset;
+              min-width: font-rem(40);
+            }
+            &:focus {
+              outline: none;
+            }
+            @include media-breakpoint-down(md) {
+              font-size: font-rem(30);
+            }
+          }
+          .cm {
+            color: $darkYellow;
+            font-size: font-rem(25);
+            border-bottom: 1px solid $darkYellow;
+            height: font-rem(60);
+            line-height: font-rem(60);
+            padding-right: font-rem(10);
+          }
+
+          // Plus & Minus Buttons
+          .plus, .minus {
+            position: absolute;
+            width: 28px;
+            right: 28px;
+            background: 0;
+            border: 0;
+
+            &:focus {
+              outline: none;
+            }
+            @include media-breakpoint-down(md) {
+              right: 20px;
+            }
+          }
+          .plus {
+            top: 20px;
+          }
+          .minus {
+            bottom: 28px;
+          }
+        }
+      }
+      .next {
+        span:last-child {
+          padding-right: font-rem(15);
+          @media (max-width: 575.98px) {
+            padding-right: font-rem(0);
+          }
+        }
+        &.disabled {
+          justify-content: flex-end;
+        }
+      }
+      .prev {
+        span:first-child {
+          padding-left: font-rem(15);
+          @media (max-width: 575.98px) {
+            padding-left: font-rem(0);
+          }
+        }
+        &.disabled {
+          justify-content: flex-start;
+        }
+        // @media (max-width: 991.98px) {
+        //   order: 2;
+        // }
+      }
+    }
+    &__errMsg {
+      background: $white;
+      color: $errMsgColor;
+      text-align: center;
+      padding-bottom: font-rem(10);
+      display: none;
+      p {
+        opacity: 0;
+        text-align: center;
+      }
+      span {
+        padding: 0 font-rem(5);
+      }
+      &.active {
+        display: block;
+        p {
+        }
+      }
+    }
+
+    @media (min-width: 991px) {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+  }
+}
+.page__en {
+  &.addMeasurementPage {
+    .innerFooter {
+      .measurementPartContainer {
+        .label {
+          padding-left: font-rem(40);
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-top-left-radius: 50px;
+          border-bottom-left-radius: 50px;
+          
+          &::after {
+            left: font-rem(-100);
+            right: unset !important;
+            background-position: left center;
+            transform: rotate(180deg);
+          }
+        }
+        .inputContainer {
+          padding-right: font-rem(40);
+          padding-left: unset !important;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-top-right-radius: 50px;
+          border-bottom-right-radius: 50px;
+  
+          &::after {
+            right: font-rem(-100);
+            left: unset !important;
+            background-position: right center;
+            transform: rotate(0deg) !important;
+          }
+  
+          .plus, .minus {
+            right: 0;
+            left: 28px;
+            @include media-breakpoint-down(md) {
+              left: -5px;
+            }
+          }
+        }
+      }
+      
+      .prev,
+      .next {
+        span {
+          &.icon-arrow-left,
+          &.icon-arrow-right {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+}

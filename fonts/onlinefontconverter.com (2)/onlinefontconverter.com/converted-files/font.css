@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Questv1-Regular';
+  src: url('Questv1-Regular.eot');
+  src: url('Questv1-Regular.woff2') format('woff2'),
+       url('Questv1-Regular.woff') format('woff'),
+       url('Questv1-Regular.ttf') format('truetype'),
+       url('Questv1-Regular.svg#Questv1-Regular') format('svg'),
+       url('Questv1-Regular.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+

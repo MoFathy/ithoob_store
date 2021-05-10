@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'ci-icons';
+  src:  url('fonts/ci-icons.eot?36d4q');
+  src:  url('fonts/ci-icons.eot?36d4q#iefix') format('embedded-opentype'),
+    url('fonts/ci-icons.ttf?36d4q') format('truetype'),
+    url('fonts/ci-icons.woff?36d4q') format('woff'),
+    url('fonts/ci-icons.svg?36d4q#ci-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ci-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shopping-cart1:before {
+  content: "\e90f";
+  color: #f6f5f1;
+}
+.icon-Facebook:before {
+  content: "\e908";
+  color: #826369;
+}
+.icon-Instagram:before {
+  content: "\e909";
+  color: #7f6469;
+}
+.icon-label:before {
+  content: "\e90a";
+  color: #b88b1c;
+}
+.icon-Twitter:before {
+  content: "\e90d";
+  color: #826369;
+}
+.icon-btn:before {
+  content: "\e90e";
+}
+.icon-shopping-card-new:before {
+  content: "\e906";
+  color: #fff;
+}
+.icon-user-down:before {
+  content: "\e907";
+  color: #fbfaf8;
+}
+.icon-arrow:before {
+  content: "\e904";
+  color: #fdd4a8;
+}
+.icon-carouselArrow:before {
+  content: "\e905";
+  color: #fdd4a8;
+}
+.icon-undo:before {
+  content: "\e901";
+}
+.icon-redo:before {
+  content: "\e902";
+}
+.icon-close:before {
+  content: "\e903";
+}
+.icon-shopping-cart:before {
+  content: "\e91e";
+}
+.icon-carouselarrowcopy:before {
+  content: "\e90c";
+  color: #fdd4a8;
+}
+.icon-tick .path1:before {
+  content: "\e900";
+  color: rgb(253, 212, 168);
+}
+.icon-tick .path2:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-attachment:before {
+  content: "\e9cd";
+}
+.icon-warning:before {
+  content: "\ea07";
+}
+.icon-compass:before {
+  content: "\e949";
+}
+.icon-google-plus:before {
+  content: "\ea8b";
+}

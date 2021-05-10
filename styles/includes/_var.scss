@@ -1,0 +1,98 @@
+@function font-rem($font_size) {
+  @return ($font_size / 16) + rem;
+}
+$sansPlain: "TheSans-Plain";
+$dubai: "Dubai-Regular";
+$sansPlain: "TheSans-Plain";
+$quest: "Questv1-Regular";
+/**
+ * In "iThoob", we are using "Tajawal"
+ * In "JZL", we are using "Bahij"
+ * Instead of replacing all Bahij fonts, we only replace the main variable's value
+ */
+$Bahij: 'Tajawal'; 
+
+$swissra: "Swissra-Normal";
+$greyBg: #f3f3f3;
+$greyIcon: #939393;
+$yellow: #d49816;
+$green: #27b548;
+$red: #e74f4f;
+$gold: #fdf0e2;
+$darkBlue: #22283b;
+$darkBlue2: #06133b;
+$white: #ffffff;
+$offWhite: #fbfaf8;
+$beige: #e7decd;
+$brown: #804e49;
+$lightOrange: #fdd4a8;
+$black: #000000;
+$lightOrange2: #e7c096;
+$red: #e62323;
+$discountTag: #c61010;
+$lightGray: #e7e5e5;
+$darkGray: #8e8e8e;
+$darkgrey: #333333;
+$greyBorder: #ededed;
+$greyborder: #ededed;
+$lightGrey: #fcfcfc;
+$darkGrey: #8a8a8a;
+$bglightGrey: #f2f2f2;
+$titleBlack: #1a1516;
+//new
+$darkRed: #000;
+$darkRed2: #81636a;
+$darkRed3: #260d13;
+$darkRed4: #431823;
+$cartBtn: #4a121f;
+$darkred5: #6f454f;
+$gray1: #bbb39b;
+$gray2: #7b7765;
+$gray3: #8c8c8c;
+$gray4: #c5c5c5;
+$hrGray: #ebebeb;
+$gray5: #909090;
+$gray6: #f8f8f8;
+$gray7: #b0b0b0;
+$gray8: #b7b7b7;
+$gray9: #eaeaea;
+$gray10: #9c9c9c;
+$gray11: #888888;
+$gray12: #787878;
+$gary13: #e8e8e8;
+$gray14: #808080;
+$gray15: #adadad;
+$gray16: #767676;
+$gray17: #dedede;
+$gray18: #989898;
+$gray19: #f9f9f9;
+$gray20: #6f6f6f;
+$gray21: #cbcbcb;
+$gray22: #e4e4e4;
+$gray23: #5f5d59;
+$gray24: #e6e6e6;
+$gray25: #bdbdbd;
+$gray26: #848484;
+$gray27: #858585;
+$gray28: #595959;
+$darkGray3: #848380;
+$darkGray4: #505050;
+$darkGray6: #9e9e9e;
+$darkGray5: #464646;
+$darkYellow: #b78b1e;
+
+$greybg: #dcdcdc;
+$greyArow: #c8c8c8;
+$sidebarBG: #f8f8f8;
+
+$twitterColor: #64ccf1;
+$facebookColor: #507dc0;
+$googleColor: #df4930;
+$errMsgColor: #de0000;
+
+
+$codGray: #060606;
+
+// Out of stock label
+$lightWhite: rgba(255, 255, 255, 0.8);
+$alizarinCrimson: #E72113;

@@ -1,0 +1,52 @@
+.measurementsGuidePage {
+  .tabContainer {
+    &__title {
+      color: $black;
+      font-size: font-rem(45);
+      font-weight: 300;
+      display: block;
+      margin-bottom: font-rem(50);
+    }
+
+    nav {
+      .nav.nav-tabs {
+        border-bottom: 1px solid $greyBorder;
+        padding-bottom: font-rem(20);
+        margin-bottom: font-rem(20);
+        .nav-item.nav-link {
+          color: $darkGray;
+          background-color: $sidebarBG;
+          border-color: none;
+          border-radius: 30px;
+          width: font-rem(290);
+          // height: font-rem(50);
+          text-align: center;
+          margin-left: font-rem(3);
+          font-size: font-rem(18);
+          font-weight: 300;
+          color: $gray23;
+          border: none;
+          @media screen and (max-width: 767.98px) {
+            width: 50%;
+            margin-left: 0;
+          }
+          &:hover,
+          &:focus {
+            border: none;
+          }
+          &.active {
+            color: $white !important;
+            background-color: $darkRed;
+            border-color: none;
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      border: none;
+      margin-bottom: font-rem(140);
+      padding: 0;
+    }
+  }
+}

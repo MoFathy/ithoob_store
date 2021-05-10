@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Swissra-Normal';
+  src: url('Swissra-Normal.eot');
+  src: url('Swissra-Normal.eot?#iefix') format('embedded-opentype'),
+       url('Swissra-Normal.svg#Swissra-Normal') format('svg'),
+       url('Swissra-Normal.ttf') format('truetype'),
+       url('Swissra-Normal.woff') format('woff'),
+       url('Swissra-Normal.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+

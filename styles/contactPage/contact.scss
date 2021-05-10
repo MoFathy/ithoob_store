@@ -1,0 +1,236 @@
+.contactPage {
+  * {
+    font-family: $Bahij;
+  }
+
+  .title {
+    font-size: font-rem(45);
+    font-weight: 300;
+    color: $black;
+    font-family: $Bahij;
+    margin-bottom: font-rem(50);
+    padding: 0;
+  }
+
+  &__branchInfo {
+    h2 {
+      font-size: font-rem(18);
+      margin-bottom: font-rem(12);
+    }
+    p {
+      font-size: font-rem(14);
+      color: $gray20;
+      margin-bottom: font-rem(20);
+      padding: 0;
+    }
+    &__branchName {
+      padding-bottom: font-rem(20);
+      font-size: font-rem(25);
+      font-weight: bold;
+    }
+    &__map {
+      margin-bottom: font-rem(25);
+    }
+    &__logos {
+      margin-bottom: font-rem(90);
+      a {
+        text-decoration: none;
+        width: font-rem(35);
+        height: font-rem(35);
+        text-align: center;
+        background: $darkRed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: font-rem(15);
+        span {
+          &::before {
+            color: $darkYellow;
+            font-size: 14px;
+          }
+        }
+        svg {
+          fill: $darkYellow;
+        }
+      }
+    }
+  }
+
+  &__contactUs {
+    background: $gray19;
+    padding: 0 font-rem(40) font-rem(40);
+    @include media-breakpoint-down(md) {
+      padding: 0 font-rem(20);
+      padding-top: font-rem(20);
+    }
+    // height: 100%;
+    margin-bottom: font-rem(40);
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      height: font-rem(100);
+      width: 100%;
+      top: 0;
+      // background: red;
+      background-image: -moz-linear-gradient(rgba(0, 0, 0, 0), $gray19);
+      background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), $gray19);
+      background-image: -o-linear-gradient(rgba(0, 0, 0, 0), $gray19);
+      background-image: -ms-linear-gradient(rgba(0, 0, 0, 0), $gray19);
+      background-image: linear-gradient(rgba(0, 0, 0, 0), $gray19);
+      transform: translateY(-100%);
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    h2 {
+      font-size: font-rem(25);
+      font-weight: bold;
+      margin-bottom: font-rem(40);
+    }
+    &__form {
+      .invalidInput {
+        &__name,
+        &__email,
+        &__mobile,
+        &__msg {
+          font-size: font-rem(12);
+          display: none;
+          text-align: right;
+          // margin-top: font-rem(25);
+          // margin-bottom: font-rem(30);
+          color: $red !important;
+        }
+      }
+      &__btnLink {
+        position: relative;
+        button {
+          width: 100%;
+        }
+      }
+      &__field {
+        // padding-bottom: font-rem(20);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        // margin-bottom: font-rem(-40);
+        margin-bottom: font-rem(10);
+        min-height: 130.4px;
+        input,
+        label,
+        textarea {
+          max-width: 100%;
+          width: 100%;
+        }
+        label {
+          font-size: font-rem(11);
+          color: $gray7;
+          margin-bottom: font-rem(10);
+          transform: none;
+          transition: all 350ms ease-in-out;
+        }
+        input,
+        textarea {
+          padding: 0 0 font-rem(10);
+          border: none;
+          border-bottom: 1px solid $gray21;
+          background: $gray19;
+          margin-bottom: font-rem(30);
+        }
+        input {
+          padding: 0.25rem 0;
+        }
+
+        &.notFocused {
+          label {
+            transform: translateY(40px);
+          }
+          &.msg {
+            // margin-bottom: font-rem(0);
+            label {
+              transform: none;
+            }
+          }
+        }
+        label {
+          &.pwTitleForget__forget {
+            text-align: left;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .loader {
+    position: absolute;
+    padding: 0;
+    left: 0;
+    z-index: 9;
+    &__load {
+      border: 3px solid $white;
+      border-radius: 50%;
+      width: font-rem(30);
+      height: font-rem(30);
+      border-right: 1px solid $white;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      margin: auto 0;
+    }
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
+.page__en {
+  .contactPage {
+    &__contactUs {
+      &__form {
+        .invalidInput {
+          &__name,
+          &__email,
+          &__mobile,
+          &__msg {
+            text-align: left;
+          }
+        }
+      }
+    }
+    &__contactUs__form__btnLink {
+      &.btnStyle {
+        button {
+          &::after {
+            right: -46px;
+            left: unset !important;
+            background-position: center;
+            transform: rotate(180deg);
+            @include media-breakpoint-down(md) {
+              right: -45px;
+            }
+          }
+        }
+      }
+    }
+    &__branchInfo__logos {
+      a {
+        margin-left: 0 !important;
+        margin-right: font-rem(15);
+      }
+    }
+  }
+}

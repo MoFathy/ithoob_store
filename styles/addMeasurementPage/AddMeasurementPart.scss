@@ -1,0 +1,262 @@
+.AddMeasurementPart {
+  display: flex;
+  // align-items: center;
+  padding: font-rem(20) 0 font-rem(30);
+  background-image: url("images/add-measurement/pattern.png");
+  background-repeat-y: no-repeat;
+  background-size: contain;
+  justify-content: space-between;
+
+  .sidebar {
+    width: 75%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    // overflow: hidden;
+    li {
+      margin-bottom: font-rem(5);
+      display: none;
+      * {
+        display: block;
+      }
+
+      .title {
+        background-image: url("images/add-measurement/item-bg.png");
+        // width: font-rem(484);
+        width: font-rem(270);
+        height: font-rem(70);
+        display: flex;
+        // justify-content: center;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+        font-size: font-rem(22);
+        font-weight: 300;
+        // margin-right: font-rem(40);
+        position: relative;
+        margin-bottom: font-rem(38);
+        .arabicNumber {
+          padding-left: font-rem(10);
+        }
+        &::before {
+          content: "";
+          height: 100%;
+          // background-image: url("images/add-measurement/item-bg.png");
+          width: calc((100vw - 1140px + 15px) / 2);
+          background: $gray6;
+          position: absolute;
+          right: 0;
+          transform: translateX(100%);
+          z-index: 99999;
+          @media (min-width: 1200px) {
+            width: calc((100vw - 1140px + 15px) / 2);
+          }
+
+          @media screen and (min-width: 992px) {
+            // .container {
+            //   max-width: 960px;
+            // }
+            width: calc((100vw - 960px + 15px) / 2);
+          }
+
+          @media (min-width: 768px) {
+            .container {
+              // max-width: 720px;
+              width: calc((100vw - 720px + 15px) / 2);
+            }
+          }
+          @media (min-width: 576px) {
+            // .container {
+            //   max-width: 540px;
+            // }
+            // display: none;
+            width: calc((100vw - 540px + 15px) / 2);
+          }
+        }
+      }
+      .minAndMax {
+        display: flex;
+        margin-bottom: font-rem(76);
+        &__minValue,
+        &__maxValue {
+          display: flex;
+          // align-items: center;
+          color: $gray26;
+          font-size: font-rem(14);
+          align-items: flex-end;
+          position: relative;
+          &::after {
+            content: "";
+            width: font-rem(9);
+            height: font-rem(11);
+            // background: orangered;
+            position: absolute;
+            align-self: center;
+
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+          span {
+            color: $black;
+            font-size: font-rem(18);
+            padding: 0 font-rem(5);
+          }
+        }
+        &__minValue {
+          padding-right: font-rem(14);
+          &::after {
+            right: 0;
+            background-image: url("images/add-measurement/min-bg.png");
+          }
+        }
+        &__maxValue {
+          padding-right: font-rem(38);
+          &::before {
+            content: "/";
+            padding: 0 font-rem(7);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+          }
+          &::after {
+            right: 24px;
+            background-image: url("images/add-measurement/max-bg.png");
+          }
+        }
+      }
+      .measureSteps {
+        &__title {
+          font-size: font-rem(14);
+          color: $gray27;
+          margin-bottom: font-rem(10);
+        }
+        &__text {
+          font-size: font-rem(16);
+          color: $black;
+          width: 70%;
+        }
+      }
+      .measureTip {
+        font-size: font-rem(14);
+        color: $gray28;
+        display: flex;
+        margin-top: 65px;
+        strong {
+          font-size: font-rem(14);
+          color: $black;
+        }
+      }
+      &.active {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0;
+      }
+    }
+  }
+
+  .imageContainer {
+    p {
+      font-size: font-rem(12);
+      color: $gray27;
+    }
+    video {
+      display: none; // Hide all videos
+      max-width: 100%;
+      &.active {
+        display: block; // Show "active" step video only
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    flex-wrap: wrap;
+
+    .sidebar, .imageContainer {
+      width: 100%;
+    }
+
+    .sidebar {
+      li {
+        .title {
+          padding: 0 1rem;
+        }
+        .minAndMax {
+          margin-bottom: 1rem;
+        }
+        .measureTip {
+          margin: 1rem 0;
+        }
+      }
+    }
+  }
+}
+.page__en {
+  &.addMeasurementPage {
+    .fileName {
+      border-left: 0 !important;
+      border-right: 1px solid $hrGray;
+      padding-left: 0 !important;
+      padding-right: font-rem(70) !important;
+      position: relative;
+    }
+
+    .buttonsContainer {
+      button {
+        margin-right: 2rem;
+
+        @media (max-width: 768px) {
+          margin-right: auto;
+          margin-left: 0;
+        }
+      }
+    }
+    .AddMeasurementPart {
+      .sidebar {
+        li {
+          .title {
+            background-image: url("images/add-measurement/item-mirror-bg.png");
+            background-position: right center;
+            background-repeat: no-repeat;
+            &::before {
+              transform: translateX(-100%);
+              right: auto;
+              left: 0;
+            }
+
+            span {
+              padding-right: font-rem(10);
+            }
+          }
+          .minAndMax {
+            &__minValue {
+              padding-left: font-rem(14);
+              padding-right: 0;
+
+              &::after {
+                left: 0;
+                background-image: url("images/add-measurement/min-bg.png");
+              }
+            }
+            &__maxValue {
+              padding-left: font-rem(38);
+
+              &::before {
+                content: "/";
+                padding: 0 font-rem(7);
+                position: absolute;
+                left: 0;
+                font-weight: bold;
+              }
+              &::after {
+                left: 24px;
+                background-image: url("images/add-measurement/max-bg.png");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+.slickSlider{
+  .slick-arrow{
+    top:110% !important;
+    &:before{
+      // content: "\e905" !important;
+      color: $lightOrange !important;
+    }
+  }
+  .slick-prev{
+    left:20px;
+  }
+  .slick-next{
+    left:80px;
+  }
+}
+
+
+  .firstSlickSlider,  .secondSlickSlider , .thirdSlickSlider{
+  &.contentSlider{
+    margin-bottom: 35px;
+  }
+  .slick-arrow{
+    position: absolute;
+    bottom: -35px;
+    cursor: pointer;
+    width: font-rem(25);
+    height: font-rem(25);
+    background-color: $greyBorder;
+    text-align: center;
+    font-size: font-rem(12);
+    line-height: font-rem(25);
+    &:hover{
+      background-color: $greybg;
+    }
+    span{
+      &.icon-carouselarrowcopy,&.icon-carouselArrow{
+      &:before{
+        color: $black;
+      }
+    }
+    }
+    &.slick-disabled{
+      cursor: default;
+      .icon-carouselarrowcopy,.icon-carouselArrow{
+        &:before{
+        color:  $greyArow;
+        }
+      }
+      &:hover{
+        background-color: $greyBorder;
+      }
+    }
+    &.secondSliderleft, &.firstSlickSliderleft, &.thirdSlickSliderleft{
+      left: 70px;
+      @include media-breakpoint-down(md) {
+          left: 0px!important;
+     }
+
+    }
+    &.secondSliderright,&.firstSlickSliderright,&.thirdSlickSliderright{
+      // left: 140px;
+      left: 100px;
+      @include media-breakpoint-down(md) {
+          left: 35px!important;
+     }
+    }
+
+  }
+  .slick-track{
+    // width:100% !important;
+    .slick-slide{
+    float :right !important;
+    }
+  }
+  .sliderArrowTxt{
+    @include media-breakpoint-down(md) {
+        left: 70px!important;
+   }
+  }
+}
+.page__en
+{
+  .firstSlickSlider,  .secondSlickSlider , .thirdSlickSlider{
+    .slick-track{
+      .slick-slide{
+      float: left !important;
+      }
+    }
+    .slick-arrow{
+      transform: rotate(180deg);
+      &.secondSliderleft, &.firstSlickSliderleft, &.thirdSlickSliderleft{
+        right: 70px ;
+        left:auto !important;
+        @include media-breakpoint-down(md) {
+            right: 0px!important;
+       }
+
+      }
+      &.secondSliderright,&.firstSlickSliderright,&.thirdSlickSliderright{
+        // left: 140px;
+        right: 100px;
+        left: auto !important;
+        @include media-breakpoint-down(md) {
+            right: 35px!important;
+       }
+      }
+    }
+  }
+  .sliderArrowTxt{
+    right: 135px;
+    left: auto !important;
+    @include media-breakpoint-down(md) {
+        right: 70px!important;
+   }
+  }
+}

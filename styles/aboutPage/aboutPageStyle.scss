@@ -1,0 +1,230 @@
+.aboutPage {
+  &__whyIthoob {
+    // background-color: $bglightGrey;
+    // background: red;
+    padding-top: font-rem(100);
+    padding-bottom: font-rem(90);
+    position: relative;
+    @include media-breakpoint-down(sm) {
+      padding-top: font-rem(20);
+      padding-bottom: font-rem(20);;
+    }
+    &::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: calc(100% - 75px);
+      width: 100%;
+      background-image: url("images/why-ithoob-bg.png") ;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: contain;
+      z-index: -1;
+    }
+    h2 {
+      // padding: font-rem(70) 0 ;
+      text-align: center;
+      font-size: font-rem(50);
+      color: $black;
+      margin-bottom: font-rem(50);
+      @include media-breakpoint-down(md) {
+        font-size: font-rem(35);
+     }
+    }
+    &__items {
+      // padding:0 font-rem(100) ;
+      &__item {
+        // padding: font-rem(50);
+        padding-top: 0;
+
+        &:nth-child(1) &__img img {
+          right: -9px;
+          bottom: -17px;
+        }
+        &:nth-child(2) &__img img {
+          right: -12px;
+          bottom: 10px;
+        }
+        &:nth-child(3) &__img img {
+          right: -10px;
+          bottom: -10px;
+        }
+
+        &__img {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 20px;
+          background: rgb(255,255,255);
+          background: linear-gradient(280deg, rgba(255,255,255,1) 0%, rgba(252,252,252,1) 100%);
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          position: relative;
+          margin-bottom: 30px;
+
+          img {
+            position: absolute;
+          }
+        }
+        h3 {
+          text-align: center;
+          // padding-top: font-rem(20);
+          font-size: font-rem(25);
+          font-weight: 300;
+          color: $black;
+          margin-bottom: font-rem(20);
+        }
+
+        &__content {
+
+          p {
+            text-align: center;
+            font-size: font-rem(14);
+            color: $darkGray5;
+            margin-bottom: font-rem(50);
+          }
+          // padding: font-rem(30);
+        }
+      }
+    }
+    &__btnLink {
+      // background: red;
+      .button {
+        // font-weight: bold;
+      }
+    }
+  }
+  &__aboutIthoob {
+    &__video {
+      margin-bottom: 90px;
+    }
+    &__content {
+      // padding-bottom: font-rem(150);
+      @media screen and (max-width: 991.98px) { 
+        flex-flow: column-reverse !important; 
+        margin-bottom: font-rem(90);
+      }
+      .img {
+        img {
+          width: 100%;
+        }
+      }
+      .aboutContent {
+        padding-right: font-rem(70);
+        padding-left: font-rem(35);
+        @include media-breakpoint-down(md) {
+          padding-right: font-rem(15);
+          padding-left: font-rem(15);
+          margin-bottom: font-rem(15);
+       }
+        h2 {
+          padding-bottom: font-rem(45);
+          font-size: font-rem(50);
+          font-weight: 300;
+          @include media-breakpoint-down(md) {
+            font-size: font-rem(35);
+            padding-bottom: font-rem(20);
+         }
+
+        }
+        p{
+          font-size: font-rem(15);
+        }
+      }
+      &:nth-of-type(even) {
+        @media screen and (min-width: 992px) {  
+          flex-flow: row-reverse;
+        }
+        .aboutContent {
+          padding-right: font-rem(35);
+          padding-left: font-rem(70);
+          @include media-breakpoint-down(md) {
+            padding-right: font-rem(15);
+            padding-left: font-rem(15);
+         }
+        }
+      }
+    }
+    .privacy_polic .btn{
+      background: brown;
+      color: #fff;
+    }
+  }
+  header {
+    position: absolute;
+    background: none;
+    .upperHeader {
+      &::before,
+      &::after {
+        background: none !important;
+      }
+      .upperHeader__socialMedia {
+        background: none;
+      }
+      .upperHeader__ContactUs {
+        background: none;
+        button.button.btn {
+          color: $gray9 !important;
+        }
+        a.nav-link:hover {
+          color: $darkYellow !important;
+        }
+      }
+    }
+
+    .headerNav .stickyNavbar .navbar-collapse .mainMenu li a {
+      color: $white;
+    }
+
+    .headerNav .navbar.fixed .mainMenu li.nav-item a {
+      color: $white;
+    }
+
+    .headerNav .stickyNavbar .navbar-collapse .dropdownNav .dropdown button span::before {
+      color: $white;
+    }
+
+    .headerNav .stickyNavbar .navbar-collapse .login {
+      color: $white;
+    }
+
+    .headerNav .navbar.fixed .dropdownNav .dropdown button span::before {
+      color: $white;
+    }
+
+    @media screen and (max-width: 991.98px) {
+      .headerNav .stickyNavbar .navbar-collapse .mainMenu li a {
+        color: $black;
+      }
+    }
+  }
+}
+.page__en{
+  .aboutPage__aboutIthoob__content {
+  
+    .aboutContent{
+      padding-left: font-rem(70);
+      padding-right: font-rem(35);
+      @include media-breakpoint-down(md) {
+        padding-right: font-rem(15) ;
+        padding-left: font-rem(20) ;
+     }
+    }
+    &:nth-of-type(even) {
+      @media screen and (min-width: 992px) {  
+      flex-flow: row-reverse;
+    }
+      .aboutContent {
+        padding-left: font-rem(35);
+        padding-right: font-rem(70);
+        @include media-breakpoint-down(md) {
+          padding-right: font-rem(15) ;
+          padding-left: font-rem(15) ;
+       }
+      }
+    }
+  }
+}
+
+

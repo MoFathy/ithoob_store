@@ -1,0 +1,220 @@
+.profilePage {
+  * {
+    font-family: $Bahij;
+  }
+  .formContainer {
+    .title {
+      color: $black;
+      font-size: font-rem(45);
+      font-weight: 300;
+      display: block;
+      margin-bottom: font-rem(80);
+    }
+
+    h4 {
+      color: $black;
+      font-size: font-rem(25);
+      margin-bottom: font-rem(35);
+      font-weight: normal;
+    }
+    form {
+      margin-bottom: font-rem(160);
+      .form-group {
+        margin-bottom: font-rem(50);
+        label {
+          font-size: font-rem(11);
+          font-family: $Bahij;
+          color: $gray7;
+          margin-bottom: font-rem(10);
+        }
+        input {
+          padding: font-rem(5) 0;
+          height: auto;
+          border: none;
+          border-bottom: 1px solid $gray21;
+          border-radius: 0;
+          &.mobile {
+            direction: ltr;
+          }
+        }
+        &.email {
+        }
+      }
+      .placeComponent {
+        margin-bottom: font-rem(50);
+      }
+      .button {
+        width: 100%;
+        font-size: font-rem(20);
+        font-weight: bold;
+        padding: font-rem(5) font-rem(30);
+        height: font-rem(50);
+        font-family: $Bahij;
+      }
+      .forgetPasswordBtn {
+        font-size: font-rem(11);
+        font-family: $Bahij;
+        color: $gray7;
+        margin-bottom: font-rem(10);
+        // margin: font-rem(47) 0 0;
+
+        padding: 0;
+        border: none;
+        width: 100%;
+        text-align: right;
+        /* height: 37px; */
+        display: block;
+        /* background-color: #e9ecef; */
+        padding: 8px 0px;
+        line-height: 1.5;
+        @media (max-width: 767.98px) {
+          margin: 0;
+        }
+        span {
+          font-size: font-rem(14);
+          color: $darkYellow;
+          padding-right: font-rem(10);
+        }
+      }
+
+      .dropdown {
+        width: 100%;
+        // margin-bottom: font-rem(16);
+        padding-top: font-rem(7);
+        label {
+          display: block;
+          font-size: font-rem(11);
+          font-family: $Bahij;
+          color: $gray7;
+          margin-bottom: font-rem(10);
+        }
+        button {
+          display: block;
+          width: 100%;
+          // padding: 0.375rem 0.75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          color: #495057;
+          background-color: #fff;
+          background-clip: padding-box;
+          // border: 1px solid #ced4da;
+          // border-radius: 0.25rem;
+          transition: border-color 0.15s ease-in-out,
+            box-shadow 0.15s ease-in-out;
+          text-align: right;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 0;
+          border: none;
+          border-bottom: 1px solid $gray21;
+          padding: font-rem(5) 0;
+          &::after {
+            display: none;
+          }
+          span {
+            &::before {
+              color: $black;
+              font-size: font-rem(8);
+            }
+          }
+        }
+        .dropdown-menu {
+          width: 100%;
+          max-height: font-rem(200);
+          overflow: auto;
+          background: $white;
+        }
+      }
+
+      .dropdown:first-of-type {
+        padding-left: 20px;
+        .dropdown-menu {
+          width: calc(100% - 20px);
+          max-height: font-rem(200);
+          overflow: auto;
+          background: $white;
+        }
+      }
+    }
+  }
+
+  .modal {
+    .modal-dialog {
+      display: flex;
+      align-items: center;
+      height: calc(100% - 56px);
+    }
+    .modal-content {
+      .modal-header {
+        .close {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    img {
+      max-width: font-rem(44);
+      margin-left: 1rem;
+    }
+  }
+
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+}
+.page__en {
+  .alert {
+    img {
+      margin-left: 0;
+      margin-right: 1rem;
+    }
+  }
+  .formContainer {
+    button {
+      &#submit {
+        &::after {
+          right: -46px;
+          left: unset !important;
+          transform: rotate(180deg);
+          @include media-breakpoint-down(md) {
+            right: -45px;
+          }
+        }
+      }
+    }
+    form {
+      .forgetPasswordBtn {
+        text-align: left;
+        span {
+          padding-right: 0;
+          padding-left: font-rem(10);
+        }
+      }
+    }
+    .placeComponent {
+      .dropdown {
+        &:first-of-type {
+          padding-left: 0;
+          padding-right: font-rem(20);
+        }
+      }
+    }
+  }
+}

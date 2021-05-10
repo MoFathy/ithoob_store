@@ -1,0 +1,78 @@
+.withInnerHeader {
+  // overflow-y: auto;
+  min-height: 100vh;
+  header {
+    position: static;
+    // background: url("images/BG.jpg");
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0) 70%,
+        rgba(255, 255, 255, 1) 100%
+      ),
+      url("images/BG.jpg");
+    padding-bottom: font-rem(100);
+    background-repeat: no-repeat;
+
+    .headerNav {
+      .upperHeader {
+        &::before {
+          background: $white;
+        }
+        &::after {
+          background: $white;
+        }
+        &__socialMedia,
+        &__ContactUs {
+          background: $white;
+          li {
+            a {
+              color: $gray8 !important;
+              span {
+                &::before {
+                  color: $gray8;
+                }
+              }
+              svg:hover {
+                fill: $gray8;
+              }
+            }
+            &.lang {
+              button {
+                color: $black !important;
+              }
+            }
+          }
+        }
+      }
+
+      .mainMenu {
+        li.nav-item a {
+          color: $darkRed;
+
+          &:before {
+            background: $darkYellow;
+            opacity: 1;
+          }
+        }
+      }
+
+      .dropdown .dropdown-toggle .icon-user-down:before,
+      .dropdown .dropdown-toggle .icon-shopping-cart1:before,
+      a.login {
+        color: $darkRed;
+      }
+    }
+  }
+  .content {
+    margin-top: font-rem(-50);
+    @media (max-width: 767.98px) {
+      margin-top: font-rem(8);
+    }
+  }
+}
+.navbar-collapse {
+  @media screen and (max-width: 991.98px) {
+    padding-top: 2.75rem;
+  }
+}

@@ -1,0 +1,181 @@
+.faqPage,
+.ordersPage {
+  h2{
+    &.noMatch{
+      display: none;
+    }
+  }
+  .title {
+    font-size: font-rem(45);
+    font-weight: 300;
+    margin-bottom: font-rem(50);
+    padding: 0;
+  }
+  h2,
+  h5 {
+    font-size: font-rem(25);
+    padding: font-rem(20) 0 font-rem(10);
+  }
+  h3 {
+    font-size: font-rem(12);
+    padding-bottom: font-rem(20);
+    color: $darkGray;
+  }
+
+  &__search {
+    position: relative;
+    input {
+      border: 0;
+      border-bottom: 1px dotted $greyborder;
+      margin-bottom: font-rem(50);
+      width: 100%;
+      font-size: font-rem(12);
+      padding: 0 0 font-rem(7) 0;
+      &::placeholder {
+        color: $gray7;
+        font-size: font-rem(14);
+      }
+      &:focus {
+        box-shadow: none;
+        outline: none;
+        @include media-breakpoint-down(sm){
+            font-size: 16px;
+        }
+      }
+    }
+    .icon-Search {
+      color: $darkRed;
+      position: absolute;
+      left: 0;
+      border-bottom: 5px solid $darkRed;
+      padding-bottom: font-rem(10);
+      width: font-rem(25);
+      text-align: center;
+    }
+  }
+
+  .card {
+    border-bottom: 0;
+    background: none;
+    &:last-child{
+      margin-bottom: font-rem(35);
+    }
+    .card-header {
+      padding: 0;
+      // margin-bottom: font-rem(10);
+      border-bottom: 0 !important;
+      h5 {
+        // padding: 0;
+        button {
+          padding: 0;
+          border: none;
+          p {
+            .icon-arrow {
+              margin: 0;
+            }
+            .question {
+              margin-right: font-rem(15);
+            }
+          }
+          &.collapsed {
+            .icon-arrow {
+              margin: 0;
+              transform: rotate(90deg);
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+    .collapse{
+      border-right:1px solid $gray22;
+      border-left: 1px solid $gray22;
+      border-bottom: 1px solid $gray22;
+    }
+    .collapse, .show, .collapsing {
+      .card-body {
+        padding:0 !important;
+        // margin-top: font-rem(20);
+        transition: none;
+        p {
+        }
+        h5{
+            padding: font-rem(20);
+        }
+        .collapserContent{
+          padding-right:font-rem(40);
+          span{
+            &.marker{
+              background-color: $bglightGrey;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.faqPage{
+  .collapserContent{
+    padding-right:0 !important;
+  }
+}
+.page__en{
+  .faqPage{
+    .card{
+      &-body{
+        .collapserContent{
+          padding-left:font-rem(40);
+          padding-right: 0;
+        }
+      }
+      &.active{
+        .collapserTitle{
+          span{
+            &.icon-arrow{
+              transform: rotate(0deg) !important;
+            }
+          }
+        }
+      }
+      &-header{
+        .collapserTitle{
+          span{
+            &.icon-arrow{
+              margin-left: 0;
+              margin-right: font-rem(15);
+              transform: rotate(-90deg) !important;
+            }
+          }
+        }
+      }
+    }
+    &__search{
+      .icon-Search{
+        right: 0;
+        left: unset !important;
+      }
+
+    }
+  }
+}
+.faqPage{
+  .card{
+    .collapse{
+      border: none;
+      .collapserContent{
+        color:$gray20;
+        padding: 0 !important;
+      }
+    }
+    &.active{
+      &:last-of-type{
+          .show{
+            margin-bottom:25px;
+          }
+      }
+    }
+  }
+  footer{
+    margin-top: font-rem(30) !important;
+  }
+}

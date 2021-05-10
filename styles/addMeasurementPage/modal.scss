@@ -1,0 +1,56 @@
+.addMeasurementPage {
+  .confirmationModal {
+    &.modal {
+      .modal-footer {
+        .button {
+          text-align: center;
+          &::after {
+            display: none;
+          }
+          &:first-of-type {
+            margin-right: 0;
+            margin-left: font-rem(5);
+          }
+          &:last-of-type {
+            margin-right: font-rem(5);
+          }
+          &:focus,
+          &:hover {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+  .modal {
+    &-footer {
+      .button {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+.page__en{
+  .modal {
+    &-header{
+      button{
+      margin-left: auto !important;
+      margin-right: 0 !important;
+      }
+    }
+    &-footer{
+      .button{
+        &:first-of-type {
+            margin-right: font-rem(5);
+        }
+        &:last-of-type {
+          margin-right: 0;
+          margin-left: font-rem(5);
+        }
+      }
+    }
+  }
+}

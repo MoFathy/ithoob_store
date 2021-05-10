@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'TheSans-Plain';
+  src: url('TheSans-Plain.eot');
+  src: url('TheSans-Plain.woff2') format('woff2'),
+       url('TheSans-Plain.woff') format('woff'),
+       url('TheSans-Plain.ttf') format('truetype'),
+       url('TheSans-Plain.svg#TheSans-Plain') format('svg'),
+       url('TheSans-Plain.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+

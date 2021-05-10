@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Dubai-Regular';
+  src: url('Dubai-Regular.eot');
+  src: url('Dubai-Regular.woff2') format('woff2'),
+       url('Dubai-Regular.woff') format('woff'),
+       url('Dubai-Regular.ttf') format('truetype'),
+       url('Dubai-Regular.svg#Dubai-Regular') format('svg'),
+       url('Dubai-Regular.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
