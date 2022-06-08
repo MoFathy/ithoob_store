@@ -27,6 +27,8 @@ import { getFromProductDetailsSatus } from "../actions/productDetails/productDet
 // import { getHomeSections } from "../actions/home/homeSections";
 import cookies from "next-cookies";
 import Helmet from "react-helmet";
+import WinterCollectionCategory from "../components/home/winterCollectionCategory.js";
+import PerfumeCategory from "../components/home/perfumeCategory.js";
 
 class Index extends Component {
   static async getInitialProps({ reduxStore, query, pathname, req }) {
@@ -109,6 +111,8 @@ class Index extends Component {
           else if(section.section_name === "clothes_design" && section.isVisiable){return <FirstSection />}
           else if(section.section_name === "latest_accessories" && section.isVisiable){return <AccessoriesProducts />}
           else if(section.section_name === "latest_designs" && section.isVisiable){return <ClothesProducts />}
+          else if(section.section_name === "winter_collection" && section.isVisiable){return <WinterCollectionCategory />}
+          else if(section.section_name === "perfume" && section.isVisiable){return <PerfumeCategory />}
           else if(section.section_name === "banner_one" && section.isVisiable){return <SecondSection />}
           else if(section.section_name === "latest_shoes" && section.isVisiable){return <ShoesProducts />}
           else if(section.section_name === "banner_two" && section.isVisiable){return <ThirdSection />}

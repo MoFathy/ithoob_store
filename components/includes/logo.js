@@ -4,7 +4,8 @@ class Logo extends Component {
   render() {
     return (
       <div className="logo">
-        <svg
+        <img src={require('../../images/brand.png')} />
+        {/* <svg
           version="1.1"
           id="Layer_1"
           xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +96,7 @@ class Logo extends Component {
            C203.6,233.5,202.1,237.2,199,240.4z"
             />
           </g>
-        </svg>
+        </svg> */}
       </div>
     );
   }

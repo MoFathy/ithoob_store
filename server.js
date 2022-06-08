@@ -22,6 +22,12 @@ app
       app.render(req, res, actualPage, queryParams);
     });
 
+    server.get("/thoob-design/:itemid", (req, res) => {
+      const actualPage = "/thoob-design";
+      const queryParams = { itemid: req.params.itemid,code:req.query.code };
+      app.render(req, res, actualPage, queryParams);
+    });
+
     server.get("/products-list/:slug", (req, res) => {
       const actualPage = "/products-list";
       const queryParams = { slug: req.params.slug,code:req.query.code };

@@ -191,6 +191,16 @@ export class ModificationsPopup extends Component {
                       ) : (
                         ""
                       )}
+                    {this.props.orderEdits.measurement_custom &&
+                      this.props.orderEdits.measurement_custom.length !== 0 ? (
+                        <CustomModifyItem
+                          title={getStringVal(this.props.language, "ADDS")}
+                          cost={this.props.orderEdits.adds_cost}
+                          customArray={this.props.orderEdits.adds_custom}
+                        />
+                      ) : (
+                        ""
+                      )}
                   </div>
                 )
             ) : (

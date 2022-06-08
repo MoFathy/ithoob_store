@@ -2,6 +2,7 @@ import {
   STORE__FABRICS,
   STORE__YAKA,
   STORE__ZARZOUR,
+  STORE__ADDS,
   STORE__AKMAM,
   STORE__OTHERS,
   DECREMENT__QUANTITY,
@@ -15,9 +16,11 @@ import {
   AKMAM_HEADER_IMAGES,
   ZARZOUR_HEADER_IMAGES,
   YAKA_HEADER_IMAGES,
+  ADDS_HEADER_IMAGES,
   FABRIC_HEADER_IMAGES,
   RESET_PRESENT_DATA,
-  UPDATE_SIZEMAN__STATUS
+  UPDATE_SIZEMAN__STATUS,
+  STORE_QUANTITY_ID
 } from "../../../actions/includes/carouselActions";
 import {
   GET_DEFAULT_SUCCESS,
@@ -28,6 +31,7 @@ import {
 const carouselInitialState = {
   fabricArray: [],
   yakaArray: [],
+  addsArray: [],
   zarzourArray: [],
   akmamArray: [],
   othersArray: [],
@@ -38,22 +42,26 @@ const carouselInitialState = {
   sizeId: "",
   fabricCost: 0,
   yakaCost: 0,
+  addsCost: 0,
   zarzourCost: 0,
   akmamCost: 0,
   othersCost: 0,
   fabricSelectedImages: [],
   yakaSelectedImages: [],
+  addsSelectedImages: [],
   zarzourSelectedImages: [],
   akmamSelectedImages: [],
   othersSelectedImages: [],
   fabricRequired: true,
   yakaRequired: true,
+  addsRequired: true,
   zarzourRequired: true,
   akmamRequired: true,
   othersRequired: true,
   recomBetana: "",
   customtype: "",
   shoesSize: "",
+  quantityId: "",
   loadImagesNow: false,
   textNote: ""
 };
@@ -65,6 +73,7 @@ export default function(state = carouselInitialState, action) {
         ...state,
         fabricArray: [],
         yakaArray: [],
+        addsArray: [],
         zarzourArray: [],
         akmamArray: [],
         othersArray: [],
@@ -75,16 +84,19 @@ export default function(state = carouselInitialState, action) {
         sizeId: "",
         fabricCost: 0,
         yakaCost: 0,
+        addsCost: 0,
         zarzourCost: 0,
         akmamCost: 0,
         othersCost: 0,
         fabricSelectedImages: [],
         yakaSelectedImages: [],
+        addsSelectedImages: [],
         zarzourSelectedImages: [],
         akmamSelectedImages: [],
         othersSelectedImages: [],
         fabricRequired: true,
         yakaRequired: true,
+        addsRequired: true,
         zarzourRequired: true,
         akmamRequired: true,
         othersRequired: true,
@@ -98,6 +110,7 @@ export default function(state = carouselInitialState, action) {
         ...state,
         fabricArray: action.defaults.fabrics,
         yakaArray: action.defaults.yaka,
+        addsArray: action.defaults.adds,
         zarzourArray: action.defaults.zarzour,
         quantity: action.defaults.quantity,
         akmamArray: action.defaults.akmam,
@@ -113,6 +126,7 @@ export default function(state = carouselInitialState, action) {
         ...state,
         fabricArray: action.data.fabric_custom,
         yakaArray: action.data.yaka_custom,
+        addsArray: action.data.adds_custom,
         zarzourArray: action.data.zarzour_custom,
         akmamArray: action.data.akmam_custom,
         othersArray: action.data.others_custom,
@@ -144,6 +158,26 @@ export default function(state = carouselInitialState, action) {
         yakaCost: action.cost,
         yakaSelectedImages: action.imagesIds,
         yakaRequired: action.required,
+        recomBetana:
+          state.recomBetana === ""
+            ? action.recomBetana
+            : state.recomBetana == action.recomBetana &&
+              state.customtype == action.customtype
+            ? state.recomBetana
+            : state.customtype == action.customtype
+            ? action.recomBetana
+            : state.recomBetana,
+        customtype:
+          state.customtype == "" ? action.customtype : state.customtype
+      };
+    case STORE__ADDS:
+      //|| (action.recomBetana == ""  && state.recomBetana !== "")
+      return {
+        ...state,
+        addsArray: action.addsArray,
+        addsCost: action.cost,
+        addsSelectedImages: action.imagesIds,
+        addsRequired: action.required,
         recomBetana:
           state.recomBetana === ""
             ? action.recomBetana
@@ -218,6 +252,11 @@ export default function(state = carouselInitialState, action) {
         measurementId: "",
         shoesSize: ""
       };
+    case STORE_QUANTITY_ID:
+      return {
+        ...state,
+        quantityId: action.quantityId
+      }
     case SIZEMAN__STATUS:
       // return {...state,sizeManStatus:!state.sizeManStatus,sizeId:"",measurementId:"",measurementsObject:{"quantity":state.quantity,"sizeManStatus":!state.sizeManStatus}}
       return {
@@ -272,6 +311,15 @@ export default function(state = carouselInitialState, action) {
           action.customCost !== undefined ? action.customCost : state.yakaCost,
         yakaRequired:
           action.required !== undefined ? action.required : state.yakaRequired
+      };
+    case ADDS_HEADER_IMAGES:
+      return {
+        ...state,
+        addsSelectedImages: action.images,
+        addsCost:
+          action.customCost !== undefined ? action.customCost : state.addsCost,
+        addsRequired:
+          action.required !== undefined ? action.required : state.addsRequired
       };
     case ZARZOUR_HEADER_IMAGES:
       return {

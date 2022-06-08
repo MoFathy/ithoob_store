@@ -659,12 +659,13 @@ export class Orders extends Component {
                         <div className="row">
                           <div className="col-12 col-md-7  ordersPage__orders">
                             {orderItem.orderDetails.itemsOfOrders.map(order => {
+                              console.log(order);
                               return (
                                 <div
                                   key={"product" + order.productId}
                                   className="ordersPage__orders__orderItem  d-flex justify-content-between"
                                 >
-                                  <div className="ordersPage__orders__orderItem__details d-flex justify-content-start  align-items-center flex-md-nowrap">
+                                  <div className="ordersPage__orders__orderItem__details d-flex justify-content-start  align-items-start flex-md-nowrap">
                                     <div className="ordersPage__orders__orderItem__details__image">
                                       {parseFloat(order.discount) > 0 ? (
                                         <div className="discountTag">
@@ -773,6 +774,11 @@ export class Orders extends Component {
                                       ) : (
                                         ""
                                       )}
+                                      <p className="mt-3"><strong>{getStringVal(
+                                            this.props.language,
+                                            "NOTES"
+                                          )}</strong></p>
+                                      {order.notes && <p>{order.notes}</p>}
                                       <div className="ordersPage__orders__orderItem__price price">
                                         {parseInt(order.quantity) > 1 &&
                                         parseFloat(order.discount) > 0 ? (
@@ -1023,8 +1029,7 @@ export class Orders extends Component {
                                   {getStringVal(this.props.language, "SR")}
                                 </p>
                               </div>
-                              {parseInt(orderItem.orderSummary.coupon_discount) !==
-                              0 && orderItem.orderSummary.coupon_code !== "MDN" ? (
+                              {parseInt(orderItem.orderSummary.coupon_discount) !== 0 ? (
                                 <div className="ordersPage__details__summery__delivery d-flex justify-content-between align-items-center">  
                                   <p>
                                     {" "}
@@ -1035,14 +1040,13 @@ export class Orders extends Component {
                                   </p>
                                   <p>
                                     {orderItem.orderSummary.coupon_discount}{" "}
-                                    {"%"}
+                                    {orderItem.orderSummary.coupon_discount_type === "percent" ? "%" : getStringVal(this.props.language, "SR")}
                                   </p>
                                 </div>
                               ) : (
                                 ""
                               ) }
-                              {parseInt(orderItem.orderSummary.coupon_discount) !==
-                              0 ? (
+                              {parseInt(orderItem.orderSummary.coupon_discount) !== 0 && orderItem.orderSummary.coupon_discount_type !== "money" ? (
                                 <div className="ordersPage__details__summery__delivery d-flex justify-content-between align-items-center">  
                                   <p>
                                     {" "}
@@ -1052,7 +1056,7 @@ export class Orders extends Component {
                                     )}{" "}
                                   </p>
                                   <p>
-                                    {orderItem.orderSummary.coupon_code === "MDN" ? orderItem.orderSummary.coupon_discount :orderItem.orderSummary.total * (orderItem.orderSummary.coupon_discount / 100)}{" "}
+                                    {orderItem.orderSummary.total * (orderItem.orderSummary.coupon_discount / 100)}{" "}
                                     {getStringVal(this.props.language, "SR")}
                                   </p>
                                 </div>
@@ -1130,6 +1134,22 @@ export class Orders extends Component {
                                   language={this.props.language}
                                 />
                               </div>
+                              {Number(orderItem.orderSummary.quantity_discount) ?
+                              (<div className="ordersPage__details__summery__expectedTotal d-flex justify-content-between  align-items-center">
+                                <p>
+                                  {getStringVal(this.props.language, "quantity_discount")}
+                                </p>
+                                <div>
+                                        <p>
+                                        {this.isFloat(
+                                          parseFloat(
+                                            orderItem.orderSummary.quantity_discount
+                                          )
+                                        )} {" "}{getStringVal(this.props.language, "SR")}
+                                        </p>
+                                    
+                                </div>
+                              </div>) : ""}
                               <div className="ordersPage__details__summery__expectedTotal d-flex justify-content-between align-items-center">
                                 <p>
                                   {getStringVal(
@@ -1165,7 +1185,7 @@ export class Orders extends Component {
                 </h2>
                 <div className="ordersPage__btns d-flex justify-content-center">
                   <div className="button btnVersa">
-                    <Link href="/customizations">
+                    <Link href="/thoob-design">
                       {getStringVal(this.props.language, "DESIGNED_YOUR_DRESS")}
                     </Link>
                   </div>

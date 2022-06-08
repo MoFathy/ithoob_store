@@ -12,6 +12,7 @@ export const CANCEL_ORDER_SUCESS_POPUP='CANCEL_ORDER_SUCESS_POPUP';
 // export const NO_SIZE_MAN= 'NO_SIZE_MAN';
 
 import {getCookie} from '../../scripts/getCookieFile';
+import { CONFIRM_PAYMENT_FAIL, CONFIRM_PAYMENT_SUCCESS, UPDATE_ORDER_SUCCEEDED_POPUP } from "../actions-types";
 
 // export const noSizeMan=() =>{
 //   return{
@@ -92,6 +93,51 @@ export const paymentResponse = (query,language,auth) => dispatch => {
       language: language,
       query:query
     })
+  }).then(res => res.json())
+  .then(data => {
+    console.log(data);
+    if (data.status === true) {
+      console.log('====================================');
+      console.log('====================================');
+      console.log(data);
+        dispatch(confirmPaymentSuccess(data));
+        dispatch(updateOrderSucceededPopup(true));
+    } else {
+      dispatch(confirmPaymentFail(data));
+    }
+  })
+  .catch(err => {
+    dispatch(
+      confirmPaymentFail({
+        status: false,
+        message: "Pyment Process Failed"
+      })
+    );
+  });
+}
+
+//confirmPaymentSuccess func that takes the payload of confirmPayment request as a param
+//and return action type (CONFIRM_PAYMENT_SUCCESS) and this payload
+export const confirmPaymentSuccess = payload => dispatch => {
+  return dispatch({
+    type: CONFIRM_PAYMENT_SUCCESS,
+    payload
+  });
+};
+
+//confirmPaymentFail func that takes the payload of confirmPayment request as a param
+//and return action type (CONFIRM_PAYMENT_FAIL) and this payload
+export const confirmPaymentFail = payload => dispatch => {
+  return dispatch({
+    type: CONFIRM_PAYMENT_FAIL,
+    payload
+  });
+};
+
+export const updateOrderSucceededPopup = payload => dispatch => {
+  return dispatch({
+      type: UPDATE_ORDER_SUCCEEDED_POPUP,
+      payload
   })
 }
 
@@ -109,7 +155,27 @@ export const tabbyResponse = (query,language,auth) => dispatch => {
       language: language,
       query:query
     })
+  }).then(res => res.json())
+  .then(data => {
+    console.log(data);
+    if (data.status === true) {
+      console.log('====================================');
+      console.log('====================================');
+      console.log(data);
+        dispatch(confirmPaymentSuccess(data));
+        dispatch(updateOrderSucceededPopup(true));
+    } else {
+      dispatch(confirmPaymentFail(data));
+    }
   })
+  .catch(err => {
+    dispatch(
+      confirmPaymentFail({
+        status: false,
+        message: "Pyment Process Failed"
+      })
+    );
+  });
 }
 
 export const getOrders = (language,auth) => dispatch => {

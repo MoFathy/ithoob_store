@@ -15,6 +15,7 @@ const menuInitialState = {
   siteDescription: "",
   deliveryPrice: 0,
   sizeManPrice: 0,
+  sizeManExtraPrice: 0,
 };
 
 export default function(state = menuInitialState, action) {
@@ -29,6 +30,7 @@ export default function(state = menuInitialState, action) {
         siteDescription: action.payload.siteDescription,
         deliveryPrice: action.payload.deliveryPrice,
         sizeManPrice: action.payload.sizeManPrice,
+        sizeManExtraPrice: action.payload.sizeManExtraPrice,
       };
     case GET_CATEGORIES_FAIL:
       return {

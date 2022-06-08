@@ -59,7 +59,7 @@ export const updateQuantity = (
           dispatch(updateDeleteConfirmedModalDisplay(true));
           dispatch(updateErrMsgStatus(false));
         }
-      } else {
+      }else{
         dispatch(updateQuantityFail(data));
       }
     })

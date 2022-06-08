@@ -41,9 +41,11 @@ import {
 } from "../../actions/customizationsPage/measurementsActions";
 import {TOGGLE_CLOSE_POPUP} from "../../actions/loginPopUp/loginActions";
 import {RESET_PRESENT_DATA} from "../../actions/includes/carouselActions";
+import { GET_ADDS_SUCCESS } from "../../actions/customizationsPage/addsActions";
 const customsInitialState = {
   fabricsStatus: false,
   yakaStatus: false,
+  addsStatus: false,
   zarzourStatus: false,
   akmamStatus: false,
   othersStatus: false,
@@ -51,6 +53,7 @@ const customsInitialState = {
   measurementsitems: {},
   generalitems: [],
   yakaobject: [],
+  addsobject: [],
   zarzourobject: [],
   akmamobject: [],
   othersobject: [],
@@ -79,7 +82,7 @@ const customsInitialState = {
   textNote:"",
   stockType: "",
   openedSection: "size",
-  currentSectionImage: "komasha"
+  currentSectionImage: "https://ithoob.com/_next/static/files/images/customization/komasha.jpg"
 };
 
 export default function(state = customsInitialState, action) {
@@ -157,6 +160,12 @@ export default function(state = customsInitialState, action) {
         ...state,
         yakaStatus: action.payload.status,
         yakaobject: action.payload.generalItems
+      };
+    case GET_ADDS_SUCCESS:
+      return {
+        ...state,
+        addsStatus: action.payload.status,
+        addsobject: action.payload.generalItems
       };
     case GET_ZARZOUR_SUCCESS:
       return {

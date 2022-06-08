@@ -20,6 +20,7 @@ const ordersInitialState= {
     branchNumber:"",
     coupon_code: null,
     coupon_discount: 0,
+    coupon_discount_type: "",
     // noSizeMan:false
 }
 

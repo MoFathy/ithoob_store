@@ -7,7 +7,8 @@ import {
   storeYaka,
   storeZarzour,
   storeAkmam,
-  storeOthers
+  storeOthers,
+  storeAdds
 } from "../../../actions/includes/carouselActions";
 import { toggleHashwaPopUp } from "../../../actions/customizationsPage/othersActions";
 import $ from "jquery";
@@ -72,6 +73,15 @@ export class ItemsContainer extends Component {
         output.recomBetana,
         output.type
       );
+    }else if (output.type === "adds") {
+      this.props.storeAdds(
+        output.items,
+        output.cost,
+        output.lastChild,
+        output.required,
+        output.recomBetana,
+        output.type
+      );
     } else if (output.type === "others") {
       this.props.storeOthers(
         output.items,
@@ -122,6 +132,7 @@ export class ItemsContainer extends Component {
     const { customObject } = this.props;
     const { type } = this.props;
     const { Id } = this.props;
+    console.log(customObject.items);
     if (customObject) {
       return (
         <div
@@ -206,11 +217,13 @@ export class ItemsContainer extends Component {
                       {item.sub.subItems.map((shape, fIndex) => {
                         return (
                           <div className="slideItem"  onClick={() =>{
-                            console.log(shape)
-                            if(shape.sub && shape.sub.color && shape.sub.color.length){
-                              $(".secondChild").css("display", "none");
-                            }
-                            this.handleDisplay(".firstChild")}}>
+                            // console.log(shape)
+                            // if(shape.sub && shape.sub.color && shape.sub.color.length){
+                            //   $(".secondChild").css("display", "none");
+                            // }
+                            // this.handleDisplay(".firstChild")
+                          }}
+                            >
                             <Item
                               key={shape.id}
                               type={this.props.type}
@@ -433,6 +446,25 @@ function mapDispatchToProps(dispatch) {
       dispatch(
         storeAkmam(
           akmamArray,
+          cost,
+          lastChild,
+          required,
+          recomBetana,
+          customtype
+        )
+      );
+    },
+    storeAdds: (
+      addsArray,
+      cost,
+      lastChild,
+      required,
+      recomBetana,
+      customtype
+    ) => {
+      dispatch(
+        storeAdds(
+          addsArray,
           cost,
           lastChild,
           required,

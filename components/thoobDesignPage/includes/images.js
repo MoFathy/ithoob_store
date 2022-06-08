@@ -8,12 +8,14 @@ class Images extends Component {
   }
   componentDidMount() {
     require("magnify/dist/js/jquery.magnify");
-    let productMagnify = $("#productMainImg").magnify();
-    const _this = this;
-    this.setState({
-      productMainImg: productMagnify
-    });
-
+    if(document.documentElement.clientWidth > 600){
+    
+      let productMagnify = $("#productMainImg").magnify();
+      const _this = this;
+      this.setState({
+        productMainImg: productMagnify
+      });
+    }
     [...document.querySelectorAll(".productImages__thumbs a")].forEach(item => {
       item.addEventListener("click", e => {
         e.preventDefault();
@@ -52,14 +54,16 @@ class Images extends Component {
           );
 
           item.classList.add("active");
+          if(document.documentElement.clientWidth > 600){
 
-          _this.state.productMainImg.destroy();
+            _this.state.productMainImg.destroy();
 
-          let productMagnify = $("#productMainImg").magnify();
+            let productMagnify = $("#productMainImg").magnify();
 
-          _this.setState({
-            productMainImg: productMagnify
-          });
+            _this.setState({
+              productMainImg: productMagnify
+            });
+          }
         };
       });
     });
@@ -70,9 +74,9 @@ class Images extends Component {
         <div className="productImages__main">
           <img
             id="productMainImg"
-            src={require("../../../images/customization/"+this.props.currentSectionImage+".jpg")}
-            data-thumb={require("../../../images/customization/"+this.props.currentSectionImage+".jpg")}
-            data-magnify-src={require("../../../images/customization/"+this.props.currentSectionImage+".jpg")}
+            src={this.props.currentSectionImage}
+            data-thumb={this.props.currentSectionImage}
+            data-magnify-src={this.props.currentSectionImage}
             alt={this.props.productTitle}
             width="100%"
             height="100%"

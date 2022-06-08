@@ -51,7 +51,7 @@
     position: relative;
     &::after {
       content: "";
-      background-image: url("images/Patern 01.jpg");
+      background-image: url("images/newPatern.png");
       height: font-rem(260);
       width: 100%;
       position: absolute;
@@ -59,6 +59,7 @@
       left: 0;
       z-index: -1;
       background-position: top center;
+      opacity: .6;
     }
   }
   .scrollingLoader {

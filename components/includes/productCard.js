@@ -39,24 +39,35 @@ class ProductCard extends Component {
 
   handleClick = (e, id) => {
     const colorId = id;
-    const selectedImg = $(e.target)
-      .parents(".product")
-      .find(".modalColorImg[id = " + colorId + "]");
-    if (selectedImg) {
-      $(e.target)
-        .parents(".product")
-        .find(".card-img-top.default")
-        .css("display", "none");
-      $(e.target)
-        .parents(".product")
-        .find(".modalColorImg")
-        .css("display", "none");
-      $(selectedImg).css("display", "block");
-    } else {
+    if(colorId === 0){
       $(e.target)
         .parents(".product")
         .find(".card-img-top.default")
         .css("display", "block");
+      $(e.target)
+        .parents(".product")
+        .find(".modalColorImg")
+        .css("display", "none");
+    }else{
+      const selectedImg = $(e.target)
+        .parents(".product")
+        .find(".modalColorImg[id = " + colorId + "]");
+      if (selectedImg) {
+        $(e.target)
+          .parents(".product")
+          .find(".card-img-top.default")
+          .css("display", "none");
+        $(e.target)
+          .parents(".product")
+          .find(".modalColorImg")
+          .css("display", "none");
+        $(selectedImg).css("display", "block");
+      } else {
+        $(e.target)
+          .parents(".product")
+          .find(".card-img-top.default")
+          .css("display", "block");
+      }
     }
     // const modalImg = $(".modalColorImg").find(img => img.id == colorId);
     // console.log(modalImg);
@@ -87,7 +98,7 @@ class ProductCard extends Component {
                 ""
               )}
               {dataItem.tags.isRecommended ? (
-                <li className="tagSpan">
+                <li className="tagSpan recommended">
                   {getStringVal(this.props.language, "RECOMMENDED_A")}
                 </li>
               ) : (
@@ -159,8 +170,8 @@ class ProductCard extends Component {
                     //   id={color.id}
                     // />
                   ))
+                  
                 : ""}
-
               {dataItem.sizeType == "sizeable" ? (
                 <div className="overlayOnHover">
                   <Link
@@ -313,10 +324,13 @@ class ProductCard extends Component {
                   //   onClick={$event => this.handleClick($event, color.id)}
                   // />
                 ))}
+                <Img src={[dataItem.img, require('../../images/FsMtu.gif')]} className="lazyload" onClick={$event => this.handleClick($event, 0)} />
+
               </div>
             ) : (
               ""
             )}
+
           </div>
         </div>
       </div>

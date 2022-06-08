@@ -5,6 +5,9 @@ import { getCookie } from "../../scripts/getCookieFile";
 import { getStringVal } from "../../scripts/multiLang";
 import { requestTailor, requestTailorPopupToggle } from "../../actions/requestTailor/requestTailorActions";
 import { loginPopUpStatusToggle } from "../../actions/loginPopUp/loginActions";
+import Select from 'react-select';
+import { getCountries } from "../../actions/signupPopUp/signupActions";
+
 export class RequestTailorPart extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +15,7 @@ export class RequestTailorPart extends Component {
     this.handleRequestTailor = this.handleRequestTailor.bind(this);
   }
   componentDidMount() {
+    this.props.getCountries(this.props.language === false ? 1 : 2);
 
     var listInputs = $(".signupPopup__content__form__field input");
     const _this = this;
@@ -25,6 +29,14 @@ export class RequestTailorPart extends Component {
       }
     });
   }
+  state = { regionValue: "الرياض" };
+  handleInputChange = (newValue) => {
+    const regionValue = newValue.value;
+    console.log(regionValue);
+    this.setState({ regionValue });
+    return regionValue;
+  };
+  
   handleClick() {
     this.props.requestTailorPopupToggle(false);
   }
@@ -48,7 +60,7 @@ export class RequestTailorPart extends Component {
     street = this.refs.street.value;
     from = this.refs.from.value;
     to = this.refs.to.value;
-    region = "الرياض";
+    region = this.state.regionValue;
     pieces_number = this.refs.pieces_number.value;
 
 
@@ -90,6 +102,19 @@ export class RequestTailorPart extends Component {
 
 
   render() {
+    var areas = [];
+    if(this.props.countries && this.props.countries.length > 0){
+      areas =  this.props.countries[0].areas.sort(function(a, b){
+        let x = a.name.toLowerCase();
+        let y = b.name.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      }).map(area => {
+        return {value: area.name, label: area.name};
+      });
+    }
+
     return (
       <div className=" requestTailorPart">
         <div className="requestTailor_content boxShadow">
@@ -112,12 +137,21 @@ export class RequestTailorPart extends Component {
           )}
           <div className="signupPopup__content__form">
             <div className="row">
-              <div className="col-6">
+              <div className="col-md-6 col-12">
                 <div className="signupPopup__content__form__field notFocused region">
                   <label htmlFor="region">
                     {getStringVal(this.props.language, "REGION")}
                   </label>
-                  <input
+                  <Select 
+                    ref="region"
+                    defaultValue={{value:"الرياض", label:"الرياض"}}
+                    className="nameInput"
+                    placeholder="المدينة"
+                    id="region"
+                    // onInputChange={this.handleInputChange}
+                    onChange={(val) => this.handleInputChange(val)}
+                    options={areas} />
+                  {/* <input
                     type="text"
                     ref="region"
                     className="nameInput formInput"
@@ -126,11 +160,11 @@ export class RequestTailorPart extends Component {
                     onBlur={(e) => this.onBlurHandle(e)}
                     disabled
                     value="الرياض"
-                  />
+                  /> */}
                 </div>
                 <p className="invalidInput__region" />
               </div>
-              <div className="col-6">
+              <div className="col-md-6 col-12">
                 <div className="signupPopup__content__form__field notFocused naighborhood">
                   <label htmlFor="naighborhood">
                     {getStringVal(this.props.language, "THE_NAIGHBORHOOD")}
@@ -155,7 +189,6 @@ export class RequestTailorPart extends Component {
                   <input
                     type="text"
                     ref="street"
-                    maxLength="15"
                     className="formInput"
                     id="street"
                     onFocus={(e) => this.onFocusHandle(e)}
@@ -173,7 +206,6 @@ export class RequestTailorPart extends Component {
                   <input
                     type="text"
                     ref="milestone"
-                    maxLength="15"
                     className="formInput"
                     id="milestone"
                     onFocus={(e) => this.onFocusHandle(e)}
@@ -193,7 +225,6 @@ export class RequestTailorPart extends Component {
                     rows="3"
                     type="text"
                     ref="details"
-                    maxLength="15"
                     className="formInput"
                     id="details"
                     onFocus={(e) => this.onFocusHandle(e)}
@@ -214,7 +245,6 @@ export class RequestTailorPart extends Component {
                   <input
                     type="time"
                     ref="from"
-                    maxLength="15"
                     className="formInput"
                     id="from"
                     onFocus={(e) => this.onFocusHandle(e)}
@@ -232,7 +262,6 @@ export class RequestTailorPart extends Component {
                   <input
                     type="time"
                     ref="to"
-                    maxLength="15"
                     className="formInput"
                     id="to"
                     onFocus={(e) => this.onFocusHandle(e)}
@@ -241,7 +270,7 @@ export class RequestTailorPart extends Component {
                 </div>
                 <p className="invalidInput__to" />
               </div>
-              <div className="col-6">
+              <div className="col-6"  style={{"display": "none"}}>
                 <div className="signupPopup__content__form__field notFocused pieces_number">
                   <label htmlFor="pieces_number">
                     {getStringVal(this.props.language, "PIECES_NUMBER")}
@@ -258,12 +287,12 @@ export class RequestTailorPart extends Component {
                 </div>
                 <p className="invalidInput__pieces_number" />
               </div>
-              <div className="col-12">
+              <div className="col-12"  style={{"display": "none"}}>
                 <p className="mt-2"> <span className="hint">*</span> {getStringVal(this.props.language, "PIECES_NUMBER_HENT")}</p>
               </div>
             </div>
 
-            <div className="btnStyle">
+            <div className="btnStyle"   style={{"marginTop": "30px"}}>
               <button onClick={this.handleRequestTailor}>
                 {getStringVal(this.props.language, "CONFIRM_REQUEST")}
               </button>
@@ -294,6 +323,9 @@ function mapDispatchToProps(dispatch) {
     },
     loginPopUpStatusToggle(value) {
         dispatch(loginPopUpStatusToggle(value));
+      },
+      getCountries(lang) {
+        dispatch(getCountries(lang));
       },
   };
 }

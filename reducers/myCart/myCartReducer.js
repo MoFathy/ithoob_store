@@ -54,7 +54,7 @@ const myCartInitialState = {
   orderSummary: {},
   items: [],
   partnerTable: [],
-
+  notEnough: false,
   quantityStatus: false,
   quantityMessage: "",
   sizeStatus: false,
@@ -147,6 +147,7 @@ export default function(state = myCartInitialState, action) {
         ...state,
         quantityStatus: action.payload.status,
         quantityMessage: action.payload.message,
+        notEnough: action.payload.notEnough,
         isLoading: false
       };
     case UPDATE_SIZE_SUCCESS:

@@ -24,7 +24,7 @@ componentDidUpdate(prevProps){
           {
             akmamObject.map((item,index)=>{
               return (
-                <div className="custom__items" key={"akmam"+item.id} style={this.props.itemid !== undefined ? {display:"block"} : index !== 0 ? {display:"none"} : {} }>
+                <div className="custom__items" key={"akmam"+item.id} style={index !== 0 ? {display:"none"} : {} }>
                   <ItemsContainer type="akmamArray"  Id={item.id}  itemid={this.props.itemid}   customObject={item} key={"akmam"+item.id} />
                 </div>
               )

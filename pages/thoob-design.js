@@ -17,6 +17,7 @@ import { getStringVal } from "../scripts/multiLang";
 import  CartPart from "../components/thoobDesignPage/cartPart";
 import Customs from "../components/thoobDesignPage/customs"
 import ImagesPart from "../components/thoobDesignPage/imagesPart";
+import DesignLogo from "../components/thoobDesignPage/includes/logo";
 // import Logo from "../components/includes/logo";
 
 NProgress.configure({ showSpinner: false });
@@ -106,7 +107,7 @@ class ThoobDesignLayout extends React.Component {
             <div className="logo">
                 <Link href="/">
                     <a>
-                        <FooterLogo />
+                        <DesignLogo />
                     </a>
                 </Link>
             </div>

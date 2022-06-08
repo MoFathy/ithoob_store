@@ -48,7 +48,7 @@ export const getDefaultValues= (lang,productId,token) => dispatch =>{
   .then(res => res.json())
   .then(data => {
     if (data.status === true) {
-      // console.log("data default")
+      console.log(data);
       dispatch(getDefaultSuccess(data));
     } else {
       dispatch(getDefaultFail(data));

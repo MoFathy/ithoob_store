@@ -55,7 +55,8 @@ class CheckoutPage extends Component {
       checkout: { ...reduxStore.getState().checkout },
       authToken: authToken,
       lang: lang,
-      queryString: query.code ? query.code : null
+      queryString: query.code ? query.code : null,
+      dataCategorySlug: query,
     };
   }
   componentDidUpdate(prevProps) {
@@ -88,7 +89,7 @@ class CheckoutPage extends Component {
             <div className="row">
               <div className="col-12 col-lg-8">
                 <Receiving />
-                <DeliveryCard />
+                <DeliveryCard pathname={this.props.dataCategorySlug}/>
               </div>
               <div className="col-12 col-lg-4">
                 <OrderSummary />

@@ -79,6 +79,8 @@
             font-size: font-rem(20);
             height: font-rem(60);
             padding: 0 font-rem(30);
+            background: #fff;
+            color: #8a633e !important;
           }
           .col-12 {
             @include media-breakpoint-down(md) {

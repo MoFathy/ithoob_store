@@ -59,6 +59,11 @@ class PageHeader extends Component {
                 $("#val5").val(),
                 $("#val6").val(),
                 $("#val7").val(),
+                $("#val8").val(),
+                $("#val9").val(),
+                $("#val10").val(),
+                $("#val11").val(),
+                $("#val12").val(),
                 this.props.fromProductDetails,
                 this.props.slug,
                 this.props.fromMyCart
@@ -81,6 +86,11 @@ class PageHeader extends Component {
               $("#val5").val(),
               $("#val6").val(),
               $("#val7").val(),
+              $("#val8").val(),
+              $("#val9").val(),
+              $("#val10").val(),
+              $("#val11").val(),
+              $("#val12").val(),
               this.props.fromProductDetails,
               this.props.slug,
               this.props.fromMyCart
@@ -101,7 +111,12 @@ class PageHeader extends Component {
             $("#val4").val(),
             $("#val5").val(),
             $("#val6").val(),
-            $("#val7").val()
+            $("#val7").val(),
+            $("#val8").val(),
+            $("#val9").val(),
+            $("#val10").val(),
+            $("#val11").val(),
+            $("#val12").val(),
           );
           this.props.updateSuccessModal(true);
         }
@@ -188,6 +203,11 @@ const mapStateToProps = state => ({
   value5: state.addMeasurement.value5,
   value6: state.addMeasurement.value6,
   value7: state.addMeasurement.value7,
+  value8: state.addMeasurement.value8,
+  value9: state.addMeasurement.value9,
+  value10: state.addMeasurement.value10,
+  value11: state.addMeasurement.value11,
+  value12: state.addMeasurement.value12,
   currentVal: state.addMeasurement.currentVal,
   minVal: state.addMeasurement.minVal,
   maxVal: state.addMeasurement.maxVal,
@@ -211,6 +231,11 @@ const mapDispatchToProps = dispatch => ({
     val5,
     val6,
     val7,
+    val8,
+    val9,
+    val10,
+    val11,
+    val12,
     fromProductDetails,
     slug,
     fromMyCart
@@ -227,6 +252,11 @@ const mapDispatchToProps = dispatch => ({
         val5,
         val6,
         val7,
+        val8,
+        val9,
+        val10,
+        val11,
+        val12,
         fromProductDetails,
         slug,
         fromMyCart
@@ -259,7 +289,12 @@ const mapDispatchToProps = dispatch => ({
     val4,
     val5,
     val6,
-    val7
+    val7,
+    val8,
+    val9,
+    val10,
+    val11,
+    val12,
   ) => {
     dispatch(
       editMeasurement(
@@ -273,7 +308,12 @@ const mapDispatchToProps = dispatch => ({
         val4,
         val5,
         val6,
-        val7
+        val7,
+        val8,
+        val9,
+        val10,
+        val11,
+        val12,
       )
     );
   }

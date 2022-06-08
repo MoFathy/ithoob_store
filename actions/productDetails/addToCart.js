@@ -29,7 +29,10 @@ export const addToCart = (
   sizeType,
   defaultIds,
   stockType,
-  hasCustomizationOptions
+  hasCustomizationOptions,
+  quantityId,
+  options_stock,
+  stock
 ) => dispatch => {
   // add to cart, if user login call API, else add item to localstorage
   if (document.cookie.indexOf("ithoobUser") !== -1) {
@@ -46,7 +49,10 @@ export const addToCart = (
         shoesSize,
         defaultIds,
         stockType,
-        hasCustomizationOptions
+        hasCustomizationOptions,
+        sizeType,
+        quantityId,
+        stock
       )
     );
   } else {
@@ -70,7 +76,10 @@ export const addToCart = (
         shoesSize,
         sizeType,
         stockType,
-        hasCustomizationOptions
+        hasCustomizationOptions,
+        quantityId,
+        options_stock,
+        stock
       )
     );
   }
@@ -88,10 +97,10 @@ export const addToCartAuth = (
   shoesSize,
   defaultIds,
   stockType,
-  hasCustomizationOptions
+  hasCustomizationOptions,
+  sizeType,
+  quantityId
 ) => dispatch => {
-  // console.log("addToCartAuth 2");
-
   return fetch(process.env.endpoint + "/api/add-to-cart", {
     method: "POST",
     headers: {
@@ -110,7 +119,9 @@ export const addToCartAuth = (
           size,
           shoesSize,
           selectedColorId: selectedColorId,
-          selectedIds: defaultIds
+          selectedIds: defaultIds,
+          sizeType:sizeType,
+          quantityId: quantityId
         }
       ]
     })
@@ -146,7 +157,10 @@ export const addToCartNotAuth = (
   shoesSize,
   sizeType,
   stockType,
-  hasCustomizationOptions
+  hasCustomizationOptions,
+  quantityId,
+  options_stock,
+  stock
 ) => dispatch => {
   if (localStorage.getItem("uc")) {
     // console.log("addToCartNotAuth 3");
@@ -170,7 +184,10 @@ export const addToCartNotAuth = (
       shoesSize,
       sizeType,
       stockType,
-      hasCustomizationOptions
+      hasCustomizationOptions,
+      quantityId,
+      options_stock,
+      stock
     });
     localStorage.setItem("uc", JSON.stringify(cart));
   } else {
@@ -196,7 +213,10 @@ export const addToCartNotAuth = (
             shoesSize,
             sizeType,
             stockType,
-            hasCustomizationOptions
+            hasCustomizationOptions,
+            quantityId,
+            options_stock,
+            stock
           }
         ]
       })

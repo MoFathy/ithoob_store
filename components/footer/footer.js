@@ -8,7 +8,7 @@ import FooterLogo from "./footerLogo";
 import WhatsAppLogo from "./../includes/WhatsApp";
 import Modal from "react-modal";
 import { getNewsCookie } from "../../scripts/getCookieFile";
-import {subscripeNewsLetter} from "../../actions/signupPopUp/signupActions";
+import { subscripeNewsLetter } from "../../actions/signupPopUp/signupActions";
 // content: {
 //   // top: "50%",
 //   // left: "50%",
@@ -40,21 +40,21 @@ const customStyles = {
     bottom: "20px",
     right: "5px",
     width: "450px",
-    maxWidth: "97%"
+    maxWidth: "97%",
   },
   overlay: {
-    position: 'fixed',
-    inset: '0px',
-    zIndex: '100',
-    backgroundColor: 'unset'
-  }
+    position: "fixed",
+    inset: "0px",
+    zIndex: "100",
+    backgroundColor: "unset",
+  },
 };
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 class Footer extends Component {
-//   componentWillMount(){
-//   Modal.setAppElement("#footer");
-// }
+  //   componentWillMount(){
+  //   Modal.setAppElement("#footer");
+  // }
   constructor() {
     super();
 
@@ -66,28 +66,31 @@ class Footer extends Component {
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
-  componentDidMount(){
-  Modal.setAppElement("#footer");
+  componentDidMount() {
+    Modal.setAppElement("#footer");
 
-    if(getNewsCookie("subscripeNews") === "canceled" || localStorage.getItem("isSubscripedToNewsletter") ){
+    if (
+      getNewsCookie("subscripeNews") === "canceled" ||
+      localStorage.getItem("isSubscripedToNewsletter")
+    ) {
       this.setState({ modalIsOpen: false });
-    }else{
+    } else {
       this.setState({ modalIsOpen: true });
     }
   }
   btnStyle = {
-    color: '#000',
-    cursor: 'pointer',
-    background: '#fff',
-    margin: '20px',
-    display: 'flex',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: '1px dashed red',
-    padding: '10px',
-    fontSize: '1em'
-  }
+    color: "#000",
+    cursor: "pointer",
+    background: "#fff",
+    margin: "20px",
+    display: "flex",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "1px dashed red",
+    padding: "10px",
+    fontSize: "1em",
+  };
   openModal() {
     this.setState({ modalIsOpen: true });
   }
@@ -99,7 +102,7 @@ class Footer extends Component {
 
   closeModal() {
     this.setState({ modalIsOpen: false });
-    document.cookie = "subscripeNews=canceled"
+    document.cookie = "subscripeNews=canceled";
   }
 
   onFocusHandle = (e) => {
@@ -131,12 +134,11 @@ class Footer extends Component {
   subscripeNewsletter = () => {
     let email = this.refs.email.value;
     let mobile = this.refs.mobile.value;
-    var isEmail = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/.test(
-      email
-    );
+    var isEmail =
+      /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/.test(email);
     var isnum = /^[0-9 +]+$/.test(mobile);
 
-    if (!email || !isEmail ) {
+    if (!email || !isEmail) {
       console.log(email);
       $(".invalidInput__email").text(
         getStringVal(
@@ -145,8 +147,8 @@ class Footer extends Component {
         )
       );
       return;
-    }else{
-      $(".invalidInput__email").text("")
+    } else {
+      $(".invalidInput__email").text("");
     }
 
     if (!mobile || !isnum) {
@@ -155,21 +157,21 @@ class Footer extends Component {
         getStringVal(this.props.language, "PLEASE_ENTER_YOUR_PHONE_NUMBER")
       );
       return;
-    }else{
-      $(".invalidInput__mobile").text("")
+    } else {
+      $(".invalidInput__mobile").text("");
     }
-    subscripeNewsLetter({mobile, email})
+    subscripeNewsLetter({ mobile, email });
     let subscriptionStatus = getNewsCookie("subscripeNews");
     console.log(subscriptionStatus);
     this.setState({ modalIsOpen: false });
-    document.cookie = "subscripeNews=canceled"
+    document.cookie = "subscripeNews=canceled";
   };
   changeLang(x) {
     this.props.changeLang(x);
   }
   render() {
     const linksStyle = {
-      color: "#b78b1e",
+      color: "#fff",
       fontSize: ".8em",
       padding: "2px !important",
     };
@@ -232,10 +234,7 @@ class Footer extends Component {
                       </Link>
                     </div>
                     <div>
-                      <a
-                        onClick={this.openModal}
-                        className="p-2 pt-4 newsBtn"
-                      >
+                      <a onClick={this.openModal} className="p-2 pt-4 newsBtn">
                         <span className="icon-envelope"></span>
                         {getStringVal(
                           this.props.language,
@@ -270,7 +269,10 @@ class Footer extends Component {
                         </div>
                         <form>
                           <div className="signupPopup__content__form__field notFocused  email">
-                            <label htmlFor="email" style={{transform: 'translateY(25px)'}}>
+                            <label
+                              htmlFor="email"
+                              style={{ transform: "translateY(25px)" }}
+                            >
                               {getStringVal(this.props.language, "E_MAIL")}
                             </label>
                             <input
@@ -287,7 +289,10 @@ class Footer extends Component {
                           </div>
 
                           <div className="signupPopup__content__form__field notFocused mobile">
-                            <label htmlFor="mobile" style={{transform: 'translateY(25px)'}}>
+                            <label
+                              htmlFor="mobile"
+                              style={{ transform: "translateY(25px)" }}
+                            >
                               {getStringVal(this.props.language, "MOBILE")} (
                               {getStringVal(this.props.language, "MOBILE_HINT")}
                               )
@@ -396,12 +401,16 @@ class Footer extends Component {
                   </Link>
                 </p>
                 <div className="about d-flex mt-2 footerList">
-                    <a className="p-1" href="https://maroof.sa/180502" target="_blank">
-                      <img
-                        src={require("../../images/maroofSa.png")}
-                        style={{ width: "100px" }}
-                      />
-                    </a>
+                  <a
+                    className="p-1"
+                    href="https://maroof.sa/180502"
+                    target="_blank"
+                  >
+                    <img
+                      src={require("../../images/maroofSa.png")}
+                      style={{ width: "100px" }}
+                    />
+                  </a>
                   {/* <iframe
                     src="http://maroof.sa/Business/GetStamp?bid=180502"
                     style={{
@@ -418,6 +427,23 @@ class Footer extends Component {
             </div>
           </div>
         </div>
+        <a
+          target="_blank"
+          href={
+            "https://api.whatsapp.com/send?phone=" +
+            process.env.whatsAppNumber +
+            "&text=&source=&data=&app_absent="
+          }
+          id="whatsapp_link"
+        >
+          <img
+            // src={require("../../images/WhatsApp_icon.png")}
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
+            alt="whatsApp Logo"
+            width="100%"
+            height="100%"
+          />
+        </a>
         <div className="copyright">
           <p className={this.props.language === true ? "arabicNumber" : ""}>
             {/* © 2018 iThoob Rights Rreserved. */}

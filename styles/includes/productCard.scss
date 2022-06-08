@@ -247,6 +247,9 @@
     background-color: $discountTag;
     font-size: font-rem(15);
   }
+  .tagSpan.recommended{
+    background-color: $recommendedTag;
+  }
 }
 .page__en {
   .productTags {

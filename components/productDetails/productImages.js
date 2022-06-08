@@ -7,12 +7,19 @@ class ProductImagesComponent extends Component {
     this.state = { productMainImg: "" };
   }
   componentDidMount() {
-    require("magnify/dist/js/jquery.magnify");
-    let productMagnify = $("#productMainImg").magnify();
+    console.log('====================================');
+    console.log(document.documentElement.clientWidth,document.documentElement.clientWidth > 600);
+    console.log('====================================');
+    // if window is bigger than 600px 
     const _this = this;
-    this.setState({
-      productMainImg: productMagnify
-    });
+    
+    if(document.documentElement.clientWidth > 600){
+      require("magnify/dist/js/jquery.magnify");
+      let productMagnify = $("#productMainImg").magnify();
+      _this.setState({
+        productMainImg: productMagnify
+      });
+    }
 
     [...document.querySelectorAll(".productImages__thumbs a")].forEach(item => {
       item.addEventListener("click", e => {
@@ -53,13 +60,15 @@ class ProductImagesComponent extends Component {
 
           item.classList.add("active");
 
-          _this.state.productMainImg.destroy();
-
-          let productMagnify = $("#productMainImg").magnify();
-
-          _this.setState({
-            productMainImg: productMagnify
-          });
+          
+          
+          if(document.documentElement.clientWidth > 600){
+            _this.state.productMainImg.destroy();
+            let productMagnify = $("#productMainImg").magnify();
+            _this.setState({
+              productMainImg: productMagnify
+            });
+          }
         };
       });
     });

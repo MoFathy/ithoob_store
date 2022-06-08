@@ -21,6 +21,7 @@ import {
 } from "../../actions/productDetails/productDetails";
 import { initialProductList } from "../../actions/productList/productList";
 import Stock from "./stock";
+import { storeQuantityID } from "../../actions/includes/carouselActions";
 class ProductDetailsComponent extends Component {
   constructor(props) {
     super(props);
@@ -60,13 +61,19 @@ class ProductDetailsComponent extends Component {
     // Select default color
     if (productDetails.colors && productDetails.colors.length > 0) {
       this.props.updateColor(
-        productDetails.colors.filter((color) => color.default === true).length > 0 ? productDetails.colors.filter((color) => color.default === true)[0].id : productDetails.colors[0].id
+        productDetails.colors.filter((color) => color.default === true).length >
+          0
+          ? productDetails.colors.filter((color) => color.default === true)[0]
+              .id
+          : productDetails.colors[0].id
       );
     }
   }
 
   componentDidUpdate() {
-    $("#productMainImg").magnify();
+    if(document.documentElement.clientWidth > 600){
+      $("#productMainImg").magnify();
+    }
   }
 
   openShareScreen(e) {
@@ -100,7 +107,10 @@ class ProductDetailsComponent extends Component {
     document
       .querySelectorAll(".productImages__thumbs")[0]
       .childNodes[0].classList.add("active");
-    $("#productMainImg").magnify();
+    if(document.documentElement.clientWidth > 600){
+
+     $("#productMainImg").magnify();
+    }
     let maxQuantity = selectedColor[0].maxQuantity;
     this.props.updateMaxQuantity(maxQuantity);
 
@@ -179,7 +189,7 @@ class ProductDetailsComponent extends Component {
                   ""
                 )}
                 {this.props.productDetails.tags.isRecommended ? (
-                  <li className="tagSpan">
+                  <li className="tagSpan recommended">
                     {getStringVal(this.props.language, "RECOMMENDED")}
                   </li>
                 ) : (
@@ -262,44 +272,69 @@ class ProductDetailsComponent extends Component {
 
         <div className="col-12 col-md-8">
           <div className="productTitle d-flex justify-content-between align-items-start mt-3">
-            <div className="title">
+            <div className="title" style={{flex:'2'}}>
               <h3>{this.props.productDetails.title}</h3>
               <p>{this.props.productDetails.subTitle}</p>
             </div>
+            <div
+              style={{flex:'4'}}
+              style={{
+                display: "flex",
+                "align-items": "flex-end",
+                "flex-direction": "column",
+              }}
+            >
+              {this.props.productDetails.price_discount > 0 ? (
+                <div className="price d-flex justify-content-between align-items-center">
+                  <p
+                    className={
+                      this.props.language === true
+                        ? "priceBeforeDiscount"
+                        : "priceBeforeDiscount"
+                    }
+                  >
+                    {this.props.productDetails.price}
+                    <span>
+                      {/* {getStringVal(this.props.language, "SR")} */}
+                    </span>
+                  </p>
 
-            {this.props.productDetails.price_discount > 0 ? (
-              <div className="price d-flex justify-content-between align-items-center">
-                <p
-                  className={
-                    this.props.language === true
-                      ? "priceBeforeDiscount"
-                      : "priceBeforeDiscount"
-                  }
-                >
-                  {this.props.productDetails.price}
-                  <span>{/* {getStringVal(this.props.language, "SR")} */}</span>
+                  <p>
+                    {this.props.productDetails.price_discount}
+                    <span>{getStringVal(this.props.language, "SR")}</span>
+                  </p>
+                </div>
+              ) : (
+                <div className="price d-flex justify-content-between align-items-center">
+                  <p>
+                    {this.props.productDetails.price}
+                    <span>{getStringVal(this.props.language, "SR")}</span>
+                  </p>
+                </div>
+              )}
+              <br />
+              {/* <div id="tabbyPromo" className="d-flex">
+                <p style={{flex: 4}}>
+                  أو اختار الدفع على 4 دفعات شهرية متساوية
+                  <a
+                    href="https://checkout.tabby.ai/promos/product-page/installments/ar/"
+                    target="blank"
+                  >
+                    للمذيد
+                  </a>
+                  ` `
                 </p>
-
-                <p>
-                  {this.props.productDetails.price_discount}
-                  <span>{getStringVal(this.props.language, "SR")}</span>
+                <p style={{flex: 1}}>
+                  <img src={require("../../images/tabby.png")} style={{width: '80px'}}/>
                 </p>
-              </div>
-            ) : (
-              <div className="price d-flex justify-content-between align-items-center">
-                <p>
-                  {this.props.productDetails.price}
-                  <span>{getStringVal(this.props.language, "SR")}</span>
-                </p>
-              </div>
-            )}
+              </div> */}
+            </div>
           </div>
           <div className="orderDetails form">
             <Stock
               stock={this.props.productDetails.options_stock}
-              selectStock={(value) =>
-                console.log(value)
-              }
+              quantity_id={this.props.quantityId}
+              selectStock={(value) => this.props.storeQuantityID(value.quantity_id)}
             />
             {this.props.quantity && this.props.quantity > 0 ? (
               <QuantitySection
@@ -307,6 +342,8 @@ class ProductDetailsComponent extends Component {
                 quantity={this.props.quantity}
                 handlePlusClick={this.handlePlusClick}
                 handleMinusClick={this.handleMinusClick}
+                stock={this.props.productDetails.stock}
+                productId={this.props.productDetails.productId}
               />
             ) : (
               ""
@@ -324,7 +361,9 @@ class ProductDetailsComponent extends Component {
             ) : (
               ""
             )}
-            {this.props.sizeType !== "accessories" && this.props.productDetails.stockType && this.props.productDetails.stockType != "product" &&
+            {this.props.sizeType !== "accessories" &&
+            this.props.productDetails.stockType &&
+            this.props.productDetails.stockType != "product" &&
             this.props.measurementsTable ? (
               <SizeSection
                 pathname={this.props.pathname}
@@ -372,6 +411,7 @@ const mapProductDetailsStateToProps = (state) => ({
   sizeType: state.productDetails.productDetails.sizeType,
   measurementsTable: state.productDetails.productDetails.measurementsTable,
   closeBtnIsShown: state.myCart.closeBtnIsShown,
+  quantityId: state.carouselReducer.present.quantityId
 });
 
 const mapProductDetailsDispatchToProps = (dispatch) => ({
@@ -381,6 +421,9 @@ const mapProductDetailsDispatchToProps = (dispatch) => ({
   // updateSizeIdState: id => {
   //   dispatch(updateSizeIdState(id));
   // },
+  storeQuantityID(quantityId) {
+    dispatch(storeQuantityID(quantityId));
+  },
   updateQuantity: (newQuantity) => {
     dispatch(updateQuantity(newQuantity));
   },

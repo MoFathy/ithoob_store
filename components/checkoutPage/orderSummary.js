@@ -27,19 +27,17 @@ class OrderSummary extends Component {
     let token = getCookie("ithoobUser", "authenticationToken");
     let language = this.props.language === false ? 1 : 2;
     //Temporary static coupon code
-    console.log(coupon_code);
-    let nowDate = new Date();
-  let firstDate = new Date("4/6/2021");
-  let secondDate = new Date("4/7/2021");
-  console.log(nowDate);
-  console.log(firstDate);
-  console.log(secondDate);
-  console.log((nowDate >= firstDate));
-  console.log((nowDate <= secondDate));
 
-  var disc = 0;
-  if(coupon_code === "MDN" && nowDate >= firstDate && nowDate <= secondDate){
-      console.log(coupon_code, "again");
+    let nowDate = new Date();
+    let firstDate = new Date("4/6/2021");
+    let secondDate = new Date("4/7/2021");
+
+    var disc = 0;
+    if (
+      coupon_code === "MDN" &&
+      nowDate >= firstDate &&
+      nowDate <= secondDate
+    ) {
       this.props.cartItems.forEach((element) => {
         if (
           element.sizeType === "accessories" ||
@@ -54,15 +52,8 @@ class OrderSummary extends Component {
       this.setState({ ...this.state, isMDN: true, expDiscount: disc });
       // return;
     }
-    console.log(disc);
     console.log(getCookie("ithoobUser", "authenticationToken"));
     this.props.checkForCouponDiscount(language, token, coupon_code, disc);
-    // $(".notLoading").css("display", "none");
-    // $(".loading").css("display", "block");
-    // if (coupon_code === "") {
-    //   $(".coupon_alert").css("display", "block");
-    //   return;
-    // }
   };
 
   componentDidMount() {
@@ -137,6 +128,99 @@ class OrderSummary extends Component {
   };
 
   render() {
+    // let products = this.props.cartItems;
+var sebhaArray =[];
+var khatemArray =[];
+var asweraArray =[];
+var deblaArray =[];
+var thoobsArray =[];
+
+this.props.cartItems.forEach(item =>{
+  if(item.subCategory === "daily-thoob"){
+    for(let i = 0; i < item.quantity; i++){
+      thoobsArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'all-sebah-'){
+    for(let i = 0; i < item.quantity; i++){
+      sebhaArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'all-rings'){
+    for(let i = 0; i < item.quantity; i++){
+      khatemArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'ring2'){
+    for(let i = 0; i < item.quantity; i++){
+      deblaArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'bracelets'){
+    for(let i = 0; i < item.quantity; i++){
+      asweraArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  
+});
+
+
+var quantity_discount = 0;
+  if(sebhaArray.length && sebhaArray.length > 1){
+    var count = Math.floor(sebhaArray.length / 2);
+    const newArr = sebhaArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(khatemArray.length && khatemArray.length > 1){
+    var count = Math.floor(khatemArray.length / 2);
+    const newArr = khatemArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(asweraArray.length && asweraArray.length > 1){
+    var count = Math.floor(asweraArray.length / 2);
+    const newArr = asweraArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(deblaArray.length && deblaArray.length > 1){
+    var count = Math.floor(deblaArray.length / 2);
+    const newArr = deblaArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(thoobsArray.length && thoobsArray.length > 2){
+    var count = Math.ceil(thoobsArray.length / 3 * 2);
+    const newArr = thoobsArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
     return (
       <div className="card orderSammury">
         <div className="">
@@ -188,9 +272,7 @@ class OrderSummary extends Component {
             <div className="card-text d-flex">
               <p> {getStringVal(this.props.language, "COUPON_DISCOUNT")} </p>
               <p>
-                {this.props.orderSummary.total *
-                  (parseInt(this.props.checkoutState.coupon_discount) /
-                    100)}{" "}
+                {this.props.checkoutState.coupon_discount_type === "percent" ? this.props.orderSummary.total * (parseInt(this.props.checkoutState.coupon_discount) / 100) : parseInt(this.props.checkoutState.coupon_discount)}{" "}
                 {getStringVal(this.props.language, "SR")}
               </p>
             </div>
@@ -265,6 +347,16 @@ class OrderSummary extends Component {
           />
 
           <hr />
+          {Number(quantity_discount) ? (<div className="card-text d-flex total  align-items-center">
+            <div className="title">
+              {getStringVal(this.props.language, "quantity_discount")}
+            </div>
+            <div className="price">
+                    <span id="quantity_discount">{quantity_discount}</span>
+                {getStringVal(this.props.language, "SR")}
+            </div>
+          </div>) : ""}
+          <hr />
 
           <div className="card-text d-flex total mb-0">
             <div className="title">
@@ -274,46 +366,64 @@ class OrderSummary extends Component {
             <div className="price">
               {this.props.deliveryMethod == "homeDelivery" ? (
                 <span>
-                  {this.state.isMDN
+                  {this.props.checkoutState.coupon_discount
+                    ? this.isFloat(parseFloat(this.props.orderSummary.expectedTotal)) -
+                      (this.props.checkoutState.coupon_discount_type === "percent" ? this.props.orderSummary.total * (parseInt(this.props.checkoutState.coupon_discount) /100) : parseInt(this.props.checkoutState.coupon_discount)) - Number(quantity_discount)
+                    : this.props.paymentMethod === "tabbyPayment"
                     ? this.isFloat(
-                        parseFloat(this.props.orderSummary.expectedTotal) -
-                        parseFloat(this.state.expDiscount)
-                      )
-                    : this.props.checkoutState.coupon_discount
+                        parseFloat(
+                          this.props.orderSummary.expectedTotal * 6.5 / 100
+                        ) + 1 + parseFloat(
+                          this.props.orderSummary.expectedTotal
+                        )
+                      ) - Number(quantity_discount)
+                    : this.props.paymentMethod === "tabbyPayLater"
                     ? this.isFloat(
-                        parseFloat(this.props.orderSummary.expectedTotal)
-                      ) -
-                      this.props.orderSummary.total *
-                        (parseInt(this.props.checkoutState.coupon_discount) /
-                          100)
+                        parseFloat(
+                          this.props.orderSummary.expectedTotal * 5.5 / 100
+                        ) + parseFloat(
+                          this.props.orderSummary.expectedTotal
+                        ) + 1
+                      ) - Number(quantity_discount)
                     : this.isFloat(
                         parseFloat(this.props.orderSummary.expectedTotal)
-                      )}
+                      )  - Number(quantity_discount)}
                   {/* {this.props.orderSummary.expectedTotal} */}
                 </span>
               ) : (
                 <span>
                   {/* {this.props.orderSummary.expectedTotal -
                     this.props.orderSummary.delivery} */}
-                  {this.state.isMDN ? (
-                this.isFloat(
-                  parseFloat(this.props.orderSummary.expectedTotal) -
-                  parseFloat(this.state.expDiscount)  -
-                  parseFloat(this.props.orderSummary.delivery)
-                )
-              ) : this.props.checkoutState.coupon_discount
+                  {this.props.checkoutState.coupon_discount
+                    ? this.isFloat(parseFloat(this.props.orderSummary.expectedTotal)) -
+                      (this.props.checkoutState.coupon_discount_type === "percent" ? this.props.orderSummary.total * (parseInt(this.props.checkoutState.coupon_discount) / 100) : parseInt(this.props.checkoutState.coupon_discount)) -
+                      parseFloat(this.props.orderSummary.delivery) - Number(quantity_discount)
+                    : this.props.paymentMethod === "tabbyPayment"
                     ? this.isFloat(
-                        parseFloat(this.props.orderSummary.expectedTotal)
-                      ) -
-                      this.props.orderSummary.total *
-                        (parseInt(this.props.checkoutState.coupon_discount) /
-                          100) -
-                      parseFloat(this.props.orderSummary.delivery)
+                        parseFloat(
+                          (parseFloat(this.props.orderSummary.expectedTotal) -
+                            parseFloat(this.props.orderSummary.delivery)) * 6.5 / 100
+                        ) + parseFloat(
+                          parseFloat(this.props.orderSummary.expectedTotal) -
+                            parseFloat(this.props.orderSummary.delivery)
+                        )  + 1
+                      ) - Number(quantity_discount)
+                    : this.props.paymentMethod === "tabbyPayLater"
+                    ? this.isFloat(
+                        parseFloat(
+                          parseFloat(this.props.orderSummary.expectedTotal) -
+                            parseFloat(this.props.orderSummary.delivery)
+                        ) * 5.5 / 100  + parseFloat(
+                          parseFloat(this.props.orderSummary.expectedTotal) -
+                            parseFloat(this.props.orderSummary.delivery)
+                        ) + 
+                          1
+                      ) - Number(quantity_discount)
                     : this.isFloat(
                         parseFloat(
                           parseFloat(this.props.orderSummary.expectedTotal) -
                             parseFloat(this.props.orderSummary.delivery)
-                        )
+                        ) - Number(quantity_discount)
                       )}
                 </span>
               )}
@@ -402,92 +512,96 @@ class OrderSummary extends Component {
           </div> */}
 
           {/* start coupon code section */}
-          {!this.props.partnerDiscount && (
-            <div id="accordionTwo">
-              <div className="card ithoobPartners m-0">
-                <div
-                  className="card-header d-flex justify-content-between align-items-center"
-                  id="headingTwo"
-                >
-                  <div className="mb-0">
-                    <h5
+          {!this.props.partnerDiscount &&
+            this.props.paymentMethod != "tabbyPayment" &&
+            this.props.paymentMethod != "tabbyPayLater" && (
+              <div id="accordionTwo">
+                <div className="card ithoobPartners m-0">
+                  <div
+                    className="card-header d-flex justify-content-between align-items-center"
+                    id="headingTwo"
+                  >
+                    <div className="mb-0">
+                      <h5
+                        className="card-title collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo"
+                      >
+                        {getStringVal(this.props.language, "DISCOUNT_COUPON")}
+                      </h5>
+                    </div>
+                    <span
                       className="card-title collapsed"
                       data-toggle="collapse"
                       data-target="#collapseTwo"
                       aria-expanded="false"
                       aria-controls="collapseTwo"
                     >
-                      {getStringVal(this.props.language, "DISCOUNT_COUPON")}
-                    </h5>
+                      <span className="icon-arrow-right"></span>
+                    </span>
                   </div>
-                  <span
-                    className="card-title collapsed"
-                    data-toggle="collapse"
-                    data-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
+
+                  <div
+                    id="collapseTwo"
+                    className="collapse "
+                    aria-labelledby="headingTwo"
+                    data-parent="#accordionTwo"
                   >
-                    <span className="icon-arrow-right"></span>
-                  </span>
-                </div>
-
-                <div
-                  id="collapseTwo"
-                  className="collapse "
-                  aria-labelledby="headingTwo"
-                  data-parent="#accordionTwo"
-                >
-                  <div className="card-body">
-                    <form className="form-inline">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          name="coupon_code"
-                          id="coupon_code"
-                          ref="coupon_code"
-                          class="form-control"
-                          placeholder={getStringVal(
-                            this.props.language,
-                            "DISCOUNT_COUPON"
-                          )}
-                          aria-describedby="discount"
-                          required
-                        />
-                      </div>
-
-                      <button
-                        type="button"
-                        className="btn button"
-                        onClick={this.handleAddCoupon}
-                      >
-                        {this.props.checkoutState.coupon_loading ? (
-                          <img
-                            src={require("../../images/spinner.gif")}
-                            className="loading"
-                            width="60px"
-                            height="24px"
+                    <div className="card-body">
+                      <form className="form-inline">
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            name="coupon_code"
+                            id="coupon_code"
+                            ref="coupon_code"
+                            class="form-control"
+                            placeholder={getStringVal(
+                              this.props.language,
+                              "DISCOUNT_COUPON"
+                            )}
+                            aria-describedby="discount"
+                            required
                           />
-                        ) : (
-                          <span className="notLoading">
-                            {getStringVal(this.props.language, "ENTER")}
-                          </span>
-                        )}
-                      </button>
-                    </form>
-                    <small
-                      class="text-red coupon_alert p-2"
-                      style={{ color: "red" }}
-                    >
-                      {this.props.checkoutState.coupone_message &&
-                        this.props.checkoutState.coupone_message}
-                    </small>
+                        </div>
+
+                        <button
+                          type="button"
+                          className="btn button"
+                          onClick={this.handleAddCoupon}
+                        >
+                          {this.props.checkoutState.coupon_loading ? (
+                            <img
+                              src={require("../../images/spinner.gif")}
+                              className="loading"
+                              width="60px"
+                              height="24px"
+                            />
+                          ) : (
+                            <span className="notLoading">
+                              {getStringVal(this.props.language, "ENTER")}
+                            </span>
+                          )}
+                        </button>
+                      </form>
+                      <small
+                        class="text-red coupon_alert p-2"
+                        style={{ color: "red" }}
+                      >
+                        {this.props.checkoutState.coupone_message &&
+                          this.props.checkoutState.coupone_message}
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {!this.props.checkoutState.coupon_discount && <IthoobPartners />}
+          {!this.props.checkoutState.coupon_discount &&
+            this.props.paymentMethod != "tabbyPayment" &&
+            this.props.paymentMethod != "tabbyPayLater" && <IthoobPartners />}
           <PartnerTablePopup />
           <button
             type="button"

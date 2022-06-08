@@ -75,7 +75,105 @@ class OrderSummary extends Component {
 
   render() {
     // OrderSummary
+// let products = this.props.cartItems;
+var sebhaArray =[];
+var khatemArray =[];
+var asweraArray =[];
+var deblaArray =[];
+var thoobsArray =[];
 
+this.props.items.forEach(item =>{
+  if(item.subCategory === "daily-thoob"){
+    for(let i = 0; i < item.quantity; i++){
+      thoobsArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'all-sebah-'){
+    for(let i = 0; i < item.quantity; i++){
+      sebhaArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'all-rings'){
+    for(let i = 0; i < item.quantity; i++){
+      khatemArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'ring2'){
+    for(let i = 0; i < item.quantity; i++){
+      deblaArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  if(item.subCategory == 'bracelets'){
+    for(let i = 0; i < item.quantity; i++){
+      asweraArray.push(Number(item.price_discount) || Number(item.price))
+    }
+  }
+  
+});
+
+
+var quantity_discount = 0;
+  if(sebhaArray.length && sebhaArray.length > 1){
+    var count = Math.floor(sebhaArray.length / 2);
+    const newArr = sebhaArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(khatemArray.length && khatemArray.length > 1){
+    var count = Math.floor(khatemArray.length / 2);
+    const newArr = khatemArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(asweraArray.length && asweraArray.length > 1){
+    var count = Math.floor(asweraArray.length / 2);
+    const newArr = asweraArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(deblaArray.length && deblaArray.length > 1){
+    var count = Math.floor(deblaArray.length / 2);
+    const newArr = deblaArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= newArr.length - count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+  if(thoobsArray.length && thoobsArray.length > 2){
+    var count = Math.ceil(thoobsArray.length / 3 * 2);
+    const newArr = thoobsArray.sort(function(a, b) {
+      return b - a;
+    });
+    for(let i = 0; i <newArr.length; i++){
+      if(i >= count){
+        quantity_discount +=  Number(newArr[i]);
+      }
+    }
+  }
+
+  console.log('====================================');
+    console.log(thoobsArray);
+    console.log(quantity_discount);
+
+    console.log('====================================');
     let wantSizeManLength = 0;
     var cartTotal = 0;
     this.props.items.length > 0
@@ -228,8 +326,17 @@ class OrderSummary extends Component {
               )}
               {getStringVal(this.props.language, "SR")}
             </div>
+            
           </div>
-
+          {Number(quantity_discount) ? (<div className="card-text d-flex total  align-items-center">
+            <div className="title">
+              {getStringVal(this.props.language, "quantity_discount")}
+            </div>
+            <div className="price">
+                    <span id="quantity_discount">{quantity_discount}</span>
+                {getStringVal(this.props.language, "SR")}
+            </div>
+          </div>) : ""}
           {this.props.ithoobCookie !== -1 ? (
             /* one or more items are out of stock! */
             this.props.items.filter(item => item.inStock === false).length > 0 ? (

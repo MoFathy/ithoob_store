@@ -168,6 +168,14 @@
         display: block; // Show "active" step video only
       }
     }
+    img{
+      display: none; // Hide all videos
+      max-width: 100%;
+      &.active {
+        display: block; // Show "active" step video only
+      }
+      width: 400px;
+    }
   }
 
   @media (max-width: 991px) {

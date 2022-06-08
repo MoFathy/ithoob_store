@@ -40,7 +40,10 @@ class MoreProducts extends Component {
           this.props.sizeType,
           this.props.defaultIds,
           this.props.stockType,
-          hasCustomizationOptions
+          hasCustomizationOptions,
+          this.props.quantityId,
+          this.props.options_stock,
+          this.props.stock
         );
       } else {
         this.props.updateShoesSizeStatus(false);
@@ -74,7 +77,10 @@ class MoreProducts extends Component {
         this.props.sizeType,
         this.props.defaultIds,
         this.props.stockType,
-        hasCustomizationOptions
+        hasCustomizationOptions,
+        this.props.quantityId,
+        this.props.options_stock,
+        this.props.stock
       );
     }
 
@@ -136,7 +142,10 @@ const mapCartStateToProps = state => ({
   hasCustomizationOptions:state.productDetails.productDetails.hasCustomizationOptions,
   price_discount: state.productDetails.productDetails.price_discount,
   defaultIds: state.productDetails.defaultIds,
-  productdetails:state.productDetails.productDetails
+  productdetails:state.productDetails.productDetails,
+  quantityId: state.carouselReducer.present.quantityId,
+  options_stock: state.productDetails.productDetails.options_stock,
+  stock: state.productDetails.productDetails.stock
 });
 //
 const mapCartDispatchToProps = dispatch => ({
@@ -159,7 +168,10 @@ const mapCartDispatchToProps = dispatch => ({
     sizeType,
     defaultIds,
     stockType,
-    hasCustomizationOptions
+    hasCustomizationOptions,
+    quantityId,
+    options_stock,
+    stock
   ) => {
     dispatch(
       addToCart(
@@ -181,7 +193,10 @@ const mapCartDispatchToProps = dispatch => ({
         sizeType,
         defaultIds,
         stockType,
-        hasCustomizationOptions
+        hasCustomizationOptions,
+        quantityId,
+        options_stock,
+        stock
       )
     );
   },

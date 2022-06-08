@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { storeNote } from '../../actions/customizationsPage/othersActions';
 
 import {getStringVal} from "../../scripts/multiLang";
 import AkmamCustom from '../customizationsPage/akmamcustom';
@@ -15,6 +16,7 @@ import  LoginPopup  from '../includes/loginPopUp';
 import SignupPopUp from '../includes/signupPopUp';
 import  VerifyCodePopup from '../includes/verifyCodePopUp';
 import AdditionCard from './additionCard';
+import AddsCard from './addsCard';
 import  FabricsCard  from './fabricsCard';
 import SideMenu from "./sideMenu";
 import SizeCard from './sizeCard';
@@ -30,6 +32,7 @@ export class Customs extends Component {
     super(props);
     this.handleUndo = this.handleUndo.bind(this);
     this.handleRedo = this.handleRedo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleUndo(e) {
@@ -37,6 +40,11 @@ export class Customs extends Component {
   }
   handleRedo(e) {
     // this.props.redoHandler() // redo the last action
+  }
+  handleChange() {
+    // var totalPrice=$('.sideBar__productImages__productDesc__cost p').text();
+    var note = $(".notes__input__value").val();
+    this.props.storeNote(note);
   }
   render() {
     return (
@@ -60,7 +68,20 @@ export class Customs extends Component {
               {this.props.openedSection === "collar" && <YakaCard itemid={this.props.itemid} />}
               {this.props.openedSection === "sleeve" && <SleeveCard itemid={this.props.itemid} />}
               {this.props.openedSection === "starlings" && <StarlingCard itemid={this.props.itemid} />}
-              {this.props.openedSection === "additions" && <AdditionCard itemid={this.props.itemid} />}
+              {this.props.openedSection === "additions" &&
+              <>
+                <AdditionCard itemid={this.props.itemid} />
+                <div className="notes mt-2">
+                  <label htmlFor="notes">{getStringVal(this.props.language, "NOTES")}</label>
+                  <div className="notes__input">
+                    {this.props.textNote !== "" ? <textarea rows="2" className="notes__input__value form-control" placeholder={getStringVal(this.props.language, "YOU_CAN_WRITE_ANY_NOTES_OR_ADDONS_HERE")} value={this.props.textNote} onFocus={this.onFocus} id="notes" onChange={this.handleChange}></textarea> :
+                      <textarea rows="2" className="notes__input__value form-control" placeholder={getStringVal(this.props.language, "YOU_CAN_WRITE_ANY_NOTES_OR_ADDONS_HERE")} id="notes" onChange={this.handleChange}></textarea>}
+                    {/* <p className="attach"><span className="icon-attachment" onClick={this.handleAttach}></span></p> */}
+                  </div>
+                </div>  
+              </>            
+              }
+              {this.props.openedSection === "adds" && <AddsCard itemid={this.props.itemid} />}
             </div>
             <div className="actions">
                 {/* <div className="actionsBtns">
@@ -93,10 +114,14 @@ function mapStateToProps(state) {
     zarzourRequired: state.carouselReducer.present.zarzourRequired,
     akmamRequired: state.carouselReducer.present.akmamRequired,
     othersRequired: state.carouselReducer.present.othersRequired,
+    textNote: state.customsReducer.textNote,
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
+    storeNote(note, totalPrice) {
+      dispatch(storeNote(note, totalPrice));
+    },
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Customs);

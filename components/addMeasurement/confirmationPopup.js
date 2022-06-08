@@ -63,6 +63,11 @@ class ConfirmationPopup extends Component {
             $("#val5").val(),
             $("#val6").val(),
             $("#val7").val(),
+            $("#val8").val(),
+            $("#val9").val(),
+            $("#val10").val(),
+            $("#val11").val(),
+            $("#val12").val(),
             this.props.fromProductDetails,
             this.props.slug,
             this.props.fromMyCart
@@ -79,7 +84,12 @@ class ConfirmationPopup extends Component {
             $("#val4").val(),
             $("#val5").val(),
             $("#val6").val(),
-            $("#val7").val()
+            $("#val7").val(),
+            $("#val8").val(),
+            $("#val9").val(),
+            $("#val10").val(),
+            $("#val11").val(),
+            $("#val12").val(),
           );
         }
 
@@ -191,6 +201,11 @@ const mapDispatchToProps = dispatch => ({
     val5,
     val6,
     val7,
+    val8,
+    val9,
+    val10,
+    val11,
+    val12,
     fromProductDetails,
     slug,
     fromMyCart
@@ -207,6 +222,11 @@ const mapDispatchToProps = dispatch => ({
         val5,
         val6,
         val7,
+        val8,
+        val9,
+        val10,
+        val11,
+        val12,
         fromProductDetails,
         slug,
         fromMyCart
@@ -224,7 +244,12 @@ const mapDispatchToProps = dispatch => ({
     val4,
     val5,
     val6,
-    val7
+    val7,
+    val8,
+    val9,
+    val10,
+    val11,
+    val12,
   ) => {
     dispatch(
       editMeasurement(
@@ -238,7 +263,12 @@ const mapDispatchToProps = dispatch => ({
         val4,
         val5,
         val6,
-        val7
+        val7,
+        val8,
+        val9,
+        val10,
+        val11,
+        val12
       )
     );
   }

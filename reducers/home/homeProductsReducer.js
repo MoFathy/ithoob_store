@@ -9,6 +9,8 @@ const productsInitialState = {
   clothesCategory: {},
   accessoriesCategory: {},
   recommendedCategory: {},
+  winterCollectionCategory: {},
+  perfumeCategory: {},
   shoesCategory: {},
   status: true,
   message: null
@@ -23,6 +25,8 @@ export default function(state = productsInitialState, action) {
         clothesCategory: action.payload.clothesCategory,
         accessoriesCategory: action.payload.accessoriesCategory,
         recommendedCategory: action.payload.recommendedCategory,
+        winterCollectionCategory: action.payload.winterCollectionCategory,
+        perfumeCategory: action.payload.perfumeCategory,
         shoesCategory: action.payload.shoesCategory,
         status: action.payload.status
       };

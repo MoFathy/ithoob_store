@@ -17,29 +17,29 @@
     .headerNav {
       .upperHeader {
         &::before {
-          background: $white;
+          background: #fff;
         }
         &::after {
-          background: $white;
+          background: #fff;
         }
         &__socialMedia,
         &__ContactUs {
-          background: $white;
+          background: #fff;
           li {
             a {
-              color: $gray8 !important;
+              color: #000 !important;
               span {
                 &::before {
-                  color: $gray8;
+                  color: #7c7c7b;
                 }
               }
               svg:hover {
-                fill: $gray8;
+                fill: #7c7c7b;
               }
             }
             &.lang {
               button {
-                color: $black !important;
+                color: #7c7c7b !important;
               }
             }
           }
@@ -48,7 +48,7 @@
 
       .mainMenu {
         li.nav-item a {
-          color: $darkRed;
+          color: #fff;
 
           &:before {
             background: $darkYellow;

@@ -99,19 +99,23 @@ class AddMeasurement extends Component {
           <div className="imageContainer">
             {items && items.length > 0 ? 
               items.map((item, index) => (
-                <video 
-                  alt={item.imgTitle}
-                  id={index}
-                  key={index}
-                  className={activeImg == index ? "active" : ""}
-                  autoPlay loop muted playsInline
-                >
-                  <source 
-                    src={item.image}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag. Please try a different browser!
-                </video>
+                // item.video && item.video != null ?
+                // <video 
+                //   alt={item.imgTitle}
+                //   id={index}
+                //   key={index}
+                //   className={activeImg == index ? "active" : ""}
+                //   autoPlay loop muted playsInline
+                // >
+                //   <source 
+                //     src={item.video}
+                //     type="video/mp4"
+                //   />
+                //   Your browser does not support the video tag. Please try a different browser!
+                // </video> :
+                <img src={item.image} alt={item.imgTitle} 
+                className={activeImg == index ? "active" : ""}
+                />
               ))
             : (
               ""
@@ -145,7 +149,12 @@ const mapStateToProps = state => ({
   value4: state.addMeasurement.value4,
   value5: state.addMeasurement.value5,
   value6: state.addMeasurement.value6,
-  value7: state.addMeasurement.value7
+  value7: state.addMeasurement.value7,
+  value8: state.addMeasurement.value8,
+  value9: state.addMeasurement.value9,
+  value10: state.addMeasurement.value10,
+  value11: state.addMeasurement.value11,
+  value12: state.addMeasurement.value12,
 });
 
 const mapDispatchToProps = dispatch => ({

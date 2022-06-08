@@ -9,7 +9,7 @@
     @include media-breakpoint-down(md) {
       margin-right: 0;
       padding-bottom: 5px;
-    margin-bottom: 10px;
+      margin-bottom: 10px;
     }
     h3 {
       margin-bottom: font-rem(30);
@@ -287,7 +287,7 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
-    @include media-breakpoint-down(sm){
+    @include media-breakpoint-down(sm) {
       margin-top: 8px;
     }
     .button {
@@ -298,9 +298,9 @@
       background-color: $darkYellow;
       font-family: $Bahij;
       border-radius: 50px;
-      box-shadow: 1px 1px 15px 2px #00000069;
+      box-shadow: 1px 1px 15px 2px #7c7c7b69;
       transition: all 200ms ease;
-      @media (max-width:767px) {
+      @media (max-width: 767px) {
         padding: 8px 12px;
       }
       span {
@@ -319,6 +319,23 @@
   }
   .measurementsCustom.sizeSection {
     flex-wrap: wrap;
+  }
+  #tabbyPromo {
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    a{
+      margin: 0 3px;
+      text-decoration: none;
+      color: #47655b;
+    }
+    p {
+      // height: 20px;
+      margin: 0;
+      padding: 0;
+  }
   }
 }
 .productImages {
@@ -354,8 +371,8 @@
     img {
       min-width: 100%;
       height: auto;
-      @include media-breakpoint-down(sm){
-        // height: 35vh;  
+      @include media-breakpoint-down(sm) {
+        // height: 35vh;
       }
     }
   }
@@ -784,24 +801,33 @@
   // }
 }
 
-.stock-options{
+.stock-options {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  .active{
+  .active {
     border: 1px solid goldenrod !important;
   }
-  .stock-item{
+  .stock-item {
     width: 40px;
     height: 40px;
   }
-    .Sizes-stock{
-    }
-    .fabrics-stock{
-      .stock-item{
-        span{
-          font-size: .9em;
-        }
+  .Sizes-stock {
+    flex-wrap: wrap;
+  }
+  .colors-stock{
+    flex-wrap: wrap;
+  }
+  .fabrics-stock {
+    flex-wrap: wrap;
+    .stock-item {
+      span {
+        font-size: 0.9em;
       }
     }
+  }
+}
+.stock-alert{
+  display: none;
+  font-size: .7em;
 }

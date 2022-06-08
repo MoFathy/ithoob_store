@@ -1,6 +1,7 @@
 export const STORE__FABRICS = "STORE__FABRICS";
 export const STORE__YAKA = "STORE__YAKA";
 export const STORE__ZARZOUR = "STORE__ZARZOUR";
+export const STORE__ADDS = "STORE__ADDS";
 export const STORE__AKMAM = "STORE__AKMAM";
 export const STORE__OTHERS = "STORE__OTHERS";
 export const INCREMENT__QUANTITY = "INCREMENT__QUANTITY";
@@ -15,11 +16,13 @@ export const CHANGE_SHOES_SIZE = "CHANGE_SHOES_SIZE";
 export const STORE_FABRIC_IMAGES = "STORE_FABRIC_IMAGES";
 export const FABRIC_HEADER_IMAGES = "FABRIC_HEADER_IMAGES";
 export const YAKA_HEADER_IMAGES = "YAKA_HEADER_IMAGES";
+export const ADDS_HEADER_IMAGES = "ADDS_HEADER_IMAGES";
 export const ZARZOUR_HEADER_IMAGES = "ZARZOUR_HEADER_IMAGES";
 export const AKMAM_HEADER_IMAGES = "AKMAM_HEADER_IMAGES";
 export const OTHERS_HEADER_IMAGES = "OTHERS_HEADER_IMAGES";
 export const RESET_PRESENT_DATA = "RESET_PRESENT_DATA";
 export const UPDATE_SIZEMAN__STATUS = "UPDATE_SIZEMAN__STATUS";
+export const STORE_QUANTITY_ID = "STORE_QUANTITY_ID";
 
 export const resetPresentData = () => {
   return {
@@ -37,6 +40,14 @@ export const storeHeaderFabricImages = (images, customCost, required) => {
 export const storeHeaderYakaImages = (images, customCost, required) => {
   return {
     type: YAKA_HEADER_IMAGES,
+    images,
+    customCost,
+    required
+  };
+};
+export const storeHeaderAddsImages = (images, customCost, required) => {
+  return {
+    type: ADDS_HEADER_IMAGES,
     images,
     customCost,
     required
@@ -96,6 +107,12 @@ export const unSelectSize = () => {
 export const toggleSizeManBtn = () => {
   return {
     type: SIZEMAN__STATUS
+  };
+};
+export const storeQuantityID = quantityId => {
+  return {
+    type: STORE_QUANTITY_ID,
+    quantityId
   };
 };
 export const storeSizeID = sizeId => {
@@ -164,6 +181,22 @@ export const storeAkmam = (
 ) => ({
   type: STORE__AKMAM,
   akmamArray,
+  cost,
+  imagesIds,
+  required,
+  recomBetana,
+  customtype
+});
+export const storeAdds = (
+  addsArray,
+  cost,
+  imagesIds,
+  required,
+  recomBetana,
+  customtype
+) => ({
+  type: STORE__ADDS,
+  addsArray,
   cost,
   imagesIds,
   required,

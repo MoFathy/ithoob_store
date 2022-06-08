@@ -118,9 +118,9 @@ class SizeSection extends Component {
     // from size part
     // if (this.props.ithoobCookie !== -1) {
     if (
-      this.props.measurementsitems &&
+      (this.props.measurementsitems &&
       this.props.measurementsitems.items &&
-      this.props.sizeType != "accessories"
+      this.props.sizeType != "accessories") || this.props.sizeType == "sizeable"
     ) {
       return (
         <div className="measurementsCustom sizeSection">
@@ -137,8 +137,9 @@ class SizeSection extends Component {
                 {/* المقاس */}
                 {getStringVal(this.props.language, "SIZE")}
               </p>
+              
               <div className="d-flex align-items-center justify-content-start dropdownContainer flex-wrap">
-                {this.props.measurementsitems.items.length > 0 ? (
+                {this.props.measurementsitems && this.props.measurementsitems.items && this.props.measurementsitems.items != undefined && this.props.measurementsitems.items.length > 0 ? (
                   <div className="dropdownForm">
                     <div
                       className={
@@ -195,7 +196,7 @@ class SizeSection extends Component {
                           </div>
                         );
                       })}
-                      <p className="dropdownHeader">
+                      <p className="dropdownHeader d-none">
                         <Link href="/addMeasurement" as="/add-measurement">
                           <a onClick={this.handleChange}>
                             +{/* إضافه ملف مقاسات */}
@@ -209,7 +210,7 @@ class SizeSection extends Component {
                     </div>
                   </div>
                 ) : (
-                  <p className="dropdownHeader measurementsLink">
+                  <p className="dropdownHeader measurementsLink d-none">
                     <Link href="/addMeasurement" as="/add-measurement">
                       <a onClick={this.handleChange}>
                         +{/* إضافه ملف مقاسات */}
@@ -219,7 +220,8 @@ class SizeSection extends Component {
                   </p>
                 )}
 
-                {!this.props.pathname.includes("customizations") && <div className="contentItem p-0 d-none d-md-flex align-items-center justify-content-start">
+                {!this.props.pathname.includes("customizations") && 
+                <div className="contentItem p-0 d-none d-md-flex align-items-center justify-content-start">
                   <div
                     className={
                       this.props.itemPresent.sizeId === "s"
@@ -292,7 +294,7 @@ class SizeSection extends Component {
                 </div>}
 
                 {this.props.measurementsTable && !this.props.pathname.includes("customizations") ? (
-                  <span className="showMeasurementTable d-none d-md-block">
+                  <span className="showMeasurementTable d-none">
                     <a onClick={(e) => this.measurementPopUp(e)}>
                       {/* جدول المقاسات */}
                       {getStringVal(this.props.language, "MEASUREMENTS_TABLE")}
@@ -368,7 +370,7 @@ class SizeSection extends Component {
                 </div>
               </div>}
               {this.props.measurementsTable && !this.props.pathname.includes("customizations") ? (
-                <span className="showMeasurementTable d-block d-md-none">
+                <span className="showMeasurementTable d-none d-md-none">
                   <a onClick={(e) => this.measurementPopUp(e)}>
                     {/* جدول المقاسات */}
                     {getStringVal(this.props.language, "MEASUREMENTS_TABLE")}
@@ -409,7 +411,7 @@ class SizeSection extends Component {
                   {/* أريد ترزى لأخذ مقاساتى بالمنزل */}
                   {getStringVal(
                     this.props.language,
-                    "I_WANT_TO_TAKE_SIZE_TAILOR_HOME"
+                    "TAILOR_VISIT"
                   )}
 
                   {/**
@@ -436,21 +438,19 @@ class SizeSection extends Component {
                       {getStringVal(this.props.language, "BY_REGION")}
                     </span> */}
 
-                  <span>
-                    &nbsp;&nbsp;
                     {/* تكلفة اضاقية تبدا من */}
+                  {/* <span>
+                    &nbsp;&nbsp;
                     {getStringVal(
                       this.props.language,
                       "THE_EXTRA_COST_STARTING_FROM"
                     )}
                     &nbsp; 30
-                    {/* ريال */}
                     &nbsp;
                     {getStringVal(this.props.language, "SR")}
-                    {/* حسب المنطقة */}
                     &nbsp;
                     {getStringVal(this.props.language, "BY_REGION")}
-                  </span>
+                  </span> */}
                 </label>
               </div>
             </div>
@@ -478,9 +478,9 @@ class SizeSection extends Component {
         </div>
       );
     } else if (
-      this.props.measurementsitems &&
+      (this.props.measurementsitems &&
       this.props.measurementsitems.items == undefined &&
-      this.props.sizeType != "accessories"
+      this.props.sizeType != "accessories") || this.props.sizeType == "sizeable"
     ) {
       return (
         <div className="measurementsCustom sizeSection">
@@ -498,7 +498,7 @@ class SizeSection extends Component {
           {this.props.sizeType != "shoes" ? (
             <div>
               <div className="d-flex align-items-center justify-content-start">
-                <p className="dropdownHeader measurementsLink">
+                <p className="dropdownHeader measurementsLink d-none">
                   <Link href="/addMeasurement" as="/add-measurement">
                     <a onClick={this.handleChange}>
                       +{/* إضافه ملف مقاسات */}
@@ -579,7 +579,7 @@ class SizeSection extends Component {
                     </div>
                   </div>}
                   {this.props.measurementsTable && !this.props.pathname.includes("customizations")  ? (
-                    <span className="showMeasurementTable">
+                    <span className="showMeasurementTable d-none">
                       <a onClick={(e) => this.measurementPopUp(e)}>
                         {/* جدول المقاسات */}
                         {getStringVal(
@@ -624,21 +624,19 @@ class SizeSection extends Component {
                   {/* أريد ترزى لأخذ مقاساتى بالمنزل */}
                   {getStringVal(
                     this.props.language,
-                    "I_WANT_TO_TAKE_SIZE_TAILOR_HOME"
+                    "TAILOR_VISIT"
                   )}
 
-                  <span>
                     {/* تكلفة اضاقية تبدا من */}
+                  {/* <span className="d-none">
                     {getStringVal(
                       this.props.language,
                       "THE_EXTRA_COST_STARTING_FROM"
                     )}
-                    )<span>{this.props.measurementsitems.sizeMan}</span>(
-                    {/* ريال */}
+                    (<span>{this.props.sizeManPrice}</span>)
                     {getStringVal(this.props.language, "SR")}
-                    {/* حسب المنطقة */}
                     {getStringVal(this.props.language, "BY_REGION")}
-                  </span>
+                  </span> */}
                 </label>
               </div>
             </div>
@@ -650,7 +648,7 @@ class SizeSection extends Component {
                 maxLength="2"
               />
               {this.props.measurementsTable ? (
-                <span className="showMeasurementTable">
+                <span className="showMeasurementTable d-none">
                   <a onClick={(e) => this.measurementPopUp(e)}>
                     {/* جدول المقاسات */}
                     {getStringVal(this.props.language, "MEASUREMENTS_TABLE")}
@@ -706,6 +704,7 @@ function mapStateToProps(state) {
     ithoobCookie: state.loginReducer.ithoobCookie,
     shoesSizeStatuse: state.productDetails.shoesSizeStatuse,
     fromProductDetials: state.addMeasurement.fromProductDetials,
+    sizeManPrice: state.categories.sizeManPrice
   };
 }
 function mapDispatchToProps(dispatch) {

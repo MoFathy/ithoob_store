@@ -53,15 +53,6 @@ export const checkForCouponFailed = payload => dispatch => {
 //send post request to profile API with language as params
 // coupon discount and MDN PART IS TEMPROARY FOR AN EVENT
 export const checkForCouponDiscount = (language, authorization, coupon_code, coupon_discount) => dispatch => {
-  console.log(language, authorization, coupon_code);
-  let nowDate = new Date();
-  let firstDate = new Date("4/6/2021");
-  let secondDate = new Date("4/7/2021");
-  if(coupon_code === "MDN" && nowDate >= firstDate && nowDate <= secondDate){
-    console.log(coupon_discount);
-    dispatch(checkForCouponSuccess({coupon_code : "MDN", coupon_discount}));
-    return;
-  }
 
   if(!coupon_code || coupon_code === ""){
     dispatch(checkForCouponFailed({message : "Please Insert The coupon Code"}));

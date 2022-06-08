@@ -186,6 +186,10 @@ export class CartPart extends Component {
         ? parseFloat(fullCost) + parseFloat(this.props.yakaCost)
         : fullCost;
     fullCost =
+      fullCost && this.props.addsCost
+        ? parseFloat(fullCost) + parseFloat(this.props.addsCost)
+        : fullCost;
+    fullCost =
       fullCost && this.props.zarzourCost
         ? parseFloat(fullCost) + parseFloat(this.props.zarzourCost)
         : fullCost;
@@ -232,6 +236,7 @@ function mapStateToProps(state) {
     title_en: state.customsReducer.title_en,
     fabricCost: state.carouselReducer.present.fabricCost,
     yakaCost: state.carouselReducer.present.yakaCost,
+    addsCost: state.carouselReducer.present.addsCost,
     zarzourCost: state.carouselReducer.present.zarzourCost,
     akmamCost: state.carouselReducer.present.akmamCost,
     othersCost: state.carouselReducer.present.othersCost,

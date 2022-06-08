@@ -22,6 +22,9 @@ export const SIGNUP_SUCCESS_FROM_MYCART_POPUP =
 export const SIGNUP_FROM_PAYMENT_BTN = "SIGNUP_FROM_PAYMENT_BTN";
 export const ADD_USER_MOBILE = "ADD_USER_MOBILE";
 import Router from "next/router";
+import toQueryString from 'to-querystring';
+import jsonp from 'jsonp';
+
 import {
   verifyCodePopUp,
   storeEmail,
@@ -659,6 +662,23 @@ export const addUserMobile = value => {
 
 export const subscripeNewsLetter = (data) => {
   console.log(data)
+  const formData = {
+    EMAIL: data.email// your email string,
+  };
+  jsonp(`${process.env.mailChimp}&${toQueryString(formData)}`, { param: 'c' }, (err, data) => {
+    console.log('err:', err);
+    console.log('data:', data);
+  });
+  // fetch(process.env.mailChimp + "&b_aff21c3bf5002b0897ee774f7_5dac38cb59=" + "&" + toQueryString(data), {
+  //   method: "POST",
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*"
+  //   }
+    
+  // }).then(res => res.json())
+  // .then(responseD => {
+  //   console.log(responseD)
+  // });
   return fetch(process.env.endpoint + "/api/subscripeNewsLetter", {
     method: "POST",
     headers: {

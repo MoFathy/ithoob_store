@@ -30,8 +30,8 @@ export class SubmissionPopup extends Component {
     this.props.toggleSubPopUpStatus(false);
   }
   submitCustomizations() {
-    // var notes = document.querySelector(".notes__input__value").value;
-    var notes = '';
+    var notes = this.props.textNote;
+    // var notes = '';
 
     let attachments = null;
     // if (document.querySelector("#attach").files[0]) {
@@ -63,6 +63,10 @@ export class SubmissionPopup extends Component {
       fullCost && this.props.othersCost
         ? parseFloat(fullCost) + parseFloat(this.props.othersCost)
         : fullCost;
+    fullCost =
+      fullCost && this.props.addsCost
+        ? parseFloat(fullCost) + parseFloat(this.props.addsCost)
+        : fullCost;
 
     if (this.props.itemid !== undefined) {
       if (this.props.ithoobCookie !== -1) {
@@ -76,6 +80,7 @@ export class SubmissionPopup extends Component {
           this.props.shoesSize,
           this.props.fabricImages,
           this.props.yakaImages,
+          this.props.addsImages,
           this.props.zarzourImages,
           this.props.akmamImages,
           this.props.othersImages,
@@ -102,6 +107,7 @@ export class SubmissionPopup extends Component {
             shoesSize: this.props.shoesSize,
             fabrics: this.props.fabricImages,
             yaka: this.props.yakaImages,
+            adds: this.props.addsImages,
             zarzour: this.props.zarzourImages,
             akmam: this.props.akmamImages,
             others: this.props.othersImages,
@@ -131,6 +137,7 @@ export class SubmissionPopup extends Component {
         this.props.shoesSize,
         this.props.fabricImages,
         this.props.yakaImages,
+        this.props.addsImages,
         this.props.zarzourImages,
         this.props.akmamImages,
         this.props.othersImages,
@@ -271,6 +278,7 @@ function mapStateToProps(state) {
     zarzourImages: state.carouselReducer.present.zarzourArray,
     akmamImages: state.carouselReducer.present.akmamArray,
     othersImages: state.carouselReducer.present.othersArray,
+    addsImages: state.carouselReducer.present.addsArray,
     attachementsNames: state.customsReducer.attachementsNames,
     quantity: state.carouselReducer.present.quantity,
     totalCost: state.customsReducer.totalCost,
@@ -279,6 +287,7 @@ function mapStateToProps(state) {
     zarzourCost: state.carouselReducer.present.zarzourCost,
     akmamCost: state.carouselReducer.present.akmamCost,
     othersCost: state.carouselReducer.present.othersCost,
+    addsCost: state.carouselReducer.present.addsCost,
     img: state.customsReducer.images,
     productId: state.customsReducer.productId,
     slug: state.customsReducer.slug,
@@ -297,7 +306,8 @@ function mapStateToProps(state) {
     indexStatus: state.customsReducer.indexStatus,
     ithoobCookie: state.loginReducer.ithoobCookie,
     sizeType: state.customsReducer.sizeType,
-    totalCost: state.customsReducer.totalCost
+    totalCost: state.customsReducer.totalCost,
+    textNote: state.customsReducer.textNote,
   };
 }
 
@@ -317,6 +327,7 @@ function mapDispatchToProps(dispatch) {
       shoesSize,
       fabrics,
       yaka,
+      adds,
       zarzour,
       akmam,
       others,
@@ -340,6 +351,7 @@ function mapDispatchToProps(dispatch) {
           shoesSize,
           fabrics,
           yaka,
+          adds,
           zarzour,
           akmam,
           others,
@@ -366,6 +378,7 @@ function mapDispatchToProps(dispatch) {
       shoesSize,
       fabrics,
       yaka,
+      adds,
       zarzour,
       akmam,
       others,
@@ -385,6 +398,7 @@ function mapDispatchToProps(dispatch) {
           shoesSize,
           fabrics,
           yaka,
+          adds,
           zarzour,
           akmam,
           others,

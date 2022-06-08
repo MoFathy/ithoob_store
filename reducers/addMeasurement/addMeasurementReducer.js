@@ -45,6 +45,11 @@ const addMeasurmentInitialState = {
   value5: "",
   value6: "",
   value7: "",
+  value8: "",
+  value9: "",
+  value10: "",
+  value11: "",
+  value12: "",
   currentVal: "",
   minVal: "",
   maxVal: "",
@@ -126,7 +131,12 @@ export default function(state = addMeasurmentInitialState, action) {
         value4: action.payload.profileDetails.value4,
         value5: action.payload.profileDetails.value5,
         value6: action.payload.profileDetails.value6,
-        value7: action.payload.profileDetails.value7
+        value7: action.payload.profileDetails.value7,
+        value8: action.payload.profileDetails.value8,
+        value9: action.payload.profileDetails.value9,
+        value10: action.payload.profileDetails.value10,
+        value11: action.payload.profileDetails.value11,
+        value12: action.payload.profileDetails.value12,
       };
     case GET_MEASUREMENT_DETAILS_FAIL:
       return {

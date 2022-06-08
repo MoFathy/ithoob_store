@@ -37,6 +37,7 @@ const checkoutInitialState = {
   coupon_code: "",
   coupon_loading: false,
   coupon_discount: "",
+  coupon_discount_type: "",
   coupone_message: "",
   deliveryAddress : {
     region : "الرياض",
@@ -90,10 +91,23 @@ export default function(state = checkoutInitialState, action) {
       };
     case UPDATE_PAYMENT_METHOD:
       console.log(action.payload)
-      return {
-        ...state,
-        paymentMethod: action.payload
-      };
+      if(action.payload === "tabbyPayLater" || action.payload === "tabbyPayment"){
+        return {
+          ...state,
+          userDiscount: 0,
+          partnerDiscount: 0,
+          paymentMethod: action.payload,
+          coupon_code: "",
+          coupon_loading: false,
+          coupon_discount: "",
+          coupone_message: "",
+        }
+      }else{
+        return {
+          ...state,
+          paymentMethod: action.payload
+        };
+      }
     case UPDATE_SHOW_CONFIRM_PAYMENT_POPUP:
       return {
         ...state,
@@ -127,6 +141,7 @@ export default function(state = checkoutInitialState, action) {
         ...state,
         coupon_code: action.payload.coupon_code,
         coupon_discount: action.payload.coupon_discount,
+        coupon_discount_type: action.payload.coupon_discount_type,
         coupone_message: "",
         coupon_loading: false
       }
@@ -136,6 +151,7 @@ export default function(state = checkoutInitialState, action) {
         ...state,
         coupon_code: "",
         coupon_discount: "",
+        coupon_discount_type: "",
         coupone_message: action.payload.message,
         coupon_loading: false
       }

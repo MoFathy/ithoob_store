@@ -109,8 +109,8 @@ export class CustomizationsContent extends Component {
         var index = this.props.itemid;
         let productsObject = JSON.parse(localStorage.getItem("uc"));
         var productCustoms = productsObject.products[index];
-        if (prevProps.fabricsObject.length == 0 || prevProps.yakaObject.length == 0 || prevProps.zarzourObject.length == 0 || prevProps.akmamObject.length == 0 || prevProps.othersObject.length == 0) {
-          if (this.props.fabricsObject && this.props.fabricsObject.length > 0 && this.props.yakaObject && this.props.yakaObject.length > 0 && this.props.zarzourObject && this.props.zarzourObject.length > 0 && this.props.akmamObject && this.props.akmamObject.length > 0 && this.props.othersObject && this.props.othersObject.length > 0) {
+        if (prevProps.fabricsObject.length == 0 || prevProps.yakaObject.length == 0 || prevProps.addsObject.length == 0 || prevProps.zarzourObject.length == 0 || prevProps.akmamObject.length == 0 || prevProps.othersObject.length == 0) {
+          if (this.props.fabricsObject && this.props.fabricsObject.length > 0 && this.props.yakaObject && this.props.yakaObject.length > 0 && this.props.addsObject.length > 0 && this.props.zarzourObject && this.props.zarzourObject.length > 0 && this.props.akmamObject && this.props.akmamObject.length > 0 && this.props.othersObject && this.props.othersObject.length > 0) {
             if (this.props.itemid !== undefined && productCustoms) {
               this.props.updateDefaultsLocally(productCustoms);
             } else {

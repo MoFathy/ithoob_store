@@ -172,9 +172,9 @@ class CartCard extends Component {
       .addClass("d-block");
 
     this.props.updateSizeStatus(false);
-    if (selectedSize.id && selectedSize.name) {
+    if (selectedSize && selectedSize != undefined && selectedSize.id && selectedSize.name) {
       this.props.userMeasureId(selectedSize.id);
-    } else if (selectedSize.name) {
+    } else if (selectedSize && selectedSize != undefined && selectedSize.name) {
       this.props.storeSizeID(selectedSize.name);
       this.props.updateMeasurementErrMsg("");
     } else {
@@ -344,7 +344,7 @@ class CartCard extends Component {
         // updateSize from local storage");
         //console.log("index");
         //console.log(index);
-        this.props.updateSizeFromLocalStorage(index, value);
+        this.props.updateSizeFromLocalStorage(index, value, quantity_id);
       }
 
     } else {
@@ -399,6 +399,8 @@ class CartCard extends Component {
       this.props.items.length > 0 ? (
           this.props.items.map((item, index) => !item.notAvailableAnymore ? (
             <div className="cardContainer" key={index}>
+            <div className="alert alert-danger stock-alert" id={`stock-alert`} >المخزون غير كافى</div>
+
               <div className="productCard card d-flex flex-md-row flex-column">
                 <div className="productImgContainer">
                   {/* tags */}
@@ -422,7 +424,7 @@ class CartCard extends Component {
                           ""
                         )}
                       {item.tags.isRecommended ? (
-                        <li className="tagSpan">
+                        <li className="tagSpan recommended">
                           {getStringVal(this.props.language, "RECOMMENDED")}
                         </li>
                       ) : (
@@ -490,14 +492,14 @@ class CartCard extends Component {
                         <Link
                           href={
                             this.props.ithoobCookie !== -1
-                              ? `/customizations/${item.productId}`
-                              : `/customizations/${index}`
+                              ? `/thoob-design/${item.productId}`
+                              : `/thoob-design/${index}`
                           }
                           // href={`/customizations?itemid=${item.productId}`}
                           as={
                             this.props.ithoobCookie !== -1
-                              ? `/customizations/${item.productId}`
-                              : `/customizations/${index}`
+                              ? `/thoob-design/${item.productId}`
+                              : `/thoob-design/${index}`
                           }
                         >
                           <h5 className="card-title">
@@ -579,15 +581,86 @@ class CartCard extends Component {
 
                     {/* size part */}
                     {this.props.ithoobCookie == -1 ? (
-                      item.sizeType == "sizeable" ? (
-                        <Link href="/addMeasurement" as="/add-measurement">
-                          <button
-                            className="button sizeBtn"
-                            onClick={() => this.checkQuery()}
-                          >
-                            {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
-                          </button>
-                        </Link>
+                      item.options_stock && item.options_stock.length > 0 ||
+                      (item.shoesSize && item.shoesSize.length > 0) ?
+                      (
+                        this.props.sizeStatus ?
+                          (
+                            <div>
+                              {/* Shoes Sizes */}
+                              <Stock 
+                                stock={item.options_stock} 
+                                quantity_id={item.quantityId}
+                                selectStock={(value)=>this.updateSize(
+                                  value.size,
+                                  item.productId,
+                                  index,
+                                  "shoes",
+                                  value.quantity_id
+                                )}/>
+
+                              {/* <select
+                                className="form-control mb-2"
+                                onChange={e => this.updateSize(
+                                  e,
+                                  item.productId,
+                                  index,
+                                  item.sizeType,
+                                  value.quantity_id
+                                )}
+                                value={item.selectedSize.name}
+                              >
+                                <option value="0"> </option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                              </select> */}
+                            </div>
+                          ) : (
+                            <div>
+                              <Stock stock={item.options_stock} 
+                                quantity_id={item.quantity_id.quanity_id}
+                                selectStock={(value)=>this.updateSize(
+                                  value.size,
+                                  item.productId,
+                                  index,
+                                  "shoes",
+                                  value.quantity_id
+                                )}/>
+
+                              {/* <select
+                                className="form-control mb-2"
+                                onChange={e => this.updateSize(
+                                  e,
+                                  item.productId,
+                                  index,
+                                  item.sizeType
+                                )}
+                                value={
+                                  item.selectedSize.name
+                                }
+                              >
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                              </select> */}
+                            </div>
+                          )
+                      ):
+                      // will unhash the next lines later
+                      item.sizeType == "sizeable" ? (""
+                        // <Link href="/addMeasurement" as="/add-measurement">
+                        //   <button
+                        //     className="button sizeBtn"
+                        //     onClick={() => this.checkQuery()}
+                        //   >
+                        //     {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
+                        //   </button>
+                        // </Link>
                       ) : (
                           ""
                         )
@@ -788,7 +861,7 @@ class CartCard extends Component {
                                 {getStringVal(this.props.language, "I_WANT_TO_TARZI")}
                               </span>
                             ) : (item.sizeType !== "accessories" || (item.sizeType === "accessories" && item.subCategory && (item.subCategory === "all-rings" || item.subCategory === "ring2")) ?
-                                <span className="noSizeselected">
+                            <span className="noSizeselected">
                                   {getStringVal(
                                     this.props.language,
                                     "DO_NOT_CHOOSE_SIZE"
@@ -829,8 +902,8 @@ class CartCard extends Component {
                             <Link
                               href={
                                 this.props.ithoobCookie !== -1
-                                  ? `/customizations/${item.productId}`
-                                  : `/customizations/${index}`
+                                  ? `/thoob-design/${item.productId}`
+                                  : `/thoob-design/${index}`
                               }
                             >
                               <a className="card-link modify">
@@ -952,6 +1025,8 @@ class CartCard extends Component {
                       handleMinusClick={() =>
                         this.handleMinusClick(item.productId, item.quantity, index)
                       }
+                      stock={item.stock}
+                      productId={item.productId}
                     />
                   </div>
                 </div>
@@ -1144,14 +1219,14 @@ class CartCard extends Component {
                         <Link
                           href={
                             this.props.ithoobCookie !== -1
-                              ? `/customizations/${item.productId}`
-                              : `/customizations/${index}`
+                              ? `/thoob-design/${item.productId}`
+                              : `/thoob-design/${index}`
                           }
                           // href={`/customizations?itemid=${item.productId}`}
                           as={
                             this.props.ithoobCookie !== -1
-                              ? `/customizations/${item.productId}`
-                              : `/customizations/${index}`
+                              ? `/thoob-design/${item.productId}`
+                              : `/thoob-design/${index}`
                           }
                         >
                           <h5 className="card-title">
@@ -1233,15 +1308,16 @@ class CartCard extends Component {
 
                     {/* size part */}
                     {this.props.ithoobCookie == -1 ? (
-                      item.sizeType == "sizeable" ? (
-                        <Link href="/addMeasurement" as="/add-measurement">
-                          <button
-                            className="button sizeBtn"
-                            onClick={() => this.checkQuery()}
-                          >
-                            {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
-                          </button>
-                        </Link>
+                      // will unhash the next lines later
+                      item.sizeType == "sizeable" ? (""
+                        // <Link href="/addMeasurement" as="/add-measurement">
+                        //   <button
+                        //     className="button sizeBtn"
+                        //     onClick={() => this.checkQuery()}
+                        //   >
+                        //     {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
+                        //   </button>
+                        // </Link>
                       ) : (
                           ""
                         )
@@ -1494,8 +1570,8 @@ class CartCard extends Component {
                             <Link
                               href={
                                 this.props.ithoobCookie !== -1
-                                  ? `/customizations/${item.productId}`
-                                  : `/customizations/${index}`
+                                  ? `/thoob-design/${item.productId}`
+                                  : `/thoob-design/${index}`
                               }
                             >
                               <a className="card-link modify">
@@ -1617,6 +1693,8 @@ class CartCard extends Component {
                       handleMinusClick={() =>
                         this.handleMinusClick(item.productId, item.quantity, index)
                       }
+                      stock={item.stock}
+                      productId={item.productId}
                     />
                   </div>
                 </div>
@@ -1803,8 +1881,8 @@ const mapMyCartDispatchToProps = dispatch => ({
   updateCustomsStatusAction: payload => {
     dispatch(updateCustomsStatusAction(payload));
   },
-  updateSizeFromLocalStorage: (index, newSize) => {
-    dispatch(updateSizeFromLocalStorage(index, newSize));
+  updateSizeFromLocalStorage: (index, newSize, quantityId) => {
+    dispatch(updateSizeFromLocalStorage(index, newSize, quantityId));
   },
   updateDeletedItemId: id => {
     dispatch(updateDeletedItemId(id));

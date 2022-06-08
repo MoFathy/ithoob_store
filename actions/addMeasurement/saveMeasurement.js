@@ -40,6 +40,11 @@ export const saveMeasurement = (
   val5,
   val6,
   val7,
+  val8,
+  val9,
+  val10,
+  val11,
+  val12,
   fromProductDetails,
   slug,
   fromMyCart
@@ -60,7 +65,12 @@ export const saveMeasurement = (
         value4: val4,
         value5: val5,
         value6: val6,
-        value7: val7
+        value7: val7,
+        value8: val8,
+        value9: val9,
+        value10: val10,
+        value11: val11,
+        value12: val12
       }
     })
   })
@@ -127,7 +137,12 @@ export const editMeasurement = (
   val4,
   val5,
   val6,
-  val7
+  val7,
+  val8,
+  val9,
+  val10,
+  val11,
+  val12,
 ) => dispatch => {
   return fetch(process.env.endpoint + "/api/edit-measurement", {
     method: "POST",
@@ -145,7 +160,12 @@ export const editMeasurement = (
       value4: val4,
       value5: val5,
       value6: val6,
-      value7: val7
+      value7: val7,
+      value8: val8,
+      value9: val9,
+      value10: val10,
+      value11: val11,
+      value12: val12,
     })
   })
     .then(res => res.json())

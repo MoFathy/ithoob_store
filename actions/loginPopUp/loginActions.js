@@ -250,6 +250,11 @@ export const loginRequest = (
                 $("#val5").val(),
                 $("#val6").val(),
                 $("#val7").val(),
+                $("#val8").val(),
+                $("#val9").val(),
+                $("#val10").val(),
+                $("#val11").val(),
+                $("#val12").val(),
                 fromProductDetails,
                 slug,
                 fromMyCart

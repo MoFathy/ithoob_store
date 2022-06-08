@@ -9,7 +9,7 @@ import {
   storeAkmam,
   storeOthers
 } from "../../../actions/includes/carouselActions";
-import { toggleHashwaPopUp } from "../../../actions/customizationsPage/othersActions";
+import { setOpenedSection, toggleHashwaPopUp } from "../../../actions/customizationsPage/othersActions";
 import $ from "jquery";
 import React, { Component } from "react";
 import { clickModule } from "../../../scripts/clickHandlerModule.js";
@@ -28,6 +28,9 @@ export class FabricsContainer extends Component {
 
   handleDisplay(divToHide){
     $(divToHide).css("display", "none")
+  }
+  _handleSelectedSection(section, image){
+    this.props.setOpenedSection(section, image);
   }
   handleClick(e, itemId, subItemId, multiSelect, cost) {
     let output = clickModule.handleClick(
@@ -117,6 +120,9 @@ export class FabricsContainer extends Component {
   hashwaPopUp() {
     this.props.toggleHashwaPopUp();
   }
+  state = {
+    currentView : "main"
+  }
   render() {
     const { customObject } = this.props;
     const { type } = this.props;
@@ -146,7 +152,9 @@ export class FabricsContainer extends Component {
           ) : (
             ""
           )}
-          <div className="firstChild fabricChildrens__sub">
+          <div className="firstChild fabricChildrens__sub"
+            style={{display: `${this.state.currentView === "main" ? "block" : "none"}`}}
+          >
             {customObject.type !== "betana" ? (
               <p className="title">
                 {customObject.title}
@@ -171,7 +179,15 @@ export class FabricsContainer extends Component {
             <div className="items-container images">
               {customObject.items.map((item, iIndex) => {
                 return (
-                  <div className="slideItem" onClick={() =>this.handleDisplay(".firstChild")}>
+                  <div className="slideItem" onClick={() =>{
+                    if(item.sub && item.sub.subItems){
+                      console.log("#####################",item.id);
+                      this.setState({currentView: "subItem"})
+                      if(item.image){
+                        this._handleSelectedSection("fabric",  item.image)
+                      }
+                    }
+                  }}>
                     <Item
                       key={item.id}
                       item={item}
@@ -187,7 +203,9 @@ export class FabricsContainer extends Component {
               })}
             </div>
           </div>
-          <div className="secondChild fabricChildrens__sub firstSub">
+          <div className="secondChild fabricChildrens__sub firstSub"
+          style={{display: `${this.state.currentView === "subItem" ? "block" : "none"}`}}
+          >
             {customObject.items.map((item, index) => {
               if (item.sub && item.sub.subItems) {
                 return (
@@ -201,15 +219,19 @@ export class FabricsContainer extends Component {
                     className="items"
                   >
                     <p className="title">{item.sub.subtitle}</p>
-                    <div className="images ">
+                    <div className="images" >
                       {item.sub.subItems.map((shape, fIndex) => {
                         return (
                           <div className="slideItem"  onClick={() =>{
-                            console.log(shape)
-                            if(shape.sub && shape.sub.color && shape.sub.color.length){
-                              $(".secondChild").css("display", "none");
+                            if(shape.sub && shape.sub.color && shape.sub.color.length > 0){
+                              console.log("***********************",shape.id)
+                              this.setState({currentView: "subItemSub"})
+                              if(shape.image){
+                                this._handleSelectedSection("fabric",  shape.image)
+                              }
                             }
-                            this.handleDisplay(".firstChild")}}>
+                          }}
+                            >
                             <Item
                               key={shape.id}
                               type={this.props.type}
@@ -228,6 +250,11 @@ export class FabricsContainer extends Component {
                 );
               }
             })}
+            <button className="cartBtn px-5" 
+              onClick={()=> {
+                this.setState({currentView: "main"})
+              }
+            }>{getStringVal(this.props.language, "BACK")}</button>
           </div>
           <div className="secondChild__Sub fabricChildrens__sub">
             {customObject.items.map((item, index) => {
@@ -275,7 +302,15 @@ export class FabricsContainer extends Component {
                                     >
                                       {subDetail.items.map((image, sIndex) => {
                                         return (
-                                          <div className="slideItem">
+                                          <div className="slideItem" onClick={
+                                            ()=> {
+                                              if(image.image){
+                                                this._handleSelectedSection("fabric",  image.image)
+                                                document.getElementsByClassName("productMainImg").style.height = document.getElementsByClassName("magnify").style.height;
+                                                console.log(document.getElementsByClassName("productMainImg").style.height);
+                                              }
+                                            }
+                                          }>
                                             <Item
                                               key={image.id}
                                               type={this.props.type}
@@ -302,7 +337,9 @@ export class FabricsContainer extends Component {
               }
             })}
           </div>
-          <div className="thirdChild fabricChildrens__sub">
+          <div className="thirdChild fabricChildrens__sub"
+            style={{display: `${this.state.currentView === "main" || this.state.currentView === "subItem" ? "none" : "block"}`}}
+          >
             {customObject.items.map((item, index) => {
               if (item.sub && item.sub.subItems) {
                 return (
@@ -340,7 +377,13 @@ export class FabricsContainer extends Component {
                               >
                                 {fabric.sub.color.map((color, cIndex) => {
                                   return (
-                                    <div className="slideItem">
+                                    <div className="slideItem" onClick={
+                                      ()=> {
+                                        if(color.image){
+                                          this._handleSelectedSection("fabric",  color.image)
+                                        }
+                                      }
+                                    }>
                                       <Item
                                         key={color.id}
                                         type={this.props.type}
@@ -359,14 +402,17 @@ export class FabricsContainer extends Component {
                         }
                       }
                     })}
-                    {/* <button className="cartBtn px-5" onClick={
-                      ()=> {$(".secondChild").css("display", "none"); $(".secondChild__Sub").css("display", "none"); $(".thirdChild").css("display", "none"); $(".firstChild").css("display", "block");}
-                    }>{getStringVal(this.props.language, "BACK")}</button> */}
+                    
 
                   </div>
                 );
               }
             })}
+            <button className="cartBtn px-5" 
+              onClick={()=> {
+                this.setState({currentView: "subItem"})
+              }
+            }>{getStringVal(this.props.language, "BACK")}</button>
           </div>
         </div>
       );
@@ -449,6 +495,9 @@ function mapDispatchToProps(dispatch) {
     },
     toggleHashwaPopUp() {
       dispatch(toggleHashwaPopUp());
+    },
+    setOpenedSection(section, image){
+        dispatch(setOpenedSection(section, image))
     }
   };
 }

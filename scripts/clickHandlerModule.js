@@ -3,7 +3,7 @@ export var clickModule = (function () {
   var containAttr, customItems
   var firstHasSecond = function (e, itemId, subItemId, multiSelect) {
     customItems = $(e.target).closest("div.custom").find("div.custom__items")
-    customItems.css("display", "block")
+    // customItems.css("display", "block")
     containAttr = $(e.target).parents("div.fabricChildrens").find("div[data-childof='" + itemId + "']");
     var itemSelected = $(e.target).parents(".contentItem").hasClass('item-selected')
     // change $(e.target).parents("div.fabricChildrens").attr('data-required',true)
@@ -33,7 +33,7 @@ export var clickModule = (function () {
 
     //make other items in custom  appear
     customItems = $(e.target).closest("div.custom").find("div.custom__items")
-    customItems.css("display", "block")
+    // customItems.css("display", "block")
     containAttr = $(e.target).parents("div.fabricChildrens").find("div[data-childof='" + itemId + "']");
     var itemSelected = $(e.target).parents(".contentItem").hasClass('item-selected')
     // change $(e.target).parents("div.fabricChildrens").attr('data-required',true)
@@ -92,7 +92,7 @@ export var clickModule = (function () {
   var secondHasThird = function (e, itemId, subItemId, multiSelect) {
     // secondHasThird
     customItems = $(e.target).closest("div.custom").find("div.custom__items")
-    customItems.css("display", "block")
+    // customItems.css("display", "block")
     containAttr = $(e.target).parents("div.fabricChildrens").find("div[data-childof='" + subItemId + "']");
     var itemSelected = $(e.target).parents(".contentItem").hasClass('item-selected')
     // change $(e.target).parents("div.fabricChildrens").attr('data-required',true)
@@ -122,7 +122,7 @@ export var clickModule = (function () {
   var lastChild = function (e, itemId, subItemId) {
     // lastChild
     customItems = $(e.target).closest("div.custom").find("div.custom__items")
-    customItems.css("display", "block")
+    // customItems.css("display", "block")
     var itemSelected = $(e.target).parents(".contentItem").hasClass('item-selected')
 
     var $clone;
@@ -164,7 +164,7 @@ export var clickModule = (function () {
       else {
         //make other items in custom  appear
         customItems = $(e.target).closest("div.custom").find("div.custom__items")
-        customItems.css("display", "block")
+        // customItems.css("display", "block")
         $(e.target).parents(".fabricChildrens__sub").find(".images .contentItem p").css('visibility', 'hidden')
         $(e.target).parents(".fabricChildrens__sub").find(".images .contentItem").removeClass('item-selected')
         $(e.target).parents("div.fabricChildrens").find(".fabricChildrens__sub div.items .contentItem").removeClass('item-selected')

@@ -24,7 +24,7 @@ componentDidUpdate(prevProps){
           {
             zarzourObject.map((item,index)=>{
               return (
-                <div className="custom__items" key={"zarzour"+item.id} style={this.props.itemid !== undefined ? {display:"block"} : index !== 0 ? {display:"none"} : {} }>
+                <div className="custom__items" key={"zarzour"+item.id}>
                   <ItemsContainer type="zarzourArray"  Id={item.id}  itemid={this.props.itemid} customObject={item} key={"zarzour"+item.id} />
                 </div>
               )

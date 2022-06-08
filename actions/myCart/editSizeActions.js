@@ -93,11 +93,12 @@ export const updateSize = (
     });
 };
 
-export const updateSizeFromLocalStorage = (index, newSize) => dispatch => {
+export const updateSizeFromLocalStorage = (index, newSize, quantityId) => dispatch => {
   let localCartItems;
   if (localStorage.getItem("uc")) {
     localCartItems = JSON.parse(localStorage.getItem("uc"));
     localCartItems.products[index].shoesSize = newSize;
+    localCartItems.products[index].quantityId = quantityId;
     localStorage.setItem("uc", JSON.stringify(localCartItems));
   } else {
     localCartItems = localStorage.setItem(

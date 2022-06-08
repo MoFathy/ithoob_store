@@ -241,21 +241,21 @@ class SizeCard extends Component {
                       {getStringVal(this.props.language, "BY_REGION")}
                     </span> */}
 
-                <span>
-                  &nbsp;&nbsp;
                   {/* تكلفة اضاقية تبدا من */}
+                  {/* ريال */}
+                  {/* حسب المنطقة */}
+                {/* <span>
+                  &nbsp;&nbsp;
                   {getStringVal(
                     this.props.language,
                     "THE_EXTRA_COST_STARTING_FROM"
                   )}
                   &nbsp; 30
-                  {/* ريال */}
                   &nbsp;
                   {getStringVal(this.props.language, "SR")}
-                  {/* حسب المنطقة */}
                   &nbsp;
                   {getStringVal(this.props.language, "BY_REGION")}
-                </span>
+                </span> */}
               </label>
             </div>
           </div>
@@ -327,19 +327,19 @@ class SizeCard extends Component {
                   this.props.language,
                   "I_WANT_TO_TAKE_SIZE_TAILOR_HOME"
                 )}
-
-                <span>
                   {/* تكلفة اضاقية تبدا من */}
+                  {/* ريال */}
+                  {/* حسب المنطقة */}
+
+                {/* <span>
                   {getStringVal(
                     this.props.language,
                     "THE_EXTRA_COST_STARTING_FROM"
                   )}
                   )<span>{this.props.measurementsitems.sizeMan}</span>(
-                  {/* ريال */}
                   {getStringVal(this.props.language, "SR")}
-                  {/* حسب المنطقة */}
                   {getStringVal(this.props.language, "BY_REGION")}
-                </span>
+                </span> */}
               </label>
             </div>
           </div>

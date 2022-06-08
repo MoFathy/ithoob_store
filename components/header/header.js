@@ -216,6 +216,7 @@ class Header extends Component {
     const menu =
       this.props.status === true
         ? this.props.categories.map((x) => (
+          x.slug != "winter-collection3" ?
             <li className="nav-item" key={x.categoryId}>
               <Link
                 as={`/products-list/${x.slug}`}
@@ -269,7 +270,7 @@ class Header extends Component {
                 ))}
                 {/* </div> */}
               </ul>
-            </li>
+            </li>: ""
           ))
         : "";
     return (
