@@ -43,7 +43,8 @@ class MoreProducts extends Component {
           hasCustomizationOptions,
           this.props.quantityId,
           this.props.options_stock,
-          this.props.stock
+          this.props.stock,
+          this.props.stockVariation,
         );
       } else {
         this.props.updateShoesSizeStatus(false);
@@ -80,7 +81,8 @@ class MoreProducts extends Component {
         hasCustomizationOptions,
         this.props.quantityId,
         this.props.options_stock,
-        this.props.stock
+        this.props.stock,
+        this.props.stockVariation,
       );
     }
 
@@ -145,7 +147,8 @@ const mapCartStateToProps = state => ({
   productdetails:state.productDetails.productDetails,
   quantityId: state.carouselReducer.present.quantityId,
   options_stock: state.productDetails.productDetails.options_stock,
-  stock: state.productDetails.productDetails.stock
+  stock: state.productDetails.productDetails.stock,
+  stockVariation: state.productDetails.productDetails.stockVariation
 });
 //
 const mapCartDispatchToProps = dispatch => ({
@@ -171,7 +174,8 @@ const mapCartDispatchToProps = dispatch => ({
     hasCustomizationOptions,
     quantityId,
     options_stock,
-    stock
+    stock,
+    stockVariation,
   ) => {
     dispatch(
       addToCart(
@@ -196,7 +200,8 @@ const mapCartDispatchToProps = dispatch => ({
         hasCustomizationOptions,
         quantityId,
         options_stock,
-        stock
+        stock,
+        stockVariation,
       )
     );
   },

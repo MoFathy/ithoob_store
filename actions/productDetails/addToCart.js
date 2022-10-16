@@ -32,7 +32,8 @@ export const addToCart = (
   hasCustomizationOptions,
   quantityId,
   options_stock,
-  stock
+  stock,
+  stockVariation,
 ) => dispatch => {
   // add to cart, if user login call API, else add item to localstorage
   if (document.cookie.indexOf("ithoobUser") !== -1) {
@@ -52,7 +53,8 @@ export const addToCart = (
         hasCustomizationOptions,
         sizeType,
         quantityId,
-        stock
+        stock,
+        stockVariation,
       )
     );
   } else {
@@ -79,7 +81,8 @@ export const addToCart = (
         hasCustomizationOptions,
         quantityId,
         options_stock,
-        stock
+        stock,
+        stockVariation,
       )
     );
   }
@@ -160,7 +163,8 @@ export const addToCartNotAuth = (
   hasCustomizationOptions,
   quantityId,
   options_stock,
-  stock
+  stock,
+  stockVariation,
 ) => dispatch => {
   if (localStorage.getItem("uc")) {
     // console.log("addToCartNotAuth 3");
@@ -187,7 +191,8 @@ export const addToCartNotAuth = (
       hasCustomizationOptions,
       quantityId,
       options_stock,
-      stock
+      stock,
+      stockVariation,
     });
     localStorage.setItem("uc", JSON.stringify(cart));
   } else {
@@ -216,7 +221,8 @@ export const addToCartNotAuth = (
             hasCustomizationOptions,
             quantityId,
             options_stock,
-            stock
+            stock,
+            stockVariation,
           }
         ]
       })

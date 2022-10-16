@@ -11,7 +11,7 @@ import {
   updateQuantityFromLocalStorage,
   updateDeletedItemId,
   updateDeletedItemIndex,
-  updateDeletedItemTitle
+  updateDeletedItemTitle,
 } from "../../actions/myCart/updateQuantity";
 
 import {
@@ -19,7 +19,7 @@ import {
   getCartItemsFromLocalStorage,
   deleteCartItemsFromLocalStorage,
   updateErrMsgStatus,
-  updateMeasurementsIsComplateStatus
+  updateMeasurementsIsComplateStatus,
 } from "../../actions/myCart/myCartActions";
 
 import {
@@ -29,25 +29,25 @@ import {
   updateCustoms,
   getDefaultIdsFromLocalStorage,
   updateItemsInLocalStorage,
-  updateCustomsStatusAction
+  updateCustomsStatusAction,
 } from "../../actions/myCart/edits";
 
 import {
   updateSize,
   updateSizeFromLocalStorage,
-  updateSizeStatus
+  updateSizeStatus,
 } from "../../actions/myCart/editSizeActions";
 
 import {
   getProductDetails,
   getDefaultIds,
-  updateFromProductDetails
+  updateFromProductDetails,
 } from "../../actions/productDetails/productDetails";
 
 import {
   storeSizeID,
   userMeasureId,
-  updateSizeMan
+  updateSizeMan,
 } from "../../actions/includes/carouselActions";
 
 import { getPartnerDiscountFromLocalStorage } from "../../actions/myCart/getCode";
@@ -58,11 +58,12 @@ import EditSize from "./editSize";
 // import Costums from "../productDetails/costums";
 import CustomsContainer from "./customsContainer";
 import { updateMeasurementErrMsg } from "../../actions/myCart/editSizeActions";
+import StockVariation from "../productDetails/stockVariations";
 class CartCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      getMeasurmentsIsCalled: false
+      getMeasurmentsIsCalled: false,
       // shoesSizeIsValid: false
     };
     this.props.updateSizeStatus(true);
@@ -76,10 +77,10 @@ class CartCard extends Component {
       this.props.getPartnerDiscountFromLocalStorage();
       this.defaultIds =
         this.props.productDetails.customs &&
-          this.props.productDetails.customs.length > 0
+        this.props.productDetails.customs.length > 0
           ? this.props.productDetails.customs.map(
-            custom => custom.images.find(img => img.default == true).id
-          )
+              (custom) => custom.images.find((img) => img.default == true).id
+            )
           : "";
       this.props.getDefaultIds(this.defaultIds);
     }
@@ -88,8 +89,6 @@ class CartCard extends Component {
       "min-height",
       $(".orderSammury").outerHeight() + 400 + "px"
     );
-
-
   }
 
   handlePlusClick = (id, quantity, index) => {
@@ -162,9 +161,7 @@ class CartCard extends Component {
   chooseSize = (e, id, selectedSize, sizeManFlag) => {
     e.preventDefault();
 
-    $(".editSizeContainer")
-      .removeClass("d-block")
-      .addClass("d-none");
+    $(".editSizeContainer").removeClass("d-block").addClass("d-none");
     $(e.target)
       .parents(".cardContainer")
       .children(".editSizeContainer")
@@ -172,7 +169,12 @@ class CartCard extends Component {
       .addClass("d-block");
 
     this.props.updateSizeStatus(false);
-    if (selectedSize && selectedSize != undefined && selectedSize.id && selectedSize.name) {
+    if (
+      selectedSize &&
+      selectedSize != undefined &&
+      selectedSize.id &&
+      selectedSize.name
+    ) {
       this.props.userMeasureId(selectedSize.id);
     } else if (selectedSize && selectedSize != undefined && selectedSize.name) {
       this.props.storeSizeID(selectedSize.name);
@@ -205,9 +207,7 @@ class CartCard extends Component {
       this.props.getProductDetails(this.props.language === false ? 1 : 2, slug);
       this.props.getDefaultIdsFromLocalStorage(index);
     }
-    $(".customsContainer")
-      .removeClass("d-block")
-      .addClass("d-none");
+    $(".customsContainer").removeClass("d-block").addClass("d-none");
     $(e.target)
       .parents(".cardContainer")
       .children(".customsContainer")
@@ -216,16 +216,14 @@ class CartCard extends Component {
   };
 
   closeCustoms = () => {
-    $(".customsContainer")
-      .removeClass("d-block")
-      .addClass("d-none");
+    $(".customsContainer").removeClass("d-block").addClass("d-none");
   };
 
   changeSize = (e, id) => {
     e.preventDefault();
   };
 
-  handleColorClick = id => {
+  handleColorClick = (id) => {
     //console.log(id);
     // if (this.props.ithoobCookie !== -1) {
     //console.log("handleColorClick");
@@ -244,12 +242,12 @@ class CartCard extends Component {
         ? this.props.customs
         : this.props.productDetails.customs;
     let clickedCustomIdsArray = customs
-      .find(custom => custom.images.find(img => img.id == imgId))
-      .images.map(img => img.id);
+      .find((custom) => custom.images.find((img) => img.id == imgId))
+      .images.map((img) => img.id);
 
     let deletedArray = [];
-    this.props.selectedIds.forEach(defaultId =>
-      clickedCustomIdsArray.forEach(customId =>
+    this.props.selectedIds.forEach((defaultId) =>
+      clickedCustomIdsArray.forEach((customId) =>
         defaultId === customId ? deletedArray.push(defaultId) : ""
       )
     );
@@ -257,8 +255,8 @@ class CartCard extends Component {
     let deletedId = deletedArray.join("");
 
     let filteredDefaultIds = [
-      ...this.props.selectedIds.filter(id => !(id == deletedId)),
-      imgId
+      ...this.props.selectedIds.filter((id) => !(id == deletedId)),
+      imgId,
     ];
 
     // this.props.getDefaultIds(filteredDefaultIds);
@@ -289,10 +287,10 @@ class CartCard extends Component {
         this.props.getCartItemsFromLocalStorage();
         this.defaultIds =
           this.props.productDetails.customs &&
-            this.props.productDetails.customs.length > 0
+          this.props.productDetails.customs.length > 0
             ? this.props.productDetails.customs.map(
-              custom => custom.images.find(img => img.default == true).id
-            )
+                (custom) => custom.images.find((img) => img.default == true).id
+              )
             : "";
         this.props.getDefaultIds(this.defaultIds);
       }
@@ -303,18 +301,17 @@ class CartCard extends Component {
   updateSize = (e, id, index, sizeType, quantity_id) => {
     // var value = parseFloat($(e.target).val());
     var value = e;
-    if (value !== 0) { // If we change the size to anything except 0
-
+    if (value !== 0) {
+      // If we change the size to anything except 0
 
       // Disable checkout button - It will be enabled once the size gets updated by api call at 'getCartItems'
-      let checkoutBtn = document.querySelector('.checkout-btn');
+      let checkoutBtn = document.querySelector(".checkout-btn");
       if (checkoutBtn) {
-        checkoutBtn.classList.add('disabled');
+        checkoutBtn.classList.add("disabled");
       }
 
       // Hide "Complete Measurement" error message
       this.props.updateErrMsgStatus(false);
-
 
       if (this.props.ithoobCookie !== -1) {
         if (sizeType != "shoes") {
@@ -337,7 +334,7 @@ class CartCard extends Component {
             value,
             quantity_id,
             true
-          )
+          );
           // this.setState({ shoesSizeIsValid: true });
         }
       } else {
@@ -346,7 +343,6 @@ class CartCard extends Component {
         //console.log(index);
         this.props.updateSizeFromLocalStorage(index, value, quantity_id);
       }
-
     } else {
       // If no appropriate size selected, show error message
       this.props.updateErrMsgStatus(true);
@@ -358,9 +354,7 @@ class CartCard extends Component {
       this.props.sizeStatus !== prevProps.sizeStatus &&
       this.props.sizeStatus
     ) {
-      $(".editSizeContainer")
-        .removeClass("d-block")
-        .addClass("d-none");
+      $(".editSizeContainer").removeClass("d-block").addClass("d-none");
     }
     if (
       this.props.updateCustomsStatus !== prevProps.updateCustomsStatus &&
@@ -387,9 +381,9 @@ class CartCard extends Component {
   };
 
   render() {
-    console.log('====================================');
+    console.log("====================================");
     console.log(this.props.items);
-    console.log('====================================');
+    console.log("====================================");
     return this.props.isLoading ? (
       <div className="alert alert-info text-center" role="alert">
         {getStringVal(this.props.language, "LOADING")}
@@ -397,91 +391,551 @@ class CartCard extends Component {
     ) : !this.props.isLoading &&
       this.props.items &&
       this.props.items.length > 0 ? (
-          this.props.items.map((item, index) => !item.notAvailableAnymore ? (
-            <div className="cardContainer" key={index}>
-            <div className="alert alert-danger stock-alert" id={`stock-alert`} >المخزون غير كافى</div>
+      this.props.items.map((item, index) =>
+        !item.notAvailableAnymore ? (
+          <div className="cardContainer" key={index}>
+            <div className="alert alert-danger stock-alert" id={`stock-alert`}>
+              المخزون غير كافى
+            </div>
 
-              <div className="productCard card d-flex flex-md-row flex-column">
-                <div className="productImgContainer">
-                  {/* tags */}
-                  {item.tags ? (
-                    <ul className="productTags">
-                      {item.tags.discount ? (
-                        item.tags.discount !== 0 ? (
-                          <li
-                            className={
-                              this.props.language === true
-                                ? "tagSpan discount"
-                                : "tagSpan discount"
+            <div className="productCard card d-flex flex-md-row flex-column">
+              <div className="productImgContainer">
+                {/* tags */}
+                {item.tags ? (
+                  <ul className="productTags">
+                    {item.tags.discount ? (
+                      item.tags.discount !== 0 ? (
+                        <li
+                          className={
+                            this.props.language === true
+                              ? "tagSpan discount"
+                              : "tagSpan discount"
+                          }
+                        >
+                          {item.tags.discount}-
+                        </li>
+                      ) : (
+                        ""
+                      )
+                    ) : (
+                      ""
+                    )}
+                    {item.tags.isRecommended ? (
+                      <li className="tagSpan recommended">
+                        {getStringVal(this.props.language, "RECOMMENDED")}
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                    {item.tags.isBestSeller ? (
+                      <li className="tagSpan">
+                        {getStringVal(this.props.language, "BEST_SELLER")}
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                  </ul>
+                ) : item.discount ? (
+                  <ul className="productTags">
+                    <li
+                      className={
+                        this.props.language === true
+                          ? "tagSpan discount"
+                          : "tagSpan discount"
+                      }
+                    >
+                      {`% ${item.discount}`}-
+                    </li>
+                  </ul>
+                ) : (
+                  ""
+                )}
+
+                {/* productImg */}
+                <img
+                  // className="card-img-top"
+                  className="productImg"
+                  /*
+                   * LoggedIn user gets "img" value with naked image URL
+                   * While LoggedOut user gets "img" object contains 3 images
+                   */
+                  src={
+                    this.props.ithoobCookie !== -1
+                      ? item.img
+                      : item.img.img || item.img
+                  }
+                  alt={
+                    this.props.ithoobCookie !== -1
+                      ? item.title
+                      : this.props.language
+                      ? item.title_ar
+                      : item.title_en
+                  }
+                />
+              </div>
+
+              <div className="card-body d-flex row">
+                <div className="productSammery col-7">
+                  {/* product title */}
+                  {item.designed ||
+                  item.fabrics ||
+                  item.yaka ||
+                  item.zarzour ||
+                  item.akmam ||
+                  item.others ||
+                  item.attachments ||
+                  item.notes ? (
+                    <Link
+                      href={
+                        this.props.ithoobCookie !== -1
+                          ? `/thoob-design/${item.productId}`
+                          : `/thoob-design/${index}`
+                      }
+                      // href={`/customizations?itemid=${item.productId}`}
+                      as={
+                        this.props.ithoobCookie !== -1
+                          ? `/thoob-design/${item.productId}`
+                          : `/thoob-design/${index}`
+                      }
+                    >
+                      <h5 className="card-title">
+                        {this.props.ithoobCookie !== -1
+                          ? item.title
+                          : this.props.language
+                          ? item.title_ar
+                          : item.title_en}
+
+                        {item.stockType == "fabric" ||
+                        (item.selectedColorId &&
+                          item.selectedColorId !== null) ||
+                        (item.selectedIds && item.selectedIds.length > 0) ? (
+                          <span>
+                            ({getStringVal(this.props.language, "RATE")})
+                          </span>
+                        ) : (
+                          ""
+                        )}
+
+                        {item.designed ||
+                        item.fabrics ||
+                        item.yaka ||
+                        item.zarzour ||
+                        item.akmam ||
+                        item.others ||
+                        item.attachments ||
+                        item.notes ? (
+                          <span>
+                            <br></br>(
+                            {getStringVal(
+                              this.props.language,
+                              "DRESS_DESIGNER"
+                            )}
+                            )
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </h5>
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/product-details?slug=${item.slug}`}
+                      as={`/product-details/${item.slug}`}
+                    >
+                      <h5 className="card-title">
+                        {this.props.ithoobCookie !== -1
+                          ? item.title
+                          : this.props.language
+                          ? item.title_ar
+                          : item.title_en}
+
+                        {item.stockType == "fabric" ||
+                        (item.selectedColorId &&
+                          item.selectedColorId !== null) ||
+                        (item.selectedIds && item.selectedIds.length > 0) ? (
+                          <span>
+                            ({getStringVal(this.props.language, "RATE")})
+                          </span>
+                        ) : (
+                          ""
+                        )}
+
+                        {item.designed ||
+                        item.fabrics ||
+                        item.yaka ||
+                        item.zarzour ||
+                        item.akmam ||
+                        item.others ||
+                        item.attachments ||
+                        item.notes ? (
+                          <span>
+                            <br></br>(
+                            {getStringVal(
+                              this.props.language,
+                              "DRESS_DESIGNER"
+                            )}
+                            )
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </h5>
+                    </Link>
+                  )}
+
+                  {/* size part */}
+                  {this.props.ithoobCookie == -1 ? (
+                    item.stockVariation != null &&
+                    item.stockVariation.length > 0 ? (
+                      <StockVariation
+                        quantity_id={item.quantityId}
+                        selectStock={(value) =>
+                          this.updateSize(
+                            "variationSize",
+                            item.productId,
+                            index,
+                            "stockVariation",
+                            value.quantity_id
+                          )
+                        }
+                        stockVariation={item.stockVariation}
+                      />
+                    ) : (item.options_stock && item.options_stock.length > 0) ||
+                      (item.shoesSize && item.shoesSize.length > 0) ? (
+                      this.props.sizeStatus ? (
+                        <div>
+                          {/* Shoes Sizes */}
+                          <Stock
+                            stock={item.options_stock}
+                            quantity_id={item.quantityId}
+                            selectStock={(value) =>
+                              this.updateSize(
+                                value.size,
+                                item.productId,
+                                index,
+                                "shoes",
+                                value.quantity_id
+                              )
+                            }
+                          />
+
+                          {/* <select
+                                className="form-control mb-2"
+                                onChange={e => this.updateSize(
+                                  e,
+                                  item.productId,
+                                  index,
+                                  item.sizeType,
+                                  value.quantity_id
+                                )}
+                                value={item.selectedSize.name}
+                              >
+                                <option value="0"> </option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                              </select> */}
+                        </div>
+                      ) : (
+                        <div>
+                          <Stock
+                            stock={item.options_stock}
+                            quantity_id={item.quantity_id.quanity_id}
+                            selectStock={(value) =>
+                              this.updateSize(
+                                value.size,
+                                item.productId,
+                                index,
+                                "shoes",
+                                value.quantity_id
+                              )
+                            }
+                          />
+
+                          {/* <select
+                                className="form-control mb-2"
+                                onChange={e => this.updateSize(
+                                  e,
+                                  item.productId,
+                                  index,
+                                  item.sizeType
+                                )}
+                                value={
+                                  item.selectedSize.name
+                                }
+                              >
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                              </select> */}
+                        </div>
+                      )
+                    ) : // will unhash the next lines later
+                    item.sizeType == "sizeable" ? (
+                      ""
+                    ) : (
+                      // <Link href="/addMeasurement" as="/add-measurement">
+                      //   <button
+                      //     className="button sizeBtn"
+                      //     onClick={() => this.checkQuery()}
+                      //   >
+                      //     {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
+                      //   </button>
+                      // </Link>
+                      ""
+                    )
+                  ) : // : item.sizeType !== "accessories" ? (
+                  //   ""
+                  // )
+                  item.stockVariation != null &&
+                    item.stockVariation.length > 0 ? (
+                    <StockVariation
+                      quantity_id={item.quantity_id.quanity_id}
+                      selectStock={(value) =>
+                        this.updateSize(
+                          "variationSize",
+                          item.productId,
+                          index,
+                          "stockVariation",
+                          value.quantity_id
+                        )
+                      }
+                      stockVariation={item.stockVariation}
+                    />
+                  ) : (item.options_stock && item.options_stock.length > 0) ||
+                    (item.shoesSize && item.shoesSize.length > 0) ? (
+                    this.props.sizeStatus ? (
+                      <div>
+                        {/* Shoes Sizes */}
+                        <Stock
+                          stock={item.options_stock}
+                          quantity_id={item.quantity_id.quanity_id}
+                          selectStock={(value) =>
+                            this.updateSize(
+                              value.size,
+                              item.productId,
+                              index,
+                              "shoes",
+                              value.quantity_id
+                            )
+                          }
+                        />
+
+                        {/* <select
+                                className="form-control mb-2"
+                                onChange={e => this.updateSize(
+                                  e,
+                                  item.productId,
+                                  index,
+                                  item.sizeType,
+                                  value.quantity_id
+                                )}
+                                value={item.selectedSize.name}
+                              >
+                                <option value="0"> </option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                              </select> */}
+                      </div>
+                    ) : (
+                      <div>
+                        <Stock
+                          stock={item.options_stock}
+                          quantity_id={item.quantity_id.quanity_id}
+                          selectStock={(value) =>
+                            this.updateSize(
+                              value.size,
+                              item.productId,
+                              index,
+                              "shoes",
+                              value.quantity_id
+                            )
+                          }
+                        />
+
+                        {/* <select
+                                className="form-control mb-2"
+                                onChange={e => this.updateSize(
+                                  e,
+                                  item.productId,
+                                  index,
+                                  item.sizeType
+                                )}
+                                value={
+                                  item.selectedSize.name
+                                }
+                              >
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                              </select> */}
+                      </div>
+                    )
+                  ) : (
+                    <p className="card-text">
+                      {(item.selectedSize && item.selectedSize.name) ||
+                      item.size ? (
+                        item.selectedSize ? (
+                          <span className="sizeSelected">
+                            {item.selectedSize.name == "sizeMan" ? (
+                              <span>
+                                <span>
+                                  {getStringVal(
+                                    this.props.language,
+                                    "SPECIAL_SIZE"
+                                  )}
+                                  :
+                                </span>
+                                <span>
+                                  {getStringVal(
+                                    this.props.language,
+                                    "I_WANT_TO_TARZI"
+                                  )}
+                                </span>
+                              </span>
+                            ) : item.selectedSize.name &&
+                              item.selectedSize.id ? (
+                              <span>
+                                <span>
+                                  {getStringVal(
+                                    this.props.language,
+                                    "SPECIAL_SIZE"
+                                  )}
+                                  :
+                                </span>
+                                <span>{item.selectedSize.name}</span>
+
+                                <span className="productSize">
+                                  {item.selectedSize.name == "s" ||
+                                  item.selectedSize.name == "m" ||
+                                  item.selectedSize.name == "l" ? (
+                                    ""
+                                  ) : item.selectedSize.complete ? (
+                                    ""
+                                  ) : (
+                                    <p className="incompleteSizeLabel">
+                                      {getStringVal(
+                                        this.props.language,
+                                        "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
+                                      )}
+                                    </p>
+                                  )}
+                                </span>
+                              </span>
+                            ) : (
+                              <span>
+                                <span>
+                                  {getStringVal(this.props.language, "SIZE")}:
+                                </span>
+                                <span className="productSize">
+                                  {item.selectedSize.name}
+
+                                  {item.selectedSize.name == "s" ||
+                                  item.selectedSize.name == "m" ||
+                                  item.selectedSize.name == "l" ? (
+                                    ""
+                                  ) : item.selectedSize.complete ? (
+                                    ""
+                                  ) : (
+                                    <p className="incompleteSizeLabel">
+                                      {getStringVal(
+                                        this.props.language,
+                                        "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
+                                      )}
+                                    </p>
+                                  )}
+                                </span>
+                              </span>
+                            )}
+                          </span>
+                        ) : item.size == "m" ||
+                          item.size == "s" ||
+                          item.size == "l" ? (
+                          <span className="sizeSelected">
+                            {getStringVal(this.props.language, "SIZE")}:
+                            <span>
+                              {item.size == "m"
+                                ? getStringVal(this.props.language, "MEDUIM")
+                                : ""}
+                            </span>
+                            <span>
+                              {item.size == "s"
+                                ? getStringVal(this.props.language, "SMALL")
+                                : ""}
+                            </span>
+                            <span>
+                              {item.size == "l"
+                                ? getStringVal(this.props.language, "LARGE")
+                                : ""}
+                            </span>
+                          </span>
+                        ) : (
+                          <span className="sizeSelected">
+                            {getStringVal(this.props.language, "SPECIAL_SIZE")}:
+                            {this.props.measurementsitems.items &&
+                            this.props.measurementsitems.items.length > 0 ? (
+                              <span>
+                                {
+                                  this.props.measurementsitems.items.filter(
+                                    (sizeItem) =>
+                                      parseFloat(sizeItem.id) == item.size
+                                  )[0].title
+                                }
+                              </span>
+                            ) : (
+                              ""
+                            )}
+                          </span>
+                        )
+                      ) : item.sizeManFlag == true &&
+                        this.props.ithoobCookie !== -1 ? (
+                        <span className="sizeSelected">
+                          {getStringVal(this.props.language, "I_WANT_TO_TARZI")}
+                        </span>
+                      ) : (item.sizeType !== "accessories" && item.subCategory !== "stockings" ) ||
+                        (item.sizeType === "accessories" &&
+                          item.subCategory &&
+                          (item.subCategory === "all-rings" ||
+                            item.subCategory === "ring2")) ? (
+                        <span className="noSizeselected">
+                          {getStringVal(
+                            this.props.language,
+                            "DO_NOT_CHOOSE_SIZE"
+                          )}{" "}
+                          <br></br>
+                          <a
+                            href="#"
+                            onClick={(e) =>
+                              this.chooseSize(
+                                e,
+                                item.productId,
+                                item.selectedSize,
+                                item.sizeManFlag
+                              )
                             }
                           >
-                            {item.tags.discount}-
-                          </li>
-                        ) : (
-                            ""
-                          )
+                            {getStringVal(this.props.language, "CHOOSE_SIZE")}
+                          </a>
+                        </span>
                       ) : (
-                          ""
-                        )}
-                      {item.tags.isRecommended ? (
-                        <li className="tagSpan recommended">
-                          {getStringVal(this.props.language, "RECOMMENDED")}
-                        </li>
-                      ) : (
-                          ""
-                        )}
-                      {item.tags.isBestSeller ? (
-                        <li className="tagSpan">
-                          {getStringVal(this.props.language, "BEST_SELLER")}
-                        </li>
-                      ) : (
-                          ""
-                        )}
-                    </ul>
-                  ) : item.discount ? (
-                    <ul className="productTags">
-                      <li
-                        className={
-                          this.props.language === true
-                            ? "tagSpan discount"
-                            : "tagSpan discount"
-                        }
-                      >
-                        {`% ${item.discount}`}-
-                  </li>
-                    </ul>
-                  ) : (
                         ""
                       )}
+                    </p>
+                  )}
 
-                  {/* productImg */}
-                  <img
-                    // className="card-img-top"
-                    className="productImg"
-
-                    /*
-                     * LoggedIn user gets "img" value with naked image URL
-                     * While LoggedOut user gets "img" object contains 3 images
-                     */
-                    src={
-                      this.props.ithoobCookie !== -1
-                        ? item.img
-                        : item.img.img || item.img
-                    }
-                    alt={
-                      this.props.ithoobCookie !== -1
-                        ? item.title
-                        : this.props.language
-                          ? item.title_ar
-                          : item.title_en
-                    }
-                  />
-                </div>
-
-                <div className="card-body d-flex row">
-                  <div className="productSammery col-7">
-                    {/* product title */}
-                    {item.designed ||
+                  {/* edit product part     */}
+                  <ul className="editProduct">
+                    <li>
+                      {item.designed ||
                       item.fabrics ||
                       item.yaka ||
                       item.zarzour ||
@@ -495,628 +949,237 @@ class CartCard extends Component {
                               ? `/thoob-design/${item.productId}`
                               : `/thoob-design/${index}`
                           }
-                          // href={`/customizations?itemid=${item.productId}`}
-                          as={
-                            this.props.ithoobCookie !== -1
-                              ? `/thoob-design/${item.productId}`
-                              : `/thoob-design/${index}`
+                        >
+                          <a className="card-link modify">
+                            {getStringVal(this.props.language, "MODIFY")}
+                          </a>
+                        </Link>
+                      ) : item.sizeType == "sizeable" &&
+                        item.stockType == "fabric" &&
+                        item.hasCustomizationOptions == true ? (
+                        <a
+                          href="#"
+                          className="card-link modify"
+                          onClick={(e) =>
+                            this.editItem(e, item.productId, item.slug, index)
                           }
                         >
-                          <h5 className="card-title">
-                            {this.props.ithoobCookie !== -1
-                              ? item.title
-                              : this.props.language
-                                ? item.title_ar
-                                : item.title_en}
-
-                            {item.stockType == "fabric" ||
-                              (item.selectedColorId && item.selectedColorId !== null) ||
-                              (item.selectedIds && item.selectedIds.length > 0) ? (
-                                <span>
-                                  ({getStringVal(this.props.language, "RATE")})
-                                </span>
-                              ) : (
-                                ""
-                              )}
-
-                            {item.designed ||
-                              item.fabrics ||
-                              item.yaka ||
-                              item.zarzour ||
-                              item.akmam ||
-                              item.others ||
-                              item.attachments ||
-                              item.notes ? (
-                                <span>
-                                <br></br>
-                                  ({getStringVal(this.props.language, "DRESS_DESIGNER")}
-                          )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                          </h5>
-                        </Link>
+                          {getStringVal(this.props.language, "MODIFY")}{" "}
+                        </a>
                       ) : (
-                        <Link
-                          href={`/product-details?slug=${item.slug}`}
-                          as={`/product-details/${item.slug}`}
-                        >
-                          <h5 className="card-title">
-                            {this.props.ithoobCookie !== -1
-                              ? item.title
-                              : this.props.language
-                                ? item.title_ar
-                                : item.title_en}
-
-                            {item.stockType == "fabric" ||
-                              (item.selectedColorId && item.selectedColorId !== null) ||
-                              (item.selectedIds && item.selectedIds.length > 0) ? (
-                                <span>
-                                  ({getStringVal(this.props.language, "RATE")})
-                                </span>
-                              ) : (
-                                ""
-                              )}
-
-                            {item.designed ||
-                              item.fabrics ||
-                              item.yaka ||
-                              item.zarzour ||
-                              item.akmam ||
-                              item.others ||
-                              item.attachments ||
-                              item.notes ? (
-                                <span>
-                                <br></br>
-                                  ({getStringVal(this.props.language, "DRESS_DESIGNER")}
-                          )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                          </h5>
-                        </Link>
+                        ""
                       )}
+                    </li>
 
-                    {/* size part */}
-                    {this.props.ithoobCookie == -1 ? (
-                      item.options_stock && item.options_stock.length > 0 ||
-                      (item.shoesSize && item.shoesSize.length > 0) ?
-                      (
-                        this.props.sizeStatus ?
-                          (
-                            <div>
-                              {/* Shoes Sizes */}
-                              <Stock 
-                                stock={item.options_stock} 
-                                quantity_id={item.quantityId}
-                                selectStock={(value)=>this.updateSize(
-                                  value.size,
-                                  item.productId,
-                                  index,
-                                  "shoes",
-                                  value.quantity_id
-                                )}/>
-
-                              {/* <select
-                                className="form-control mb-2"
-                                onChange={e => this.updateSize(
-                                  e,
-                                  item.productId,
-                                  index,
-                                  item.sizeType,
-                                  value.quantity_id
-                                )}
-                                value={item.selectedSize.name}
-                              >
-                                <option value="0"> </option>
-                                <option value="41">41</option>
-                                <option value="42">42</option>
-                                <option value="43">43</option>
-                                <option value="44">44</option>
-                                <option value="45">45</option>
-                              </select> */}
-                            </div>
-                          ) : (
-                            <div>
-                              <Stock stock={item.options_stock} 
-                                quantity_id={item.quantity_id.quanity_id}
-                                selectStock={(value)=>this.updateSize(
-                                  value.size,
-                                  item.productId,
-                                  index,
-                                  "shoes",
-                                  value.quantity_id
-                                )}/>
-
-                              {/* <select
-                                className="form-control mb-2"
-                                onChange={e => this.updateSize(
-                                  e,
-                                  item.productId,
-                                  index,
-                                  item.sizeType
-                                )}
-                                value={
-                                  item.selectedSize.name
-                                }
-                              >
-                                <option value="41">41</option>
-                                <option value="42">42</option>
-                                <option value="43">43</option>
-                                <option value="44">44</option>
-                                <option value="45">45</option>
-                              </select> */}
-                            </div>
-                          )
-                      ):
-                      // will unhash the next lines later
-                      item.sizeType == "sizeable" ? (""
-                        // <Link href="/addMeasurement" as="/add-measurement">
-                        //   <button
-                        //     className="button sizeBtn"
-                        //     onClick={() => this.checkQuery()}
-                        //   >
-                        //     {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
-                        //   </button>
-                        // </Link>
-                      ) : (
-                          ""
-                        )
-                    ) 
-                    // : item.sizeType !== "accessories" ? (
-                    //   ""
-                    // ) 
-                    : (
-                      item.options_stock && item.options_stock.length > 0 ||
-                      (item.shoesSize && item.shoesSize.length > 0) ?
-                      (
-                        this.props.sizeStatus ?
-                          (
-                            <div>
-                              {/* Shoes Sizes */}
-                              <Stock 
-                                stock={item.options_stock} 
-                                quantity_id={item.quantity_id.quanity_id}
-                                selectStock={(value)=>this.updateSize(
-                                  value.size,
-                                  item.productId,
-                                  index,
-                                  "shoes",
-                                  value.quantity_id
-                                )}/>
-
-                              {/* <select
-                                className="form-control mb-2"
-                                onChange={e => this.updateSize(
-                                  e,
-                                  item.productId,
-                                  index,
-                                  item.sizeType,
-                                  value.quantity_id
-                                )}
-                                value={item.selectedSize.name}
-                              >
-                                <option value="0"> </option>
-                                <option value="41">41</option>
-                                <option value="42">42</option>
-                                <option value="43">43</option>
-                                <option value="44">44</option>
-                                <option value="45">45</option>
-                              </select> */}
-                            </div>
-                          ) : (
-                            <div>
-                              <Stock stock={item.options_stock} 
-                                quantity_id={item.quantity_id.quanity_id}
-                                selectStock={(value)=>this.updateSize(
-                                  value.size,
-                                  item.productId,
-                                  index,
-                                  "shoes",
-                                  value.quantity_id
-                                )}/>
-
-                              {/* <select
-                                className="form-control mb-2"
-                                onChange={e => this.updateSize(
-                                  e,
-                                  item.productId,
-                                  index,
-                                  item.sizeType
-                                )}
-                                value={
-                                  item.selectedSize.name
-                                }
-                              >
-                                <option value="41">41</option>
-                                <option value="42">42</option>
-                                <option value="43">43</option>
-                                <option value="44">44</option>
-                                <option value="45">45</option>
-                              </select> */}
-                            </div>
-                          )
-                      ) : (
-                        <p className="card-text">
-                          {(item.selectedSize && item.selectedSize.name) ||
-                            item.size ? (
-                              item.selectedSize ? (
-                                <span className="sizeSelected">
-                                  {item.selectedSize.name == "sizeMan" ? (
-                                    <span>
-                                      <span>
-                                        {getStringVal(
-                                          this.props.language,
-                                          "SPECIAL_SIZE"
-                                        )}
-                                :
-                              </span>
-                                      <span>
-                                        {getStringVal(
-                                          this.props.language,
-                                          "I_WANT_TO_TARZI"
-                                        )}
-                                      </span>
-                                    </span>
-                                  ) : item.selectedSize.name &&
-                                    item.selectedSize.id ? (
-                                        <span>
-                                          <span>
-                                            {getStringVal(
-                                              this.props.language,
-                                              "SPECIAL_SIZE"
-                                            )}
-                                :
-                              </span>
-                                          <span>{item.selectedSize.name}</span>
-                                        
-                                        <span className="productSize">
-                                            
-
-                                            {item.selectedSize.name == "s" ||
-                                              item.selectedSize.name == "m" ||
-                                              item.selectedSize.name == "l" ? (
-                                                ""
-                                              ) : item.selectedSize.complete ? (
-                                                ""
-                                              ) : (
-                                                  <p className="incompleteSizeLabel">
-                                                    {getStringVal(
-                                                      this.props.language,
-                                                      "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
-                                                    )}
-                                                  </p>
-                                                )}
-                                          </span>
-                                          </span>
-                                      ) : (
-                                        <span>
-                                          <span>
-                                            {getStringVal(this.props.language, "SIZE")}:
-                              </span>
-                                          <span className="productSize">
-                                            {item.selectedSize.name}
-
-                                            {item.selectedSize.name == "s" ||
-                                              item.selectedSize.name == "m" ||
-                                              item.selectedSize.name == "l" ? (
-                                                ""
-                                              ) : item.selectedSize.complete ? (
-                                                ""
-                                              ) : (
-                                                  <p className="incompleteSizeLabel">
-                                                    {getStringVal(
-                                                      this.props.language,
-                                                      "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
-                                                    )}
-                                                  </p>
-                                                )}
-                                          </span>
-                                        </span>
-                                      )}
-                                </span>
-                              ) : item.size == "m" ||
-                                item.size == "s" ||
-                                item.size == "l" ? (
-                                    <span className="sizeSelected">
-                                      {getStringVal(this.props.language, "SIZE")}:
-                                      <span>
-                                        {item.size == "m"
-                                          ? getStringVal(this.props.language, "MEDUIM")
-                                          : ""}
-                                      </span>
-                                      <span>
-                                        {item.size == "s"
-                                          ? getStringVal(this.props.language, "SMALL")
-                                          : ""}
-                                      </span>
-                                      <span>
-                                        {item.size == "l"
-                                          ? getStringVal(this.props.language, "LARGE")
-                                          : ""}
-                                      </span>
-                                    </span>
-                                  ) : (
-                                    <span className="sizeSelected">
-                                      {getStringVal(this.props.language, "SPECIAL_SIZE")}:
-                                      {this.props.measurementsitems.items &&
-                                        this.props.measurementsitems.items.length > 0 ? (
-                                          <span>
-                                            {
-                                              this.props.measurementsitems.items.filter(
-                                                sizeItem =>
-                                                  parseFloat(sizeItem.id) == item.size
-                                              )[0].title
-                                            }
-                                          </span>
-                                        ) : (
-                                          ""
-                                        )}
-                                    </span>
-                                  )
-                            ) : item.sizeManFlag == true && this.props.ithoobCookie !== -1 ? (
-                              <span className="sizeSelected">
-                                {getStringVal(this.props.language, "I_WANT_TO_TARZI")}
-                              </span>
-                            ) : (item.sizeType !== "accessories" || (item.sizeType === "accessories" && item.subCategory && (item.subCategory === "all-rings" || item.subCategory === "ring2")) ?
-                            <span className="noSizeselected">
-                                  {getStringVal(
-                                    this.props.language,
-                                    "DO_NOT_CHOOSE_SIZE"
-                                  )}{" "}
-                                  <br></br>
-                                  <a
-                                    href="#"
-                                    onClick={e =>
-                                      this.chooseSize(
-                                        e,
-                                        item.productId,
-                                        item.selectedSize,
-                                        item.sizeManFlag
-                                      )
-                                    }
-                                  >
-                                    {getStringVal(this.props.language, "CHOOSE_SIZE")}
-                                  </a>
-                                </span> : ""
-                              )}
-                        </p>
-                      )
-                        )}
-
-
-
-                    {/* edit product part     */}
-                    <ul className="editProduct">
-                      <li>
-                        {item.designed ||
-                          item.fabrics ||
-                          item.yaka ||
-                          item.zarzour ||
-                          item.akmam ||
-                          item.others ||
-                          item.attachments ||
-                          item.notes ? (
-                            <Link
-                              href={
-                                this.props.ithoobCookie !== -1
-                                  ? `/thoob-design/${item.productId}`
-                                  : `/thoob-design/${index}`
-                              }
-                            >
-                              <a className="card-link modify">
-                                {getStringVal(this.props.language, "MODIFY")}
-                              </a>
-                            </Link>
-                          ) : item.sizeType == "sizeable" &&
-                            item.stockType == "fabric" &&
-                            item.hasCustomizationOptions == true ? (
-                              <a
-                                href="#"
-                                className="card-link modify"
-                                onClick={e =>
-                                  this.editItem(e, item.productId, item.slug, index)
-                                }
-                              >
-                                {getStringVal(this.props.language, "MODIFY")}{" "}
-                              </a>
-                            ) : (
-                              ""
-                            )}
-                      </li>
-
-                      {/* {item.sizeType == "sizeable" ? ( */}
-                      {item.sizeType == "sizeable" &&
-                        ((item.selectedSize && item.selectedSize.name) ||
-                          (item.size && item.size !== null && item.size.length > 0) ||
-                          item.sizeManFlag) ? (
-                          <li>
-                            <a
-                              href="#"
-                              className="card-link change-measurement"
-                              onClick={e =>
-                                this.chooseSize(
-                                  e,
-                                  item.productId,
-                                  item.selectedSize,
-                                  item.sizeManFlag
-                                )
-                              }
-                            >
-                              {getStringVal(this.props.language, "CHANGING_THE_SIZE")}
-                            </a>
-                          </li>
-                        ) : (
-                          ""
-                        )}
-
+                    {/* {item.sizeType == "sizeable" ? ( */}
+                    {item.sizeType == "sizeable" &&
+                    ((item.selectedSize && item.selectedSize.name) ||
+                      (item.size &&
+                        item.size !== null &&
+                        item.size.length > 0) ||
+                      item.sizeManFlag) ? (
                       <li>
                         <a
                           href="#"
-                          className="card-link"
-                          onClick={e =>
-                            this.deleteItem(
+                          className="card-link change-measurement"
+                          onClick={(e) =>
+                            this.chooseSize(
                               e,
                               item.productId,
-                              index,
-                              this.props.ithoobCookie !== -1
-                                ? item.title
-                                : this.props.language
-                                  ? item.title_ar
-                                  : item.title_en
+                              item.selectedSize,
+                              item.sizeManFlag
                             )
                           }
                         >
-                          {getStringVal(this.props.language, "DELETE")}
+                          {getStringVal(
+                            this.props.language,
+                            "CHANGING_THE_SIZE"
+                          )}
                         </a>
                       </li>
-                    </ul>
-                  </div>
+                    ) : (
+                      ""
+                    )}
 
-                  {/* priceAndquantity */}
-                  <div className="priceAndquantity col-4">
-                    <p className="totalPrice">
-                      {this.props.ithoobCookie !== -1 ? (
-                        item.price_discount ? (
-                          <span>{item.price_discount * item.quantity}</span>
-                        ) : (
-                            <span>
-                              {/* testt */}
-                              {item.price * item.quantity}
-                            </span>
+                    <li>
+                      <a
+                        href="#"
+                        className="card-link"
+                        onClick={(e) =>
+                          this.deleteItem(
+                            e,
+                            item.productId,
+                            index,
+                            this.props.ithoobCookie !== -1
+                              ? item.title
+                              : this.props.language
+                              ? item.title_ar
+                              : item.title_en
                           )
-                      ) : item.discount && item.discount !== 0 ? (
+                        }
+                      >
+                        {getStringVal(this.props.language, "DELETE")}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* priceAndquantity */}
+                <div className="priceAndquantity col-4">
+                  <p className="totalPrice">
+                    {this.props.ithoobCookie !== -1 ? (
+                      item.price_discount ? (
                         <span>
-                          {/* testtt */}
-                          {/* {parseFloat(item.price) -
+                          {item.price_discount * item.quantity}
+                        </span>
+                      ) : (
+                        <span>
+                          {/* underwear products count discount */}
+                          {item.price * item.quantity}
+                        </span>
+                      )
+                    ) : item.discount && item.discount !== 0 ? (
+                      <span>
+                        {/* {parseFloat(item.price) -
                         (parseFloat(item.price) *
                           parseFloat(item.quantity) *
                           parseFloat(item.discount)) /
                           100} */}
-                          {item.price_discount * item.quantity}
-                        </span>
-                      ) : (
-                            <span>
-                              {/* testttt */}
-                              {item.price * item.quantity}
-                            </span>
-                          )}
-
-                      {getStringVal(this.props.language, "SR")}
-                    </p>
-
-                    <p className="price">
-                      {item.price_discount
-                        ? getStringVal(this.props.language, "AFTER_DISCOUNT_APIECE")
-                        : getStringVal(this.props.language, "ONE_PIECE")}
-                      <span>
-                        {item.price_discount ? item.price_discount : item.price}
+                        {/* underwear products count discount */}
+                        { item.price_discount * item.quantity}
                       </span>
-                      {getStringVal(this.props.language, "SR")}
-                    </p>
+                    ) : (
+                      <span>
+                        {/* underwear products count discount */}
 
-                    <QuantitySection
-                      quantity={item.quantity}
-                      handlePlusClick={() =>
-                        this.handlePlusClick(item.productId, item.quantity, index)
-                      }
-                      handleMinusClick={() =>
-                        this.handleMinusClick(item.productId, item.quantity, index)
-                      }
-                      stock={item.stock}
-                      productId={item.productId}
-                    />
-                  </div>
+                        {item.price * item.quantity}
+                      </span>
+                    )}
+
+                    {getStringVal(this.props.language, "SR")}
+                  </p>
+
+                  <p className="price">
+                    {item.price_discount
+                      ? getStringVal(
+                          this.props.language,
+                          "AFTER_DISCOUNT_APIECE"
+                        )
+                      : getStringVal(this.props.language, "ONE_PIECE")}
+                    <span>
+                      {item.price_discount ? item.price_discount : item.price}
+                    </span>
+                    {getStringVal(this.props.language, "SR")}
+                  </p>
+
+                  <QuantitySection
+                    quantity={item.quantity}
+                    handlePlusClick={() =>
+                      this.handlePlusClick(item.productId, item.quantity, index)
+                    }
+                    handleMinusClick={() =>
+                      this.handleMinusClick(
+                        item.productId,
+                        item.quantity,
+                        index
+                      )
+                    }
+                    stock={item.stock}
+                    productId={item.productId}
+                  />
                 </div>
               </div>
-
-              <EditSize
-                id={item.productId}
-                key={item.productId}
-                title={
-                  this.props.ithoobCookie !== -1
-                    ? item.title
-                    : this.props.language
-                      ? item.title_ar
-                      : item.title_en
-                }
-                sizeType={item.sizeType}
-                measurementsTable={item.measurementsTable}
-                currentItemSize={
-                  item.selectedSize &&
-                    item.selectedSize.name &&
-                    item.selectedSize.name != "m" &&
-                    item.selectedSize.name != "s" &&
-                    item.selectedSize.name != "l" &&
-                    this.props.ithoobCookie !== -1
-                    ? item.selectedSize.name
-                    : this.props.ithoobCookie !== -1 &&
-                      this.props.measurementsitems &&
-                      this.props.measurementsitems.items &&
-                      this.props.measurementsitems.items.length > 0
-                      ? this.props.measurementsitems.items.map(item =>
-                        item.default === true ? item.title : ""
-                      ).title
-                      : ""
-                }
-                sizeManStatus={
-                  (this.props.ithoobCookie !== -1 && item.sizeManFlag) ||
-                  (item.selectedSize &&
-                    item.selectedSize.name &&
-                    item.selectedSize.name == "sizeMan" &&
-                    this.props.ithoobCookie !== -1)
-                }
-                pathname={this.props.pathname}
-                dataCategorySlug={this.props.dataCategorySlug}
-              />
-
-              <CustomsContainer
-                index={index}
-                closeBtnIsShown={this.props.closeBtnIsShown}
-                title={
-                  this.props.ithoobCookie !== -1
-                    ? item.title
-                    : this.props.language
-                      ? item.title_ar
-                      : item.title_en
-                }
-                handleColorClick={this.handleColorClick}
-                colors={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.colors
-                    : this.props.productDetails.colors
-                }
-                getEidtsIsLoading={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.getEidtsIsLoading
-                    : this.props.productDetailsIsLoading
-                }
-                selectedColorId={this.props.selectedColorId}
-                customs={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.customs
-                    : this.props.productDetails.customs
-                }
-                handleImgClick={this.handleImgClick}
-                defaultIds={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.selectedIds
-                    : this.props.selectedIds
-                }
-                realDefaults={this.props.defaultIds}
-                closeCustoms={this.closeCustoms}
-                id={item.productId}
-                updateCustoms={this.updateCustoms}
-              />
             </div>
-          ) : <div className="cardContainer not-available-card" key={index}>
-              <div className="overlay">
-                <div className="not-available"> {getStringVal(this.props.language, "NOT_AVAILABLE_ITEM")}<a
+
+            <EditSize
+              id={item.productId}
+              key={item.productId}
+              title={
+                this.props.ithoobCookie !== -1
+                  ? item.title
+                  : this.props.language
+                  ? item.title_ar
+                  : item.title_en
+              }
+              sizeType={item.sizeType}
+              measurementsTable={item.measurementsTable}
+              currentItemSize={
+                item.selectedSize &&
+                item.selectedSize.name &&
+                item.selectedSize.name != "m" &&
+                item.selectedSize.name != "s" &&
+                item.selectedSize.name != "l" &&
+                this.props.ithoobCookie !== -1
+                  ? item.selectedSize.name
+                  : this.props.ithoobCookie !== -1 &&
+                    this.props.measurementsitems &&
+                    this.props.measurementsitems.items &&
+                    this.props.measurementsitems.items.length > 0
+                  ? this.props.measurementsitems.items.map((item) =>
+                      item.default === true ? item.title : ""
+                    ).title
+                  : ""
+              }
+              sizeManStatus={
+                (this.props.ithoobCookie !== -1 && item.sizeManFlag) ||
+                (item.selectedSize &&
+                  item.selectedSize.name &&
+                  item.selectedSize.name == "sizeMan" &&
+                  this.props.ithoobCookie !== -1)
+              }
+              pathname={this.props.pathname}
+              dataCategorySlug={this.props.dataCategorySlug}
+            />
+
+            <CustomsContainer
+              index={index}
+              closeBtnIsShown={this.props.closeBtnIsShown}
+              title={
+                this.props.ithoobCookie !== -1
+                  ? item.title
+                  : this.props.language
+                  ? item.title_ar
+                  : item.title_en
+              }
+              handleColorClick={this.handleColorClick}
+              colors={
+                this.props.ithoobCookie !== -1
+                  ? this.props.colors
+                  : this.props.productDetails.colors
+              }
+              getEidtsIsLoading={
+                this.props.ithoobCookie !== -1
+                  ? this.props.getEidtsIsLoading
+                  : this.props.productDetailsIsLoading
+              }
+              selectedColorId={this.props.selectedColorId}
+              customs={
+                this.props.ithoobCookie !== -1
+                  ? this.props.customs
+                  : this.props.productDetails.customs
+              }
+              handleImgClick={this.handleImgClick}
+              defaultIds={
+                this.props.ithoobCookie !== -1
+                  ? this.props.selectedIds
+                  : this.props.selectedIds
+              }
+              realDefaults={this.props.defaultIds}
+              closeCustoms={this.closeCustoms}
+              id={item.productId}
+              updateCustoms={this.updateCustoms}
+            />
+          </div>
+        ) : (
+          <div className="cardContainer not-available-card" key={index}>
+            <div className="overlay">
+              <div className="not-available">
+                {" "}
+                {getStringVal(this.props.language, "NOT_AVAILABLE_ITEM")}
+                <a
                   href="#"
                   className="card-link"
-                  onClick={e =>
+                  onClick={(e) =>
                     this.deleteItem(
                       e,
                       item.productId,
@@ -1124,91 +1187,455 @@ class CartCard extends Component {
                       this.props.ithoobCookie !== -1
                         ? item.title
                         : this.props.language
-                          ? item.title_ar
-                          : item.title_en
+                        ? item.title_ar
+                        : item.title_en
                     )
                   }
                 >
                   {getStringVal(this.props.language, "DELETE")}
                 </a>
-                </div>
               </div>
-              <div className="productCard card d-flex flex-md-row flex-column">
-                <div className="productImgContainer">
-                  {/* tags */}
-                  {item.tags ? (
-                    <ul className="productTags">
-                      {item.tags.discount ? (
-                        item.tags.discount !== 0 ? (
-                          <li
-                            className={
-                              this.props.language === true
-                                ? "tagSpan discount"
-                                : "tagSpan discount"
-                            }
-                          >
-                            {item.tags.discount}-
-                          </li>
-                        ) : (
-                            ""
-                          )
-                      ) : (
-                          ""
-                        )}
-                      {item.tags.isRecommended ? (
-                        <li className="tagSpan">
-                          {getStringVal(this.props.language, "RECOMMENDED")}
+            </div>
+            <div className="productCard card d-flex flex-md-row flex-column">
+              <div className="productImgContainer">
+                {/* tags */}
+                {item.tags ? (
+                  <ul className="productTags">
+                    {item.tags.discount ? (
+                      item.tags.discount !== 0 ? (
+                        <li
+                          className={
+                            this.props.language === true
+                              ? "tagSpan discount"
+                              : "tagSpan discount"
+                          }
+                        >
+                          {item.tags.discount}-
                         </li>
                       ) : (
-                          ""
-                        )}
-                      {item.tags.isBestSeller ? (
-                        <li className="tagSpan">
-                          {getStringVal(this.props.language, "BEST_SELLER")}
-                        </li>
-                      ) : (
-                          ""
-                        )}
-                    </ul>
-                  ) : item.discount ? (
-                    <ul className="productTags">
-                      <li
-                        className={
-                          this.props.language === true
-                            ? "tagSpan discount"
-                            : "tagSpan discount"
-                        }
-                      >
-                        {`% ${item.discount}`}-
-                    </li>
-                    </ul>
-                  ) : (
                         ""
-                      )}
+                      )
+                    ) : (
+                      ""
+                    )}
+                    {item.tags.isRecommended ? (
+                      <li className="tagSpan">
+                        {getStringVal(this.props.language, "RECOMMENDED")}
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                    {item.tags.isBestSeller ? (
+                      <li className="tagSpan">
+                        {getStringVal(this.props.language, "BEST_SELLER")}
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                  </ul>
+                ) : item.discount ? (
+                  <ul className="productTags">
+                    <li
+                      className={
+                        this.props.language === true
+                          ? "tagSpan discount"
+                          : "tagSpan discount"
+                      }
+                    >
+                      {`% ${item.discount}`}-
+                    </li>
+                  </ul>
+                ) : (
+                  ""
+                )}
 
-                  {/* productImg */}
-                  <img
-                    // className="card-img-top"
-                    className="productImg"
-                    src={
-                      this.props.ithoobCookie !== -1
-                        ? item.img
-                        : item.img.img || item.img
-                    }
-                    alt={
-                      this.props.ithoobCookie !== -1
-                        ? item.title
-                        : this.props.language
+                {/* productImg */}
+                <img
+                  // className="card-img-top"
+                  className="productImg"
+                  src={
+                    this.props.ithoobCookie !== -1
+                      ? item.img
+                      : item.img.img || item.img
+                  }
+                  alt={
+                    this.props.ithoobCookie !== -1
+                      ? item.title
+                      : this.props.language
+                      ? item.title_ar
+                      : item.title_en
+                  }
+                />
+              </div>
+
+              <div className="card-body d-flex row">
+                <div className="productSammery col-7">
+                  {/* product title */}
+                  {item.designed ||
+                  item.fabrics ||
+                  item.yaka ||
+                  item.zarzour ||
+                  item.akmam ||
+                  item.others ||
+                  item.attachments ||
+                  item.notes ? (
+                    <Link
+                      href={
+                        this.props.ithoobCookie !== -1
+                          ? `/thoob-design/${item.productId}`
+                          : `/thoob-design/${index}`
+                      }
+                      // href={`/customizations?itemid=${item.productId}`}
+                      as={
+                        this.props.ithoobCookie !== -1
+                          ? `/thoob-design/${item.productId}`
+                          : `/thoob-design/${index}`
+                      }
+                    >
+                      <h5 className="card-title">
+                        {this.props.ithoobCookie !== -1
+                          ? item.title
+                          : this.props.language
                           ? item.title_ar
-                          : item.title_en
-                    }
-                  />
-                </div>
+                          : item.title_en}
 
-                <div className="card-body d-flex row">
-                  <div className="productSammery col-7">
-                    {/* product title */}
-                    {item.designed ||
+                        {item.stockType == "fabric" ||
+                        (item.selectedColorId &&
+                          item.selectedColorId !== null) ||
+                        (item.selectedIds && item.selectedIds.length > 0) ? (
+                          <span>
+                            ({getStringVal(this.props.language, "RATE")})
+                          </span>
+                        ) : (
+                          ""
+                        )}
+
+                        {item.designed ||
+                        item.fabrics ||
+                        item.yaka ||
+                        item.zarzour ||
+                        item.akmam ||
+                        item.others ||
+                        item.attachments ||
+                        item.notes ? (
+                          <span>
+                            <br></br>(
+                            {getStringVal(
+                              this.props.language,
+                              "DRESS_DESIGNER"
+                            )}
+                            )
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </h5>
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/product-details?slug=${item.slug}`}
+                      as={`/product-details/${item.slug}`}
+                    >
+                      <h5 className="card-title">
+                        {this.props.ithoobCookie !== -1
+                          ? item.title
+                          : this.props.language
+                          ? item.title_ar
+                          : item.title_en}
+
+                        {item.stockType == "fabric" ||
+                        (item.selectedColorId &&
+                          item.selectedColorId !== null) ||
+                        (item.selectedIds && item.selectedIds.length > 0) ? (
+                          <span>
+                            ({getStringVal(this.props.language, "RATE")})
+                          </span>
+                        ) : (
+                          ""
+                        )}
+
+                        {item.designed ||
+                        item.fabrics ||
+                        item.yaka ||
+                        item.zarzour ||
+                        item.akmam ||
+                        item.others ||
+                        item.attachments ||
+                        item.notes ? (
+                          <span>
+                            <br></br>(
+                            {getStringVal(
+                              this.props.language,
+                              "DRESS_DESIGNER"
+                            )}
+                            )
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </h5>
+                    </Link>
+                  )}
+
+                  {/* size part */}
+                  {this.props.ithoobCookie == -1 ? (
+                    // will unhash the next lines later
+                    item.sizeType == "sizeable" ? (
+                      ""
+                    ) : (
+                      // <Link href="/addMeasurement" as="/add-measurement">
+                      //   <button
+                      //     className="button sizeBtn"
+                      //     onClick={() => this.checkQuery()}
+                      //   >
+                      //     {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
+                      //   </button>
+                      // </Link>
+                      ""
+                    )
+                  ) : item.sizeType !== "accessories" ? (
+                    item.sizeType == "shoes" ||
+                    (item.shoesSize && item.shoesSize.length > 0) ? (
+                      this.props.sizeStatus ? (
+                        <div>
+                          <input
+                            onBlur={(e) =>
+                              this.updateSize(
+                                e,
+                                item.productId,
+                                index,
+                                item.sizeType
+                              )
+                            }
+                            className="form-control mb-2"
+                            // className={
+                            //   this.state.shoesSizeIsValid
+                            //     ? "form-control mb-2 is-invalid"
+                            //     : "form-control mb-2"
+                            // }
+                            type="number"
+                            placeholder=""
+                            min="30"
+                            max="64"
+                            defaultValue={
+                              this.props.ithoobCookie !== -1 &&
+                              item.selectedSize &&
+                              item.selectedSize.name
+                                ? item.selectedSize.name
+                                : item.shoesSize
+                            }
+                          />
+                          {/* {this.state.shoesSizeIsValid ? (
+                            ""
+                          ) : (
+                            <div className="invalid-feedback">
+                              Please choose a username.
+                            </div>
+                          )} */}
+                        </div>
+                      ) : (
+                        <div>
+                          <input
+                            onBlur={(e) =>
+                              this.updateSize(
+                                e,
+                                item.productId,
+                                index,
+                                item.sizeType
+                              )
+                            }
+                            // className={
+                            //   this.state.shoesSizeIsValid
+                            //     ? "form-control mb-2"
+                            //     : "form-control mb-2 is-invalid"
+                            // }
+                            className="form-control mb-2"
+                            type="number"
+                            placeholder=""
+                            min="30"
+                            max="64"
+                            defaultValue={
+                              this.props.ithoobCookie !== -1 &&
+                              item.selectedSize &&
+                              item.selectedSize.name
+                                ? item.selectedSize.name
+                                : item.shoesSize
+                            }
+                            disabled={true}
+                          />
+                          {/* {this.state.shoesSizeIsValid ? (
+                            ""
+                          ) : (
+                            <div className="invalid-feedback">
+                              Please choose a username.
+                            </div>
+                          )} */}
+                        </div>
+                      )
+                    ) : item.sizeManFlag !== true ? (
+                      <p className="card-text">
+                        {(item.selectedSize && item.selectedSize.name) ||
+                        item.size ? (
+                          item.selectedSize ? (
+                            <span className="sizeSelected">
+                              {item.selectedSize.name == "sizeMan" ? (
+                                <span>
+                                  <span>
+                                    {getStringVal(
+                                      this.props.language,
+                                      "SPECIAL_SIZE"
+                                    )}
+                                    :
+                                  </span>
+                                  <span>
+                                    {getStringVal(
+                                      this.props.language,
+                                      "I_WANT_TO_TARZI"
+                                    )}
+                                  </span>
+                                </span>
+                              ) : item.selectedSize.name &&
+                                item.selectedSize.id ? (
+                                <span>
+                                  <span>
+                                    {getStringVal(
+                                      this.props.language,
+                                      "SPECIAL_SIZE"
+                                    )}
+                                    :
+                                  </span>
+                                  <span>{item.selectedSize.name}</span>
+                                  <span className="productSize">
+                                    {item.selectedSize.name == "s" ||
+                                    item.selectedSize.name == "m" ||
+                                    item.selectedSize.name == "l" ? (
+                                      ""
+                                    ) : item.selectedSize.complete ? (
+                                      ""
+                                    ) : (
+                                      <p className="incompleteSizeLabel">
+                                        {getStringVal(
+                                          this.props.language,
+                                          "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
+                                        )}
+                                      </p>
+                                    )}
+                                  </span>
+                                </span>
+                              ) : (
+                                <span>
+                                  <span>
+                                    {getStringVal(this.props.language, "SIZE")}:
+                                  </span>
+                                  <span className="productSize">
+                                    {item.selectedSize.name}
+
+                                    {item.selectedSize.name == "s" ||
+                                    item.selectedSize.name == "m" ||
+                                    item.selectedSize.name == "l" ? (
+                                      ""
+                                    ) : item.selectedSize.complete ? (
+                                      ""
+                                    ) : (
+                                      <p className="incompleteSizeLabel">
+                                        {getStringVal(
+                                          this.props.language,
+                                          "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
+                                        )}
+                                      </p>
+                                    )}
+                                  </span>
+                                </span>
+                              )}
+                            </span>
+                          ) : item.size == "m" ||
+                            item.size == "s" ||
+                            item.size == "l" ? (
+                            <span className="sizeSelected">
+                              {getStringVal(this.props.language, "SIZE")}:
+                              <span>
+                                {item.size == "m"
+                                  ? getStringVal(this.props.language, "MEDUIM")
+                                  : ""}
+                              </span>
+                              <span>
+                                {item.size == "s"
+                                  ? getStringVal(this.props.language, "SMALL")
+                                  : ""}
+                              </span>
+                              <span>
+                                {item.size == "l"
+                                  ? getStringVal(this.props.language, "LARGE")
+                                  : ""}
+                              </span>
+                            </span>
+                          ) : (
+                            <span className="sizeSelected">
+                              {getStringVal(
+                                this.props.language,
+                                "SPECIAL_SIZE"
+                              )}
+                              :
+                              {this.props.measurementsitems.items &&
+                              this.props.measurementsitems.items.length > 0 ? (
+                                <span>
+                                  {
+                                    this.props.measurementsitems.items.filter(
+                                      (sizeItem) =>
+                                        parseFloat(sizeItem.id) == item.size
+                                    )[0].title
+                                  }
+                                </span>
+                              ) : (
+                                ""
+                              )}
+                            </span>
+                          )
+                        ) : (
+                          item.subCategory != "stockings" ? 
+                          <span className="noSizeselected">
+                            {getStringVal(
+                              this.props.language,
+                              "DO_NOT_CHOOSE_SIZE"
+                            )}{" "}
+                            <a
+                              href="#"
+                              onClick={(e) =>
+                                this.chooseSize(
+                                  e,
+                                  item.productId,
+                                  item.selectedSize,
+                                  item.sizeManFlag
+                                )
+                              }
+                            >
+                              {getStringVal(this.props.language, "CHOOSE_SIZE")}
+                            </a>
+                          </span> : ""
+                        )}
+                      </p>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
+
+                  {item.sizeManFlag == true &&
+                  this.props.ithoobCookie !== -1 ? (
+                    <p className="card-text">
+                      <span className="sizeSelected">
+                        {getStringVal(this.props.language, "I_WANT_TO_TARZI")}
+                      </span>
+                    </p>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* edit product part     */}
+                  <ul className="editProduct">
+                    <li>
+                      {item.designed ||
                       item.fabrics ||
                       item.yaka ||
                       item.zarzour ||
@@ -1222,580 +1649,245 @@ class CartCard extends Component {
                               ? `/thoob-design/${item.productId}`
                               : `/thoob-design/${index}`
                           }
-                          // href={`/customizations?itemid=${item.productId}`}
-                          as={
-                            this.props.ithoobCookie !== -1
-                              ? `/thoob-design/${item.productId}`
-                              : `/thoob-design/${index}`
+                        >
+                          <a className="card-link modify">
+                            {getStringVal(this.props.language, "MODIFY")}
+                          </a>
+                        </Link>
+                      ) : item.sizeType == "sizeable" &&
+                        item.stockType == "fabric" &&
+                        item.hasCustomizationOptions == true ? (
+                        <a
+                          href="#"
+                          className="card-link modify"
+                          onClick={(e) =>
+                            this.editItem(e, item.productId, item.slug, index)
                           }
                         >
-                          <h5 className="card-title">
-                            {this.props.ithoobCookie !== -1
-                              ? item.title
-                              : this.props.language
-                                ? item.title_ar
-                                : item.title_en}
-
-                            {item.stockType == "fabric" ||
-                              (item.selectedColorId && item.selectedColorId !== null) ||
-                              (item.selectedIds && item.selectedIds.length > 0) ? (
-                                <span>
-                                  ({getStringVal(this.props.language, "RATE")})
-                                </span>
-                              ) : (
-                                ""
-                              )}
-
-                            {item.designed ||
-                              item.fabrics ||
-                              item.yaka ||
-                              item.zarzour ||
-                              item.akmam ||
-                              item.others ||
-                              item.attachments ||
-                              item.notes ? (
-                                <span>
-                                <br></br>
-                                  ({getStringVal(this.props.language, "DRESS_DESIGNER")}
-                            )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                          </h5>
-                        </Link>
+                          {getStringVal(this.props.language, "MODIFY")}{" "}
+                        </a>
                       ) : (
-                        <Link
-                          href={`/product-details?slug=${item.slug}`}
-                          as={`/product-details/${item.slug}`}
-                        >
-                          <h5 className="card-title">
-                            {this.props.ithoobCookie !== -1
-                              ? item.title
-                              : this.props.language
-                                ? item.title_ar
-                                : item.title_en}
-
-                            {item.stockType == "fabric" ||
-                              (item.selectedColorId && item.selectedColorId !== null) ||
-                              (item.selectedIds && item.selectedIds.length > 0) ? (
-                                <span>
-                                  ({getStringVal(this.props.language, "RATE")})
-                                </span>
-                              ) : (
-                                ""
-                              )}
-
-                            {item.designed ||
-                              item.fabrics ||
-                              item.yaka ||
-                              item.zarzour ||
-                              item.akmam ||
-                              item.others ||
-                              item.attachments ||
-                              item.notes ? (
-                                <span>
-                                <br></br>
-                                  ({getStringVal(this.props.language, "DRESS_DESIGNER")}
-                            )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                          </h5>
-                        </Link>
-                      )}
-
-                    {/* size part */}
-                    {this.props.ithoobCookie == -1 ? (
-                      // will unhash the next lines later
-                      item.sizeType == "sizeable" ? (""
-                        // <Link href="/addMeasurement" as="/add-measurement">
-                        //   <button
-                        //     className="button sizeBtn"
-                        //     onClick={() => this.checkQuery()}
-                        //   >
-                        //     {getStringVal(this.props.language, "ADD_FILE_FORMAT")}
-                        //   </button>
-                        // </Link>
-                      ) : (
-                          ""
-                        )
-                    ) : item.sizeType !== "accessories" ? (
-                      item.sizeType == "shoes" ||
-                        (item.shoesSize && item.shoesSize.length > 0) ? (
-                          this.props.sizeStatus ? (
-                            <div>
-                              <input
-                                onBlur={e =>
-                                  this.updateSize(
-                                    e,
-                                    item.productId,
-                                    index,
-                                    item.sizeType
-                                  )
-                                }
-                                className="form-control mb-2"
-                                // className={
-                                //   this.state.shoesSizeIsValid
-                                //     ? "form-control mb-2 is-invalid"
-                                //     : "form-control mb-2"
-                                // }
-                                type="number"
-                                placeholder=""
-                                min="30"
-                                max="64"
-                                defaultValue={
-                                  this.props.ithoobCookie !== -1 &&
-                                    item.selectedSize &&
-                                    item.selectedSize.name
-                                    ? item.selectedSize.name
-                                    : item.shoesSize
-                                }
-                              />
-                              {/* {this.state.shoesSizeIsValid ? (
-                            ""
-                          ) : (
-                            <div className="invalid-feedback">
-                              Please choose a username.
-                            </div>
-                          )} */}
-                            </div>
-                          ) : (
-                              <div>
-                                <input
-                                  onBlur={e =>
-                                    this.updateSize(
-                                      e,
-                                      item.productId,
-                                      index,
-                                      item.sizeType
-                                    )
-                                  }
-                                  // className={
-                                  //   this.state.shoesSizeIsValid
-                                  //     ? "form-control mb-2"
-                                  //     : "form-control mb-2 is-invalid"
-                                  // }
-                                  className="form-control mb-2"
-                                  type="number"
-                                  placeholder=""
-                                  min="30"
-                                  max="64"
-                                  defaultValue={
-                                    this.props.ithoobCookie !== -1 &&
-                                      item.selectedSize &&
-                                      item.selectedSize.name
-                                      ? item.selectedSize.name
-                                      : item.shoesSize
-                                  }
-                                  disabled={true}
-                                />
-                                {/* {this.state.shoesSizeIsValid ? (
-                            ""
-                          ) : (
-                            <div className="invalid-feedback">
-                              Please choose a username.
-                            </div>
-                          )} */}
-                              </div>
-                            )
-                        ) : item.sizeManFlag !== true ? (
-                          <p className="card-text">
-                            {(item.selectedSize && item.selectedSize.name) ||
-                              item.size ? (
-                                item.selectedSize ? (
-                                  <span className="sizeSelected">
-                                    {item.selectedSize.name == "sizeMan" ? (
-                                      <span>
-                                        <span>
-                                          {getStringVal(
-                                            this.props.language,
-                                            "SPECIAL_SIZE"
-                                          )}
-                                    :
-                                  </span>
-                                        <span>
-                                          {getStringVal(
-                                            this.props.language,
-                                            "I_WANT_TO_TARZI"
-                                          )}
-                                        </span>
-                                      </span>
-                                    ) : item.selectedSize.name &&
-                                      item.selectedSize.id ? (
-                                          <span>
-                                            <span>
-                                              {getStringVal(
-                                                this.props.language,
-                                                "SPECIAL_SIZE"
-                                              )}
-                                    :
-                                  </span>
-                                            <span>{item.selectedSize.name}</span>
-                                            <span className="productSize">
-                                              
-
-                                              {item.selectedSize.name == "s" ||
-                                                item.selectedSize.name == "m" ||
-                                                item.selectedSize.name == "l" ? (
-                                                  ""
-                                                ) : item.selectedSize.complete ? (
-                                                  ""
-                                                ) : (
-                                                    <p className="incompleteSizeLabel">
-                                                      {getStringVal(
-                                                        this.props.language,
-                                                        "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
-                                                      )}
-                                                    </p>
-                                                  )}
-                                            </span>
-                                          </span>
-                                        ) : (
-                                          <span>
-                                            <span>
-                                              {getStringVal(this.props.language, "SIZE")}:
-                                  </span>
-                                            <span className="productSize">
-                                              {item.selectedSize.name}
-
-                                              {item.selectedSize.name == "s" ||
-                                                item.selectedSize.name == "m" ||
-                                                item.selectedSize.name == "l" ? (
-                                                  ""
-                                                ) : item.selectedSize.complete ? (
-                                                  ""
-                                                ) : (
-                                                    <p className="incompleteSizeLabel">
-                                                      {getStringVal(
-                                                        this.props.language,
-                                                        "THIS_FILE_IS_INCOMPLETE_MUST_COMPLETE_THE_FILE_BEFORE_PURCHASE"
-                                                      )}
-                                                    </p>
-                                                  )}
-                                            </span>
-                                          </span>
-                                        )}
-                                  </span>
-                                ) : item.size == "m" ||
-                                  item.size == "s" ||
-                                  item.size == "l" ? (
-                                      <span className="sizeSelected">
-                                        {getStringVal(this.props.language, "SIZE")}:
-                                        <span>
-                                          {item.size == "m"
-                                            ? getStringVal(this.props.language, "MEDUIM")
-                                            : ""}
-                                        </span>
-                                        <span>
-                                          {item.size == "s"
-                                            ? getStringVal(this.props.language, "SMALL")
-                                            : ""}
-                                        </span>
-                                        <span>
-                                          {item.size == "l"
-                                            ? getStringVal(this.props.language, "LARGE")
-                                            : ""}
-                                        </span>
-                                      </span>
-                                    ) : (
-                                      <span className="sizeSelected">
-                                        {getStringVal(this.props.language, "SPECIAL_SIZE")}:
-                                        {this.props.measurementsitems.items &&
-                                          this.props.measurementsitems.items.length > 0 ? (
-                                            <span>
-                                              {
-                                                this.props.measurementsitems.items.filter(
-                                                  sizeItem =>
-                                                    parseFloat(sizeItem.id) == item.size
-                                                )[0].title
-                                              }
-                                            </span>
-                                          ) : (
-                                            ""
-                                          )}
-                                      </span>
-                                    )
-                              ) : (
-                                <span className="noSizeselected">
-                                  {getStringVal(
-                                    this.props.language,
-                                    "DO_NOT_CHOOSE_SIZE"
-                                  )}{" "}
-                                  <a
-                                    href="#"
-                                    onClick={e =>
-                                      this.chooseSize(
-                                        e,
-                                        item.productId,
-                                        item.selectedSize,
-                                        item.sizeManFlag
-                                      )
-                                    }
-                                  >
-                                    {getStringVal(this.props.language, "CHOOSE_SIZE")}
-                                  </a>
-                                </span>
-                              )}
-                          </p>
-                        ) : (
-                            ""
-                          )
-                    ) : (
-                          ""
-                        )}
-
-                    {item.sizeManFlag == true && this.props.ithoobCookie !== -1 ? (
-                      <p className="card-text">
-                        <span className="sizeSelected">
-                          {getStringVal(this.props.language, "I_WANT_TO_TARZI")}
-                        </span>
-                      </p>
-                    ) : (
                         ""
                       )}
+                    </li>
 
-                    {/* edit product part     */}
-                    <ul className="editProduct">
-                      <li>
-                        {item.designed ||
-                          item.fabrics ||
-                          item.yaka ||
-                          item.zarzour ||
-                          item.akmam ||
-                          item.others ||
-                          item.attachments ||
-                          item.notes ? (
-                            <Link
-                              href={
-                                this.props.ithoobCookie !== -1
-                                  ? `/thoob-design/${item.productId}`
-                                  : `/thoob-design/${index}`
-                              }
-                            >
-                              <a className="card-link modify">
-                                {getStringVal(this.props.language, "MODIFY")}
-                              </a>
-                            </Link>
-                          ) : item.sizeType == "sizeable" &&
-                            item.stockType == "fabric" &&
-                            item.hasCustomizationOptions == true ? (
-                              <a
-                                href="#"
-                                className="card-link modify"
-                                onClick={e =>
-                                  this.editItem(e, item.productId, item.slug, index)
-                                }
-                              >
-                                {getStringVal(this.props.language, "MODIFY")}{" "}
-                              </a>
-                            ) : (
-                              ""
-                            )}
-                      </li>
-
-                      {/* {item.sizeType == "sizeable" ? ( */}
-                      {item.sizeType == "sizeable" &&
-                        ((item.selectedSize && item.selectedSize.name) ||
-                          (item.size && item.size !== null && item.size.length > 0) ||
-                          item.sizeManFlag) ? (
-                          <li>
-                            <a
-                              href="#"
-                              className="card-link change-measurement"
-                              onClick={e =>
-                                this.chooseSize(
-                                  e,
-                                  item.productId,
-                                  item.selectedSize,
-                                  item.sizeManFlag
-                                )
-                              }
-                            >
-                              {getStringVal(this.props.language, "CHANGING_THE_SIZE")}
-                            </a>
-                          </li>
-                        ) : (
-                          ""
-                        )}
-
+                    {/* {item.sizeType == "sizeable" ? ( */}
+                    {item.sizeType == "sizeable" &&
+                    ((item.selectedSize && item.selectedSize.name) ||
+                      (item.size &&
+                        item.size !== null &&
+                        item.size.length > 0) ||
+                      item.sizeManFlag) ? (
                       <li>
                         <a
                           href="#"
-                          className="card-link"
-                          onClick={e =>
-                            this.deleteItem(
+                          className="card-link change-measurement"
+                          onClick={(e) =>
+                            this.chooseSize(
                               e,
                               item.productId,
-                              index,
-                              this.props.ithoobCookie !== -1
-                                ? item.title
-                                : this.props.language
-                                  ? item.title_ar
-                                  : item.title_en
+                              item.selectedSize,
+                              item.sizeManFlag
                             )
                           }
                         >
-                          {getStringVal(this.props.language, "DELETE")}
+                          {getStringVal(
+                            this.props.language,
+                            "CHANGING_THE_SIZE"
+                          )}
                         </a>
                       </li>
-                    </ul>
-                  </div>
+                    ) : (
+                      ""
+                    )}
 
-                  {/* priceAndquantity */}
-                  <div className="priceAndquantity col-4">
-                    <p className="totalPrice">
-                      {this.props.ithoobCookie !== -1 ? (
-                        item.price_discount ? (
-                          <span>{item.price_discount * item.quantity}</span>
-                        ) : (
-                            <span>
-                              {/* testt */}
-                              {item.price * item.quantity}
-                            </span>
+                    <li>
+                      <a
+                        href="#"
+                        className="card-link"
+                        onClick={(e) =>
+                          this.deleteItem(
+                            e,
+                            item.productId,
+                            index,
+                            this.props.ithoobCookie !== -1
+                              ? item.title
+                              : this.props.language
+                              ? item.title_ar
+                              : item.title_en
                           )
-                      ) : item.discount && item.discount !== 0 ? (
+                        }
+                      >
+                        {getStringVal(this.props.language, "DELETE")}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* priceAndquantity */}
+                <div className="priceAndquantity col-4">
+                  <p className="totalPrice">
+                    {this.props.ithoobCookie !== -1 ? (
+                      item.price_discount ? (
                         <span>
-                          {/* testtt */}
-                          {/* {parseFloat(item.price) -
+                          {item.price_discount * item.quantity}
+                        </span>
+                      ) : (
+                        <span>
+                          {/* testt */}
+                          {item.price * item.quantity}
+                        </span>
+                      )
+                    ) : item.discount && item.discount !== 0 ? (
+                      <span>
+                        {/* testtt */}
+                        {/* {parseFloat(item.price) -
                           (parseFloat(item.price) *
                             parseFloat(item.quantity) *
                             parseFloat(item.discount)) /
                             100} */}
-                          {item.price_discount * item.quantity}
-                        </span>
-                      ) : (
-                            <span>
-                              {/* testttt */}
-                              {item.price * item.quantity}
-                            </span>
-                          )}
-
-                      {getStringVal(this.props.language, "SR")}
-                    </p>
-
-                    <p className="price">
-                      {item.price_discount
-                        ? getStringVal(this.props.language, "AFTER_DISCOUNT_APIECE")
-                        : getStringVal(this.props.language, "ONE_PIECE")}
-                      <span>
-                        {item.price_discount ? item.price_discount : item.price}
+                        {item.price_discount * item.quantity}
                       </span>
-                      {getStringVal(this.props.language, "SR")}
-                    </p>
+                    ) : (
+                      <span>
+                        {/* testttt */}
+                        {item.price * item.quantity}
+                      </span>
+                    )}
 
-                    <QuantitySection
-                      quantity={item.quantity}
-                      handlePlusClick={() =>
-                        this.handlePlusClick(item.productId, item.quantity, index)
-                      }
-                      handleMinusClick={() =>
-                        this.handleMinusClick(item.productId, item.quantity, index)
-                      }
-                      stock={item.stock}
-                      productId={item.productId}
-                    />
-                  </div>
+                    {getStringVal(this.props.language, "SR")}
+                  </p>
+
+                  <p className="price">
+                    {item.price_discount
+                      ? getStringVal(
+                          this.props.language,
+                          "AFTER_DISCOUNT_APIECE"
+                        )
+                      : getStringVal(this.props.language, "ONE_PIECE")}
+                    <span>
+                      {item.price_discount
+                        ? item.price_discount
+                        : item.price}
+                    </span>
+                    {getStringVal(this.props.language, "SR")}
+                  </p>
+
+                  <QuantitySection
+                    quantity={item.quantity}
+                    handlePlusClick={() =>
+                      this.handlePlusClick(item.productId, item.quantity, index)
+                    }
+                    handleMinusClick={() =>
+                      this.handleMinusClick(
+                        item.productId,
+                        item.quantity,
+                        index
+                      )
+                    }
+                    stock={item.stock}
+                    productId={item.productId}
+                  />
                 </div>
               </div>
-
-              <EditSize
-                id={item.productId}
-                key={item.productId}
-                title={
-                  this.props.ithoobCookie !== -1
-                    ? item.title
-                    : this.props.language
-                      ? item.title_ar
-                      : item.title_en
-                }
-                sizeType={item.sizeType}
-                measurementsTable={item.measurementsTable}
-                currentItemSize={
-                  item.selectedSize &&
-                    item.selectedSize.name &&
-                    item.selectedSize.name != "m" &&
-                    item.selectedSize.name != "s" &&
-                    item.selectedSize.name != "l" &&
-                    this.props.ithoobCookie !== -1
-                    ? item.selectedSize.name
-                    : this.props.ithoobCookie !== -1 &&
-                      this.props.measurementsitems.items &&
-                      this.props.measurementsitems.items.length > 0
-                      ? this.props.measurementsitems.items.map(item =>
-                        item.default === true ? item.title : ""
-                      ).title
-                      : ""
-                }
-                sizeManStatus={
-                  (this.props.ithoobCookie !== -1 && item.sizeManFlag) ||
-                  (item.selectedSize &&
-                    item.selectedSize.name &&
-                    item.selectedSize.name == "sizeMan" &&
-                    this.props.ithoobCookie !== -1)
-                }
-                pathname={this.props.pathname}
-                dataCategorySlug={this.props.dataCategorySlug}
-              />
-
-              <CustomsContainer
-                index={index}
-                closeBtnIsShown={this.props.closeBtnIsShown}
-                title={
-                  this.props.ithoobCookie !== -1
-                    ? item.title
-                    : this.props.language
-                      ? item.title_ar
-                      : item.title_en
-                }
-                handleColorClick={this.handleColorClick}
-                colors={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.colors
-                    : this.props.productDetails.colors
-                }
-                getEidtsIsLoading={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.getEidtsIsLoading
-                    : this.props.productDetailsIsLoading
-                }
-                selectedColorId={this.props.selectedColorId}
-                customs={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.customs
-                    : this.props.productDetails.customs
-                }
-                handleImgClick={this.handleImgClick}
-                defaultIds={
-                  this.props.ithoobCookie !== -1
-                    ? this.props.selectedIds
-                    : this.props.selectedIds
-                }
-                realDefaults={this.props.defaultIds}
-                closeCustoms={this.closeCustoms}
-                id={item.productId}
-                updateCustoms={this.updateCustoms}
-              />
             </div>
 
-          )
-        ) : !this.props.isLoading &&
-          this.props.items &&
-          this.props.items.length == 0 ? (
-            <div className="alert alert-info text-center" role="alert">
-              {getStringVal(
-                this.props.language,
-                "THERE_ARE_NO_PRODUCTS_IN_THE_SHOPPING_CART"
-              )}
-            </div>
-          ) : (
-            ""
-          );
+            <EditSize
+              id={item.productId}
+              key={item.productId}
+              title={
+                this.props.ithoobCookie !== -1
+                  ? item.title
+                  : this.props.language
+                  ? item.title_ar
+                  : item.title_en
+              }
+              sizeType={item.sizeType}
+              measurementsTable={item.measurementsTable}
+              currentItemSize={
+                item.selectedSize &&
+                item.selectedSize.name &&
+                item.selectedSize.name != "m" &&
+                item.selectedSize.name != "s" &&
+                item.selectedSize.name != "l" &&
+                this.props.ithoobCookie !== -1
+                  ? item.selectedSize.name
+                  : this.props.ithoobCookie !== -1 &&
+                    this.props.measurementsitems.items &&
+                    this.props.measurementsitems.items.length > 0
+                  ? this.props.measurementsitems.items.map((item) =>
+                      item.default === true ? item.title : ""
+                    ).title
+                  : ""
+              }
+              sizeManStatus={
+                (this.props.ithoobCookie !== -1 && item.sizeManFlag) ||
+                (item.selectedSize &&
+                  item.selectedSize.name &&
+                  item.selectedSize.name == "sizeMan" &&
+                  this.props.ithoobCookie !== -1)
+              }
+              pathname={this.props.pathname}
+              dataCategorySlug={this.props.dataCategorySlug}
+            />
+
+            <CustomsContainer
+              index={index}
+              closeBtnIsShown={this.props.closeBtnIsShown}
+              title={
+                this.props.ithoobCookie !== -1
+                  ? item.title
+                  : this.props.language
+                  ? item.title_ar
+                  : item.title_en
+              }
+              handleColorClick={this.handleColorClick}
+              colors={
+                this.props.ithoobCookie !== -1
+                  ? this.props.colors
+                  : this.props.productDetails.colors
+              }
+              getEidtsIsLoading={
+                this.props.ithoobCookie !== -1
+                  ? this.props.getEidtsIsLoading
+                  : this.props.productDetailsIsLoading
+              }
+              selectedColorId={this.props.selectedColorId}
+              customs={
+                this.props.ithoobCookie !== -1
+                  ? this.props.customs
+                  : this.props.productDetails.customs
+              }
+              handleImgClick={this.handleImgClick}
+              defaultIds={
+                this.props.ithoobCookie !== -1
+                  ? this.props.selectedIds
+                  : this.props.selectedIds
+              }
+              realDefaults={this.props.defaultIds}
+              closeCustoms={this.closeCustoms}
+              id={item.productId}
+              updateCustoms={this.updateCustoms}
+            />
+          </div>
+        )
+      )
+    ) : !this.props.isLoading &&
+      this.props.items &&
+      this.props.items.length == 0 ? (
+      <div className="alert alert-info text-center" role="alert">
+        {getStringVal(
+          this.props.language,
+          "THERE_ARE_NO_PRODUCTS_IN_THE_SHOPPING_CART"
+        )}
+      </div>
+    ) : (
+      ""
+    );
   }
 }
 
-const mapMyCartStateToProps = state => ({
+const mapMyCartStateToProps = (state) => ({
   language: state.generalReducer.language,
   ithoobUser: state.loginReducer.ithoobUser,
   ithoobCookie: state.loginReducer.ithoobCookie,
@@ -1818,10 +1910,10 @@ const mapMyCartStateToProps = state => ({
   measurementsitems: state.customsReducer.measurementsitems,
   closeBtnIsShown: state.myCart.closeBtnIsShown,
   allSizesComplete: state.myCart.allSizesComplete,
-  isLoading: state.myCart.isLoading
+  isLoading: state.myCart.isLoading,
 });
 
-const mapMyCartDispatchToProps = dispatch => ({
+const mapMyCartDispatchToProps = (dispatch) => ({
   updateQuantity: (language, authorization, productId, quantity) => {
     dispatch(updateQuantity(language, authorization, productId, quantity));
   },
@@ -1831,10 +1923,10 @@ const mapMyCartDispatchToProps = dispatch => ({
   getEdits: (language, authorization, productId) => {
     dispatch(getEdits(language, authorization, productId));
   },
-  updateSelectedColorId: id => {
+  updateSelectedColorId: (id) => {
     dispatch(updateSelectedColorId(id));
   },
-  updateSelectedId: payload => {
+  updateSelectedId: (payload) => {
     dispatch(updateSelectedId(payload));
   },
   updateCustoms: (
@@ -1854,13 +1946,31 @@ const mapMyCartDispatchToProps = dispatch => ({
       )
     );
   },
-  updateSize: (language, authorization, productId, sizeManFlag, size, quantity_id, stockUpdate) => {
-    dispatch(updateSize(language, authorization, productId, sizeManFlag, size, quantity_id, stockUpdate));
+  updateSize: (
+    language,
+    authorization,
+    productId,
+    sizeManFlag,
+    size,
+    quantity_id,
+    stockUpdate
+  ) => {
+    dispatch(
+      updateSize(
+        language,
+        authorization,
+        productId,
+        sizeManFlag,
+        size,
+        quantity_id,
+        stockUpdate
+      )
+    );
   },
   getCartItemsFromLocalStorage: () => {
     dispatch(getCartItemsFromLocalStorage());
   },
-  deleteItemFromLocalStorage: index => {
+  deleteItemFromLocalStorage: (index) => {
     dispatch(deleteItemFromLocalStorage(index));
   },
   updateQuantityFromLocalStorage: (index, newQuantity) => {
@@ -1869,60 +1979,60 @@ const mapMyCartDispatchToProps = dispatch => ({
   getProductDetails: (language, slug) => {
     dispatch(getProductDetails(language, slug));
   },
-  getDefaultIds: arrayOfIds => {
+  getDefaultIds: (arrayOfIds) => {
     dispatch(getDefaultIds(arrayOfIds));
   },
-  getDefaultIdsFromLocalStorage: index => {
+  getDefaultIdsFromLocalStorage: (index) => {
     dispatch(getDefaultIdsFromLocalStorage(index));
   },
   updateItemsInLocalStorage: (index, selectedColorId, selectedIds) => {
     dispatch(updateItemsInLocalStorage(index, selectedColorId, selectedIds));
   },
-  updateCustomsStatusAction: payload => {
+  updateCustomsStatusAction: (payload) => {
     dispatch(updateCustomsStatusAction(payload));
   },
   updateSizeFromLocalStorage: (index, newSize, quantityId) => {
     dispatch(updateSizeFromLocalStorage(index, newSize, quantityId));
   },
-  updateDeletedItemId: id => {
+  updateDeletedItemId: (id) => {
     dispatch(updateDeletedItemId(id));
   },
-  updateDeletedItemIndex: index => {
+  updateDeletedItemIndex: (index) => {
     dispatch(updateDeletedItemIndex(index));
   },
-  updateDeletedItemTitle: title => {
+  updateDeletedItemTitle: (title) => {
     dispatch(updateDeletedItemTitle(title));
   },
-  updateSizeStatus: status => {
+  updateSizeStatus: (status) => {
     dispatch(updateSizeStatus(status));
   },
   deleteCartItemsFromLocalStorage: () => {
     dispatch(deleteCartItemsFromLocalStorage());
   },
-  storeSizeID: sizeId => {
+  storeSizeID: (sizeId) => {
     dispatch(storeSizeID(sizeId));
   },
-  updateErrMsgStatus: status => {
+  updateErrMsgStatus: (status) => {
     dispatch(updateErrMsgStatus(status));
   },
-  updateMeasurementsIsComplateStatus: status => {
+  updateMeasurementsIsComplateStatus: (status) => {
     dispatch(updateMeasurementsIsComplateStatus(status));
   },
-  userMeasureId: measureId => {
+  userMeasureId: (measureId) => {
     dispatch(userMeasureId(measureId));
   },
   getPartnerDiscountFromLocalStorage: () => {
     dispatch(getPartnerDiscountFromLocalStorage());
   },
-  updateMeasurementErrMsg: msg => {
+  updateMeasurementErrMsg: (msg) => {
     dispatch(updateMeasurementErrMsg(msg));
   },
-  updateSizeMan: status => {
+  updateSizeMan: (status) => {
     dispatch(updateSizeMan(status));
   },
   updateFromProductDetails: (status, query, fromMyCartStatus) => {
     dispatch(updateFromProductDetails(status, query, fromMyCartStatus));
-  }
+  },
 });
 
 export default connect(

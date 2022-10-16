@@ -6,7 +6,7 @@ import { getCookie } from "../../scripts/getCookieFile";
 import { updateShowConfrimPaymentPopup } from "../../actions/checkout/confirmPayment";
 import { getStringVal } from "../../scripts/multiLang";
 import AvailableDiscounts from "../includes/AvailableDiscounts";
-import { checkForCouponDiscount } from "../../actions/checkout/checkoutActions";
+import { checkForCouponDiscount, checkForCouponFailed } from "../../actions/checkout/checkoutActions";
 import IthoobPartners from "../myCart/ithoobPartners";
 import PartnerTablePopup from "../myCart/partnerTablePopup";
 
@@ -26,12 +26,22 @@ class OrderSummary extends Component {
     let coupon_code = this.refs.coupon_code.value;
     let token = getCookie("ithoobUser", "authenticationToken");
     let language = this.props.language === false ? 1 : 2;
+    let couponAllowed = true;
     //Temporary static coupon code
 
     let nowDate = new Date();
     let firstDate = new Date("4/6/2021");
     let secondDate = new Date("4/7/2021");
-
+    this.props.cartItems.forEach((cartItem) => {
+      if (
+        cartItem.price_discount && cartItem.price_discount != 0
+      ) {
+        this.props.couponNotAllowed();
+        couponAllowed = false;
+        return;
+      }
+    });
+    if(!couponAllowed) return;
     var disc = 0;
     if (
       coupon_code === "MDN" &&
@@ -52,7 +62,10 @@ class OrderSummary extends Component {
       this.setState({ ...this.state, isMDN: true, expDiscount: disc });
       // return;
     }
-    console.log(getCookie("ithoobUser", "authenticationToken"));
+    // console.log('====================================');
+    // console.log(this.props.cartItems); 
+    // console.log('====================================');
+    // console.log(getCookie("ithoobUser", "authenticationToken"));
     this.props.checkForCouponDiscount(language, token, coupon_code, disc);
   };
 
@@ -656,6 +669,9 @@ const maporderSummaryDispatchToProps = (dispatch) => ({
   checkForCouponDiscount: (language, token, coupon_code, disc) => {
     dispatch(checkForCouponDiscount(language, token, coupon_code, disc));
   },
+  couponNotAllowed: ()=>{
+    dispatch(checkForCouponFailed({message : "المنتجات المختارة لديها خصم بالفعل"}));
+  }
 });
 
 export default connect(

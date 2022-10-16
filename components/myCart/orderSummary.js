@@ -168,21 +168,15 @@ var quantity_discount = 0;
       }
     }
   }
-
-  console.log('====================================');
-    console.log(thoobsArray);
-    console.log(quantity_discount);
-
-    console.log('====================================');
+  
     let wantSizeManLength = 0;
     var cartTotal = 0;
     this.props.items.length > 0
       ? (this.props.items.map(
           item =>
-            (cartTotal +=
-              item.price_discount > 0
-                ? item.price_discount * item.quantity
-                : item.price * item.quantity)
+            (cartTotal += item.price_discount > 0 
+              ? item.price_discount * item.quantity
+              : item.price * item.quantity)
         ),
         this.props.items.map(item =>
           item.sizeManFlag == true

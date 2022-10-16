@@ -22,6 +22,7 @@ import {
 import { initialProductList } from "../../actions/productList/productList";
 import Stock from "./stock";
 import { storeQuantityID } from "../../actions/includes/carouselActions";
+import StockVariation from "./stockVariations";
 class ProductDetailsComponent extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +72,7 @@ class ProductDetailsComponent extends Component {
   }
 
   componentDidUpdate() {
-    if(document.documentElement.clientWidth > 600){
+    if (document.documentElement.clientWidth > 600) {
       $("#productMainImg").magnify();
     }
   }
@@ -101,15 +102,24 @@ class ProductDetailsComponent extends Component {
     document
       .querySelector("#productMainImg")
       .setAttribute("data-magnify-src", largeImg);
-    [
-      ...document.querySelectorAll(".productImages__thumbs")[0].childNodes,
-    ].forEach((child) => child.classList.remove("active"));
-    document
-      .querySelectorAll(".productImages__thumbs")[0]
-      .childNodes[0].classList.add("active");
-    if(document.documentElement.clientWidth > 600){
-
-     $("#productMainImg").magnify();
+      if(document.querySelectorAll(".productImages__thumbs").length){
+        [
+          ...document.querySelectorAll(".productImages__thumbs")[0].childNodes,
+        ].forEach((child) => {
+          if(child && child.classList && child.classList != undefined){
+            child.classList.remove("active")
+        }});
+      }
+      if(document
+        .querySelectorAll(".productImages__thumbs").length){
+          if(document.querySelectorAll(".productImages__thumbs")[0] && document.querySelectorAll(".productImages__thumbs")[0].childNodes[0] && document.querySelectorAll(".productImages__thumbs")[0].childNodes[0].classList != undefined){
+            document
+              .querySelectorAll(".productImages__thumbs")[0]
+              .childNodes[0].classList.add("active");
+          }
+        }
+    if (document.documentElement.clientWidth > 600) {
+      $("#productMainImg").magnify();
     }
     let maxQuantity = selectedColor[0].maxQuantity;
     this.props.updateMaxQuantity(maxQuantity);
@@ -272,14 +282,14 @@ class ProductDetailsComponent extends Component {
 
         <div className="col-12 col-md-8">
           <div className="productTitle d-flex justify-content-between align-items-start mt-3">
-            <div className="title" style={{flex:'2'}}>
+            <div className="title" style={{ flex: "2" }}>
               <h3>{this.props.productDetails.title}</h3>
               <p>{this.props.productDetails.subTitle}</p>
             </div>
             <div
-              style={{flex:'4'}}
               style={{
                 display: "flex",
+                flex: "4",
                 "align-items": "flex-end",
                 "flex-direction": "column",
               }}
@@ -331,11 +341,25 @@ class ProductDetailsComponent extends Component {
             </div>
           </div>
           <div className="orderDetails form">
-            <Stock
-              stock={this.props.productDetails.options_stock}
-              quantity_id={this.props.quantityId}
-              selectStock={(value) => this.props.storeQuantityID(value.quantity_id)}
-            />
+            {this.props.productDetails.stockVariation != null &&
+            this.props.productDetails.stockVariation.length > 0 ? (
+              <StockVariation
+                quantity_id={this.props.quantityId}
+                selectStock={(value) =>
+                  this.props.storeQuantityID(value.quantity_id)
+                }
+                stockVariation={this.props.productDetails.stockVariation}
+              />
+            ) : (
+              <Stock
+                stock={this.props.productDetails.options_stock}
+                quantity_id={this.props.quantityId}
+                selectStock={(value) =>
+                  this.props.storeQuantityID(value.quantity_id)
+                }
+              />
+            )}
+
             {this.props.quantity && this.props.quantity > 0 ? (
               <QuantitySection
                 title={this.props.productDetails.title}
@@ -411,7 +435,7 @@ const mapProductDetailsStateToProps = (state) => ({
   sizeType: state.productDetails.productDetails.sizeType,
   measurementsTable: state.productDetails.productDetails.measurementsTable,
   closeBtnIsShown: state.myCart.closeBtnIsShown,
-  quantityId: state.carouselReducer.present.quantityId
+  quantityId: state.carouselReducer.present.quantityId,
 });
 
 const mapProductDetailsDispatchToProps = (dispatch) => ({

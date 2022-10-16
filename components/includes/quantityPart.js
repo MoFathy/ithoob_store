@@ -4,7 +4,7 @@ import { updateQuantityFail } from "../../actions/myCart/updateQuantity";
 import { getStringVal } from "../../scripts/multiLang";
 
  class QuantitySection extends Component {
-  addQuantitiy = () => {
+  addQuantity = () => {
     if(this.props.stock - this.props.quantity - 1 < 0){
       document.getElementById(`stock-alert${this.props.productId}`).style.display = "block";
       setTimeout(() => {
@@ -33,7 +33,7 @@ import { getStringVal } from "../../scripts/multiLang";
           <div className="contentItem  d-inline-flex align-items-center justify-content-start">
             <p onClick={this.props.handleMinusClick}  className={quantity === 1? "quantityDisabled inc":"inc"} >-</p>
             <label className={this.props.language === true ? "arabicNumber quantityValue": "quantityValue"}>{quantity}</label>
-            <p onClick={() => this.addQuantitiy()} className="inc">+</p>
+            <p onClick={() => this.addQuantity()} className="inc">+</p>
          </div>
          <div className="alert alert-danger stock-alert" id={`stock-alert${this.props.productId}`} >المخزون غير كافى</div>
       </div>

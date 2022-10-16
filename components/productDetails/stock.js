@@ -50,7 +50,6 @@ const Stock = (props) => {
         shoesColorsState.push({ ...element.shoesColor, qunId: element.id });
       }
     });
-    console.log("sisssssssss", sizesState);
     setSizes(sizesState);
     setColors(colorsState);
     setFabrics(fabricsState);

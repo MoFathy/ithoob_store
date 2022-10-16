@@ -6,7 +6,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <script
+          {/* <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-180259772-1"
           ></script>
@@ -20,7 +20,46 @@ export default class MyDocument extends Document {
               gtag('config', 'UA-180259772-1');
             `,
             }}
+          /> */}
+          {/* <!-- Google Tag Manager --> */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-WR8Q4HR');`,
+            }}
           />
+
+          {/* <!-- Google Tag Manager (noscript) --> */}
+          <noscript
+            dangerouslySetInnerHTML={{
+              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR8Q4HR"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+            }}
+          />
+
+          {/* collect users Cookies */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              (function(){
+                var cookieName = "visitorOfTheWebsite"; // Name of your cookie
+                var cookieValue = "website visitor name"; // Value of your cookie
+                var expirationTime = 2592000; // One month in seconds
+                expirationTime = expirationTime * 1000; // Converts expirationTime to milliseconds
+                var date = new Date(); 
+                var dateTimeNow = date.getTime();
+                date.setTime(dateTimeNow + expirationTime); // Sets expiration time (Time now + one month)
+                var date = date.toUTCString(); // Converts milliseconds to UTC time string
+                document.cookie = cookieName+"="+cookieValue+"; SameSite=None; Secure; expires="+date+"; path=/; domain=." + location.hostname.replace(/^www\./i, ""); // Sets cookie for all subdomains
+               })();`,
+            }}
+          />
+          {/* <!-- End Google Tag Manager (noscript) --> */}
+          {/* <!-- End Google Tag Manager --> */}
           <script src="https://checkout.tabby.ai/tabby-promo.js"></script>
 
           {/* <!-- Facebook Pixel Code --> */}
@@ -42,8 +81,7 @@ export default class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `<img height="1" width="1" 
                 src="https://www.facebook.com/tr?id=1472277233167711&ev=PageView
-                &noscript=1"/>
-                </noscript`,
+                &noscript=1"/>`,
             }}
           />
           {/* // <!-- End Facebook Pixel Code --> */}
@@ -65,6 +103,18 @@ export default class MyDocument extends Document {
             rg4js('enableCrashReporting', true);`,
           }}
           /> */}
+          {/* !-- Twitter universal website tag code --> */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+                },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+                a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+                // Insert Twitter Pixel ID and Standard Event data below
+                twq('init','o99ln');
+                twq('track','PageView');`,
+            }}
+          />
+          {/* <!-- End Twitter universal website tag code --> */}
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0, shrink-to-fit=no"
@@ -74,7 +124,10 @@ export default class MyDocument extends Document {
             name="google-site-verification"
             content="3t96ptZkAnuxTUJ0BtDVFlWp43EMVNpsE5cSQymyq9k"
           />
-          <meta name="facebook-domain-verification" content="hu640epnz5p8jluhxoa2krqoior5q9" />
+          <meta
+            name="facebook-domain-verification"
+            content="hu640epnz5p8jluhxoa2krqoior5q9"
+          />
         </Head>
         <body>
           <Main />

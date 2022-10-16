@@ -37,18 +37,17 @@ class CheckoutPage extends Component {
       changeLangWithoutCookie(lang === "false" ? false : true)
     );
 
-
     if (ithoobUser) {
       reduxStore.dispatch(changeIthoobCookie(1));
       await reduxStore.dispatch(
         getCheckoutData(lang === "false" ? 1 : 2, authToken)
       );
-    }else{
-      if(res){
-        res.writeHead(302, {Location: "/"})
-        res.end()
+    } else {
+      if (res) {
+        res.writeHead(302, { Location: "/" });
+        res.end();
       } else {
-        Router.push('/')
+        Router.push("/");
       }
     }
     return {
@@ -69,27 +68,44 @@ class CheckoutPage extends Component {
       );
     }
 
-    if(this.props.ithoobCookie !== prevProps.ithoobCookie && this.props.ithoobCookie == -1){
-      Router.push('/')
+    if (
+      this.props.ithoobCookie !== prevProps.ithoobCookie &&
+      this.props.ithoobCookie == -1
+    ) {
+      Router.push("/");
+    }
+
+    if (
+      this.props.showOrderSucceededPopup !==
+        prevProps.showOrderSucceededPopup &&
+      this.props.showOrderSucceededPopup == true
+    ) {
+      Router.push("/success");
+    } else if (
+      this.props.showOrderSucceededPopup !== prevProps.showOrderSucceededPopup
+    ) {
+      Router.push("/");
     }
   }
 
-
   render() {
     return (
-      <Layout queryString={this.props.queryString} classNameData="checkoutPage withInnerHeader">
+      <Layout
+        queryString={this.props.queryString}
+        classNameData="checkoutPage withInnerHeader"
+      >
         <div className="content">
           <div className="container">
             <Breadcrumb />
             <h1 className="title">
-            {getStringVal(this.props.language, "PAYMENT_AND_RECEIPT")}
+              {getStringVal(this.props.language, "PAYMENT_AND_RECEIPT")}
               {/* الدفع و الأستلام */}
-              </h1>
+            </h1>
 
             <div className="row">
               <div className="col-12 col-lg-8">
                 <Receiving />
-                <DeliveryCard pathname={this.props.dataCategorySlug}/>
+                <DeliveryCard pathname={this.props.dataCategorySlug} />
               </div>
               <div className="col-12 col-lg-4">
                 <OrderSummary />
@@ -98,19 +114,16 @@ class CheckoutPage extends Component {
           </div>
         </div>
         <ConfirmpPaymentPopup />
-        <OrderSucceededPopup />
+        {/* <OrderSucceededPopup /> */}
       </Layout>
     );
   }
 }
-const mapCheckoutStateToProps = state => ({
+const mapCheckoutStateToProps = (state) => ({
   language: state.generalReducer.language,
   categories: state.categories,
-  ithoobCookie: state.loginReducer.ithoobCookie
+  showOrderSucceededPopup: state.checkout.showOrderSucceededPopup,
+  ithoobCookie: state.loginReducer.ithoobCookie,
 });
 
-
-export default connect(
-  mapCheckoutStateToProps,
-null
-)(CheckoutPage);
+export default connect(mapCheckoutStateToProps, null)(CheckoutPage);

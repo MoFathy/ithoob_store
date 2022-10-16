@@ -53,10 +53,15 @@ class ProductImagesComponent extends Component {
           document
             .querySelector("#productMainImg")
             .setAttribute("data-thumb", item.childNodes[0].src);
+            if(item.parentElement.childNodes.length > 0){
 
-          [...item.parentElement.childNodes].forEach(child =>
-            child.classList.remove("active")
-          );
+              [...item.parentElement.childNodes].forEach(child =>
+                {if(child && child.classList && child.classList != undefined){
+
+                  child.classList.remove("active")
+                }}
+              );
+            }
 
           item.classList.add("active");
 
@@ -112,9 +117,9 @@ class ProductImagesComponent extends Component {
                 <a href="#" data-img={index} key={index}>
                   <img
                     className={"thumb" + index}
-                    src={item.thumbImg}
+                    src={item.thumbImg ? item.thumbImg : item.img}
                     data-img={item.img}
-                    data-img_large={item.largeImg}
+                    data-img_large={item.largeImg?item.largeImg :item.img}
                     alt={this.props.productTitle}
                   />
                 </a>
@@ -124,9 +129,9 @@ class ProductImagesComponent extends Component {
                 <a className="active" data-img={index} href="#" key={index}>
                   <img
                     className={"thumb" + index}
-                    src={item.thumbImg}
+                    src={item.thumbImg ? item.thumbImg : item.img}
                     data-img={item.img}
-                    data-img_large={item.largeImg}
+                    data-img_large={item.largeImg?item.largeImg :item.img}
                     alt={this.props.productTitle}
                   />
                 </a>
